@@ -22,7 +22,7 @@ setcookie("siteID",$siteid);
 ?>
 <html>
 <head>
-    <title>Dashboard - Tailor Made Traffic</title>
+    <title>Dashboard - Tailor Made Trafficsdadada</title>
     <!-- Required meta tags-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
