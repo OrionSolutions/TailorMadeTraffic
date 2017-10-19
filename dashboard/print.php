@@ -123,7 +123,7 @@ try{
                                 <li>Invoice Number:</li>
                                 <li>Subscription Type:</li>
                                 <li>Subscription Date:</li>
-                                <li>Invoice To:</li>
+                                <li>Invoice Tosararar:</li>
                                 <li>Invoice Date:</li>
                             </ul>
                         </div>
