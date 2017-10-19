@@ -51,7 +51,7 @@ setcookie("siteID",$siteid);
 
 <body>
    <?php
-   // THis is a test for sir larry
+   // THis is a test for sir Bols
 if ($exist == 0)
 	{
 	$jscript = "
