@@ -1,0 +1,141 @@
+/*** ESSENTIAL STYLES ***/
+/* =============================================== */
+/* Do Not Touch */
+/* =============================================== */
+.main-menu, .main-menu * {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.main-menu li {
+	position: relative;
+}
+.main-menu ul {
+	position: absolute;
+	display: none;
+	top: 100%;
+	left: 0;
+	z-index: 99999;
+}
+.main-menu > li {
+	float: left;
+}
+.main-menu li:hover > ul,
+.main-menu li.sfHover > ul {
+	display: block;
+}
+
+.main-menu a {
+	display: block;
+	position: relative;
+}
+.main-menu ul ul {
+	top: 0;
+	left: 100%;
+}
+/* =============================================== */
+/* Do Not Touch */
+/* =============================================== */
+
+.nav-container{
+	position: relative;
+	z-index: 999;
+}
+
+.main-menu{
+	display: inline-block;
+	float: right;
+     
+}
+
+/* Child Menu */
+.main-menu ul{
+	z-index: 9999999999999999999999;
+}
+.main-menu ul li{
+	background:#000000;
+	border:none;
+	}
+.main-menu ul li:first-child{ border-top:none; }
+.main-menu ul li:last-child{ border-bottom:none; }
+
+.main-menu ul {
+	min-width: 12em; /* allow long menu items to determine submenu width */
+	*width: 12em; /* no auto sub width for IE7, see white-space comment below */
+    
+}
+
+
+/* Third Level */
+.main-menu ul li ul{
+	padding-top:0px;
+	padding-left:0px;
+	background:url(../images/nav-arrow-2.png) top left no-repeat;
+	}
+
+
+.main-menu a {
+	padding: 20px;
+	padding-top: 13px;
+	padding-bottom: 13px;
+	zoom: 1; /* IE7 */
+    text-transform: uppercase;
+    border-radius: 100px
+}
+
+.main-menu ul li a{ padding:1.3em; }
+
+.main-menu a {
+	color: #555555;
+	text-transform: uppercase;
+	font-weight: 800;
+	font-size: 13px;
+	letter-spacing: 0.3px;
+	border:3px solid #FFFFFF;
+
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.main-menu ul li a{
+	color: #aaaaaa;
+    text-align: left;
+}
+
+.main-menu a:hover{ 
+    text-decoration:none;
+    color: #34495e;
+    border:3px solid #34495e;
+}
+
+.main-menu li {
+	white-space: nowrap; /* no need for Supersubs plugin */
+	*white-space: normal; /* ...unless you support IE7 (let it wrap) */
+}
+
+
+/* Hover */
+.main-menu li.sfHover{}
+.main-menu li a:hover{}
+
+
+
+.main-menu ul li a:hover{}
+
+/* Active or Current Nav menu */
+.main-menu li.current a,
+.main-menu li.current-menu-item a{
+	border:3px solid #34495e;
+	color: #34495e;
+}
+
+.main-menu li.client-login a{
+    background: #3498db;
+    color: #FFFFFF;
+}
+.main-menu li.client-login a:hover{
+	background: #34495e;
+}
