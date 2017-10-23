@@ -1,0 +1,596 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Raleway:300,400,500,600,700,800,900');
+/*
+font-family: 'Open Sans', sans-serif;
+font-family: 'Raleway', sans-serif;
+*/
+
+body{
+	font-family: 'Open Sans', sans-serif;
+	background: #f4f4f4;
+	font-size: 14px;
+}
+span{
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Open Sans',sans-serif;
+}
+
+a{ text-decoration: none; color: #323232 }
+
+.image-full{
+	width: 100%;
+}
+.right{
+	text-align: right;
+	line-height: 1.3em;
+}
+
+/*============NAVIGATION CONTAINER===========*/
+.nav-container{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background:#323232;
+    margin-bottom: 50px;
+}
+.nav-container h1{
+    font-size: 30px;
+    color: #ffffff;
+    font-weight: 00;
+}
+.home-button{
+    padding-top: 5px;
+}
+
+.home-button span{
+    float: right;
+}
+.home-button span a{
+    color: #ffffff;
+}
+.home-button span i{
+    padding-right: 10px;
+}
+
+/*============NAVIGATION CONTAINER===========*/
+
+
+/* ======================================= Top Header ======================================= */
+.top-header{
+	background: #323232;
+	color: #FFFFFF;
+	padding-top: 18px;
+	padding-bottom: 18px;
+}
+
+.top-header .logo{
+	max-width: 100%;
+	height: auto;
+}
+
+.top-header .top-menu{ margin-top: 10px; }
+.top-header .top-menu li{
+	float: left;
+	margin-right: 30px;
+}
+.top-header .top-menu a{
+	color: #888888;
+}
+.top-header .top-menu a:hover{
+	color: #BBBBBB;
+}
+
+.top-header .user-info{ display: inline-block; float: right; }
+
+.top-header .user-info .avatar{
+	border-radius: 100%;
+	width: 30px;
+	height: 30px;
+	float: left;
+	margin-right: 10px;
+}
+
+.top-header .user-info p{ display: inline-block; }
+
+.top-header .user-info span{
+	display: block;
+	width: 100%;
+	color: #DDDDDD;
+	margin-right: 10px;
+	margin-top: 5px;
+}
+
+.top-header .user-info a{
+	color: #888888;
+}
+
+
+
+
+
+/* ====================================== Middle Header ============================================ */
+.middle-header{
+	background: #2cc185;
+	color: #FFFFFF;
+	padding-top: 50px;
+	margin-bottom: 50px;
+}
+
+.middle-header ul{
+	display: inline-block;
+}
+
+.middle-header li{
+	float: left;
+	margin-right: 20px;
+}
+.middle-header li a{
+	color: #FFFFFF;
+	padding: 15px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	display: inline-block;
+}
+.middle-header li a:hover{ color: #888888; }
+.middle-header li.current a{
+	background: #f4f4f4;
+	color: #888888;
+	border-radius: 3px 3px 0px 0px;
+}
+
+/* Over View Graph */
+.overview-graph{
+	background: #FFFFFF;
+	padding: 20px;
+	margin-bottom: 50px;
+}
+
+canvas{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.chart-container{
+    width: 100%;
+    margin: 0px;
+}
+.chart-container-clickthrough{
+	width: 100%;
+	margin: 0px;
+}
+
+.table-overview{
+	width: 100%;
+	margin-bottom: 50px;
+	color: #888888
+}
+.table-overview tr.header{
+	font-family: 'Raleway', sans-serif;
+	background: #333333;
+	color: #FFFFFF;
+	text-align: left;
+	font-size: 20px;
+	font-weight: 100;
+}
+.table-overview tr.header th{ padding-left: 20px; }
+
+.table-overview .big{ width: 50%; }
+.table-overview .small{ text-align: right; }
+
+.table-overview th,
+.table-overview td{ padding: 10px; padding-top: 20px; padding-bottom: 20px; border-bottom: 1px solid #DDDDDD }
+
+.sub-charts{
+	padding-bottom: 100px;
+}
+
+.sub-charts .chart-title,
+.chart-title{
+	font-family: 'Raleway', sans-serif;
+	background: #333333;
+	color: #FFFFFF;
+	text-align: left;
+	font-size: 20px;
+	font-weight: 100;
+	padding: 20px;
+	position:relative;
+}
+
+.chart-title.orange{
+	background: #d35400;
+}
+.chart-title.red{
+	background: #c0392b;
+}
+.chart-title.wisteria{
+	background: #8e44ad;
+}
+.chart-title.blue{
+	background: #3498db;
+}
+
+#filter{
+	position: absolute;
+	background: none;
+	border: none;
+	color: #ccc;
+	font-size: 18px;
+	outline: none;
+	 right: 20px;
+	text-align: center;
+}
+
+ .chart-title option.filter-item{
+	color: #cccccc;
+	background: none;
+	text-align: center;
+}
+
+.sub-charts .item{
+	margin-bottom: 50px;
+}
+
+
+/* ============================ Overview Selector CSS ======================== */
+
+
+#overview-selector {
+	display: none;
+}
+
+#ctr-selector {
+	display: none;
+}
+
+#clicks-selector {
+	display: none;
+}
+
+#session-selector {
+	display: none;
+}
+
+#bounce-back-selector {
+	display: none;
+}
+
+#session-duration-selector {
+	display: none;
+}
+
+.sub-charts .one-half .ctr-graph,
+.sub-charts .one-half .clicks-graph,
+.sub-charts .one-half .session-graph,
+.sub-charts .one-half .bounce-back-graph,
+.sub-charts .one-half .session-duration-graph{
+	background: #FFFFFF;
+	padding: 40px;
+}
+.data-chart-1-container{
+	display: block;
+}
+
+.DateRangeSelector{
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: -1em;
+    margin-left: -1em;
+}
+
+ .DateRangeSelector-item{	
+	margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 1em;
+    margin-left: 1em;
+	-webkit-box-flex: 1;
+	flex-grow: 1;
+    flex-shrink: 0;
+	
+}
+
+.DateRangeSelector-item label{
+	display: block;
+	margin-bottom: 10px;
+}
+
+.DateRangeSelector-item input{
+	width: 100%;
+	padding: 2px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-family: 'Raleway',sans-serif;
+}
+
+
+.content{
+	margin-top: 150px;
+	width: 100%;
+}
+
+.content .debit-success-items{
+
+	margin: 0 auto;
+	width: 48%;
+}
+
+.item-pricing{
+	padding-top: 50px;
+	padding-bottom: 50px;
+    background: #1abc9c;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.item-pricing .details{
+    width: 80%;
+    margin: 0 auto;
+    padding: 30px;
+    background: #16a085;
+}
+
+.item-pricing h1{
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.item-pricing p{
+    font-size: 18px;
+    color: #ffffff;
+    line-height: 1.3em;
+}
+
+.item-pricing i.fa{
+    font-size: 60px;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;   
+    border: 5px solid #ffffff;
+    margin-bottom: 20px;
+}
+/** ============= INVOICE ============== **/
+.invoice-head{
+	border-bottom: 2px solid #333;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+.logo img{
+	margin-top: 10px;
+	margin-bottom: 20px;
+	width: 30%;
+}
+
+.invoice-body{
+	padding-top: 50px;
+	padding-bottom: 100px;
+	font-family: 'Open Sans',sans-serif;
+}
+.invoice-body .details{
+	width: 30%;
+	display: inline-block;
+}
+
+.invoice-body h1{
+	font-family: 'Open Sans',sans-serif;
+	font-size: 16px;
+}
+
+.invoice-body ul li{
+	margin-bottom: 10px;
+}
+.invoice-body ul.invoice-payment-fields li h1{
+	font-weight: 700;
+}
+
+.invoice-body .address{
+	margin-top: 50px;
+}
+
+.invoice-body .address h1{
+	font-size: 16px;
+	font-weight: 800;
+	margin-bottom: 20px;
+	padding-top: 10px;
+	border-top: 1px solid #000;
+	text-transform: uppercase;
+}
+
+.invoice-body .address ul.billing-address-details li{
+	margin-bottom: 10px;
+	font-weight: 500;
+}
+
+.invoice-body .address{
+	margin-bottom: 50px;
+}
+
+.invoice-body .invoice-subscription h1{
+	font-size: 24px;
+	margin-bottom: 20px;
+	font-weight: 600;
+}
+
+.invoice-body .invoice-subscription .subscription-thead{
+	font-size: 16px;
+	font-weight: 700;
+	background: #16a085;
+}
+.invoice-body .invoice-subscription .subscription-thead h2{
+	padding: 10px;
+	text-align: center;
+	color: #ffffff;
+	text-transform: uppercase;
+}
+
+.invoice-body .invoice-subscription .subscription-items{
+	font-size: 16px;
+	font-weight: 700;
+}
+.invoice-body .invoice-subscription .subscription-items h2{
+	padding: 10px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.invoice-body .invoice-subscription .sub-total h1{
+	margin: 0;
+	font-size: 16px;
+	font-weight: 700;
+	background: #16a085;
+	padding: 10px 0;
+	color: #ffffff;
+	text-transform: uppercase;
+}
+
+.invoice-body .invoice-subscription .sub-total h2{
+	padding: 10px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.invoice-body .invoice-subscription .sub-total{
+	margin-top: 20px;
+	font-size: 16px;
+	font-weight: 700;
+	width: 32%;
+	float: right;
+	text-align: center;
+}
+/** ============= INVOICE ============== **/
+
+.status {
+	padding-top: 50px;
+	text-align: center;
+}
+
+.status h6 a{
+	color: #16a085;
+}
+
+.status h5{
+	font-size: 22px;
+	margin-bottom: 10px;
+}
+
+.status h6{
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+/** ====================== ER ===================== **/
+
+.content-error{
+	margin-top: 10px;
+	width: 100%;
+}
+
+.content-error .error-items{
+
+	margin: 0 auto;
+	width: 48%;
+}
+
+.error-desc{
+	padding-top: 50px;
+	padding-bottom: 50px;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.error-desc .details{
+    width: 80%;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.error-desc h1{
+    font-size: 30px;
+    margin-bottom: 20px;
+	font-weight: 500;
+	color: #95a5a6;
+}
+
+.error-desc p{
+    font-size: 18px;
+    color: #95a5a6;
+    line-height: 1.3em;
+}
+
+.error-desc i.fa{
+    font-size: 60px;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+	border-radius: 100px; 
+	color: #c0392b;  
+    border: 5px solid #c0392b;
+    margin-bottom: 0px;
+}
+.code{
+	color: #95a5a6;
+	text-align: center;
+}
+
+.code h1{
+	font-size: 20px;
+    margin-bottom: 20px;
+	font-weight: 500;
+}
+
+.code p{
+	font-size: 14px;
+    margin-bottom: 20px;
+	font-weight: 500;
+	padding: 20px;
+	background: #ecf0f1;
+	border: 1px solid #95a5a6;
+	color: #c0392b
+}
+.code a.button_er{
+	background: #1abc9c;
+	padding: 15px;
+	color: #ffffff;
+	font-weight: 800;
+	text-transform: uppercase;
+	display: inline-block;
+}
+
+.error-redirect {
+	padding-top: 150px;
+	text-align: center;
+}
+
+.error-redirect h6 a{
+	color: #16a085;
+	font-weight: 900;
+}
+
+.error-redirect h5{
+	font-size: 22px;
+	margin-bottom: 10px;
+}
+
+.error-redirect h6{
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+
+/** ====================== ER ===================== **/
+a.btn-print{
+	padding: 10px 20px;
+	background: #16a085;
+	color: #ffffff;
+	font-size: 16px;
+}
+a.btn-print i{
+	margin-right: 10px;
+}

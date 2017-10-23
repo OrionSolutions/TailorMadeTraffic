@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Login Using Google</title>
+        <link href="css/reset.css" rel="stylesheet" type="text/css">
+        <link href="css/grid.css" rel="stylesheet" type="text/css">
+        <link href="css/login.css" rel="stylesheet" type="text/css">
+        <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+       <!-- <script src="js/google.js?nocache=1"></script> -->
+    </head>
+    <body>
+        
+        <!--===========NAVIGATION CONTAINER==============-->
+        <div class="nav-container"> 
+            <div class="container">
+                <div class="full-width">
+                    <div class="one-half first">
+                        <h1>Tailor Made Traffic Dashboard</h1>
+                    </div>
+                    <div class="one-half last">
+                        <div class="home-button">
+                            <span><a href="#"><i class="fa fa-home" aria-hidden="true"></i>Back to Home</a></span>
+                        <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div> 
+            </div>    
+        </div>   
+        <!--===========NAVIGATION CONTAINER==============-->
+        
+
+        <div class="container">
+            <div class="full-width">
+                <div class="item-pricing">
+                    <h1>1$</h1>
+                    <a href="sand_box_api.php">Subscribe Now</a>
+                </div>
+            </div>
+
+        </div>
+        
+    </body>
+</html>
