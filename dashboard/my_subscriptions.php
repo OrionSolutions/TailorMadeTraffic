@@ -8,13 +8,17 @@ try{
         'access_token' =>'live_gZJP-n7WoRErIDs5disNaRxe14bj8oNdYgogu0BQ',
         'environment' => \GoCardlessPro\Environment::LIVE
     ]);
+    $id = $_COOKIE["useremail"];
     $useremail = $_COOKIE["useremail"];
     $token =  $_COOKIE["access_token"];
     $_SESSION['u_email'] = $useremail; 
     $_SESSION['u_access_token'] = $token;
     $con = new mycon();
     $con->getconnect();
-    $id = $_COOKIE["useremail"];
+    $user_name = "SELECT * FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
+    $getUser = $con->getrecords($user_name);
+    $rsUser = $con->getresult($getUser);
+    $user = $rsUser["Firstname"] ." ". $rsUser["Lastname"];
     $sqlexist = "SELECT COUNT(`tblaccount`.`GoogleEmail`) AS Existing,`tblaccount`.`AccountID` FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
     $getexist = $con->getrecords($sqlexist);
     $rs = $con->getresult($getexist);
@@ -38,7 +42,7 @@ try{
 <html>
 
 <head>
-    <title>TailorMadeTraffic Subscriptions</title>
+    <title>Subscriptions - Tailor Made Traffic</title>
 
     <!-- Required meta tags-->
     <meta charset="utf-8">
@@ -64,6 +68,7 @@ try{
     <script src="js/firebase-config.js"></script>
     <script src="js/logout.js"></script>
     <script src="js/google.js"></script>
+    <script src="js/responsive-side.js"></script>
     <script>
         (function(w, d, s, g, js, fs) {
             g = w.gapi || (w.gapi = {});
@@ -86,31 +91,69 @@ try{
 
 <body>
     <!-- Top Menu -->
-   <?php include('menu.php'); ?>
+   <?php //include('menu.php'); ?>
+
+   <!-- <div class="top-header">
+        <div class="container">
+            <div class="full-width">
+            <h1><i class="fa fa-line-chart"></i> Dashboard</h1>
+            <a href="https://tailormadetraffic.com/dashboard/subscribe.php" class="new-subscribe">New Subscription <i class="fa fa-plus"></i></a>
+            <div class="clear"></div>
+                <div class="user-info">
+                    <img src="images/avatar.jpg" id="myavatar" class="avatar">
+                    <p>Larry Mark</p>
+                    <div class="clear"></div>
+                </div>
+            
+            </div>    
+        </div> 
+    </div> -->
+
     <!-- Top Menu -->
     <!-- Middle Menu -->
     <div class="middle-header">
-        <div class="container">
-            <div class="full-width">
-                <ul>
-                    <li><a href="dashboard.php">Dashboard</a></li>
-                    <li class="current"><a href="#">My Subscriptions</a></li>
-                    <li><a href="my_payment.php">Development Service</a></li>
-                </ul>
-            </div>
-        </div>
+        <div class="logo">
+            <img src="images/logo.png" >     
+        </div>  
+        <ul>
+            <li><a href="dashboard.php"><i class="fa fa-bar-chart"></i> Google Marketing</a></li>
+            <li class="current"><a href="my_subscriptions.php"><i class="fa fa-check-square-o"></i> My Subscriptions</a></li>
+            <li><a href="my_payment.php"><i class="fa fa-code"></i> Development Service</a></li>
+        </ul>
     </div>
     <!-- Middle Menu -->
     <!-- Dashboard -->
     
-   
+    <div class="dashboard-wrapper">
     <?php if(mysqli_num_rows($getsubscription)){ ?>
-    <div class="container desktop">
+
+    <div class="top-header">
         <div class="full-width">
+            <ul class="tab-menu">
+                <li><h1><i class="fa fa-line-chart"></i> Dashboard</h1></li>
+                <li><a href="https://tailormadetraffic.com/dashboard/subscribe.php" class="menu-button">New Subscription <i class="fa fa-plus"></i></a></li>
+            </ul>
+            <div class="user-info">
+                <img src="images/avatar.jpg" id="myavatar" class="avatar">
+                <div class="user-options">
+                    <a href="#" id="logout">Logout</a>
+                </div>
+                <div>
+                    <p><?php echo $user; ?></p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>  
+    </div>
+
+
+    
+    <div class="desktop">
+    <!-- <div class="spacer"> -->
+        <div class="full-width">
+      
             <div class="subscriptions-holder">
-                <h1>Current Subscriptions
-                <a href="https://tailormadetraffic.com/dashboard/subscribe.php" class="new-subscribe">New Subscription <i class="fa fa-plus"></i></a>
-                </h1>
+                <h1>Current Subscriptions</h1>
                 <div class="subscription-details">
                     <div class="one-fourth first items">
                         <h2>Subscription Type</h2>
@@ -199,8 +242,9 @@ try{
                 </div>
             </div>
         </div>
+        <!-- </div> -->
     </div>
-
+</div>
 <?php 
 }else{
 ?>

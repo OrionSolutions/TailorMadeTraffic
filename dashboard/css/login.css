@@ -45,11 +45,11 @@ body.register{ background: #EEEEEE; }
 }
 .login-google{
     position: relative;
-    background: #d34836;
-    color: #FFFFFF;
-    border-bottom: 3px solid #b73d2d;
-    padding: 17px;
-    padding-left: 85px;
+    color: #b73d2d;
+    border: 1px solid #b73d2d;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 90px;
     padding-right: 35px;
     font-size: 25px;
     font-weight: 300;
@@ -60,13 +60,13 @@ body.register{ background: #EEEEEE; }
 
 .login-google:hover,.login-google:focus{
     cursor: pointer;
-    opacity: 0.9
+    opacity: 0.7
 }
 
 .login-google .fa{
     position: absolute;
-    left: 0px;
-    top: -5px;
+    left: 10px;
+    top: 0px;
     opacity: 0.7;
     margin-right: 10px;
     font-size: 75px;
@@ -126,7 +126,7 @@ a{
 }
 .home-button span i{
     padding-right: 10px;
-    font-size: 20px;
+    font-size: 35px;
 }
 
 /*============NAVIGATION CONTAINER===========*/
@@ -236,17 +236,18 @@ a{
 .form-container-register .one-half.last{ margin-right: 0px; }
 
 .form-container-register h1{
-    background: #2ecc71;
+    background: #009688;
     color: #FFFFFF;
-    font-size: 28px!important;
+    font-size: 35px!important;
     text-transform: uppercase;
     padding: 25px;
-    font-weight: 400;
+    font-weight: 300;
     text-align: center;
+    letter-spacing: 1px;
 }
 .form-container-register h1 span{
     display: block;
-    font-size: 18px;
+    font-size: 20px;
     margin-top: 10px;
     text-transform: none;
 }
@@ -432,12 +433,12 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .form-container-register .reg-link{
-    color: #BBBBBB;
+    color: rgb(165, 165, 165);
     font-size: 15px;
     font-weight: 300;
 }
 
-.form-container-register .reg-link:hover{
+.form-container-register .reg-link:hover {
     color: #2ecc71;
     cursor: pointer;
 }

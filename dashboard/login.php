@@ -30,7 +30,7 @@
                     </div>
                     <div class="one-half last">
                         <div class="home-button">
-                            <span><a href="https://tailormadetraffic.com/"id="back"><i class="fa fa-home" aria-hidden="true"></i><span>Back to Tailor Made Traffic<span></a></span>
+                            <span><a href="https://tailormadetraffic.com/"id="back"><i class="fa fa-home" aria-hidden="true"></i></a></span>
                         <div class="clear"></div>
                         </div>
                     </div>

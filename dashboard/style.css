@@ -7,7 +7,7 @@ font-family: 'Raleway', sans-serif;
 
 body{
 	font-family: 'Open Sans', sans-serif;
-	background: #f4f4f4;
+	background: #ecf0f1;
 	font-size: 14px;
 }
 
@@ -54,17 +54,37 @@ a{ text-decoration: none; color: #323232 }
 	margin-left: 10px;
 	font-size: 18px;
 }
+
 /* ======================================= Top Header ======================================= */
 .top-header{
-	background: #323232;
+	background: #ffffff;
 	color: #FFFFFF;
-	padding-top: 18px;
-	padding-bottom: 18px;
+	width: 100%;
+	z-index: 1000;
+	box-shadow:  0 4 20px -2px #BFCFCF;
+	position: relative;
+	margin-bottom: 30px;
 }
 
-.top-header .logo{
-	max-width: 100%;
-	height: auto;
+.top-header h1{
+	color:#000;
+	font-size: 30px;
+	font-family: 'Raleway', sans-serif;
+	padding: 20px;
+	padding-left: 0;
+}
+
+.top-header ul.tab-menu{
+	color: #000000;
+	padding: 2px 0;
+	vertical-align: middle;
+	display: table;
+}
+
+.top-header ul.tab-menu li{
+	display: table-cell;
+	vertical-align: middle;
+	margin-right: 40px;
 }
 
 .responsive-main-menu{
@@ -80,6 +100,7 @@ a{ text-decoration: none; color: #323232 }
 	float: left;
 	margin-right: 30px;
 }
+
 .top-header .main-menu a{
 	color: #888888;
 }
@@ -87,17 +108,62 @@ a{ text-decoration: none; color: #323232 }
 	color: #BBBBBB;
 }
 
-.top-header .user-info{ display: inline-block; float: right; }
+.top-header .user-info{ 
+	position: absolute;
+	display: table;
+	right: 5px;
+	top:15px;
+}
+
+.top-header .user-info .user-options{
+	width: 200px;
+	background: #ecf0f1;
+	border-radius: 3px;
+	position: absolute;
+	left: -170%;
+	padding: 20px;
+	display: none;
+}
+
+.top-header .user-info .user-options:after{
+content: "";
+    position: absolute;
+	top: 5;
+	right: -30;
+    width: 0;
+    height: 0;
+    border-top: 18px solid transparent;
+    border-left: 36px solid #ecf0f1;
+    border-bottom: 18px solid transparent;
+}
+
+.top-header .user-info .user-options.show{
+	display: block;
+}
+
+.top-header .user-info .user-options a:hover{
+	color:#000000;
+	font-weight: 600;
+}
+
 
 .top-header .user-info .avatar{
 	border-radius: 100%;
 	width: 40px;
 	height: 40px;
+	display: table-cell;
+	vertical-align: middle;
 	float: left;
 	margin-right: 10px;
 }
 
-.top-header .user-info p{ display: inline-block; }
+.top-header .user-info p{ 
+	display: table-cell;
+	vertical-align: middle; 
+	font-size: 16px;
+	font-weight: 900;
+	color: #000000;
+}
 
 .top-header .user-info span{
 	display: block;
@@ -111,46 +177,136 @@ a{ text-decoration: none; color: #323232 }
 	color: #888888;
 }
 
+.header-top{
+	background: #394959;
+	color: #FFFFFF;
+	padding-top: 18px;
+	padding-bottom: 18px;
+	padding-left: 20px;
+}
 
+.header-top h1{
+	font-size: 30px;
+}
 
+.header-top i{
+	font-size: 30px;
+}
+/* ===================== SIDE MENU AMIN =================== */
+.admin-header{
+	background: #bdc3c7;
+	color: #34495e;
+	height: 100%;
+	width: 15%;
+	margin-left: 0;
+	float: left;
+	padding-top: 40px;
+}
+
+.admin-header .logo img{
+	width: 100%;
+	padding-top: 10px;
+}
+
+.admin-header li {
+}
+
+.admin-header li a{
+	color: #FFFFFF;
+	padding: 20px 20px;
+	display:block;
+	transition: all 0.3s ease-in-out;
+}
+.admin-header li a:hover{
+	background: #f4f4f4;
+	color: #888888;
+}
+.admin-header li.current a{
+	background: #f4f4f4;
+	color: #888888;
+}
+
+/*
+.admin-header ul{
+	display: inline-block;
+}
+
+.admin-header li{
+	float: left;
+	margin-right: 5px;
+}
+*/
 
 
 /* ====================================== Middle Header ============================================ */
 .middle-header{
-	background: #2cc185;
+	background: #262b33;
 	color: #FFFFFF;
-	padding-top: 50px;
 	margin-bottom: 50px;
+	width: 20%;
+	height: 100%;
+	position: fixed;
+	display: inline-block;
+	z-index: 1001;
+	top: 0;
 }
 
+.middle-header .logo{
+	width: 100%;
+	height: auto;
+	margin-bottom: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #3b434e;
+	text-align: center;
+}
+.middle-header .logo img{
+	width: auto;
+	max-width: 100%;
+	margin: 10px 0;
+}
+
+.dashboard-wrapper{
+	width: 80%;
+	float: right;
+}
+.spacer{
+	padding: 20px;
+}
+
+
 .middle-header ul{
-	display: inline-block;
+	display: block;
 }
 
 .middle-header li{
-	float: left;
+	display: block;
+	position: relative;
 }
 .middle-header li a{
-	color: #FFFFFF;
-	padding: 15px;
+	color: #819599;
+	padding-left: 80px;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	display: inline-block;
-	border-radius: 3px 3px 0px 0px;
-
-	-webkit-transition: all 0.3s ease-in-out;
-	-moz-transition: all 0.3s ease-in-out;
-	-ms-transition: all 0.3s ease-in-out;
-	-o-transition: all 0.3s ease-in-out;
-	transition: all 0.3s ease-in-out;
+	font-size: 15px;
+	font-weight: 600;
+	display: block;
+	transition: all 0.2s ease-in-out;
 }
+
+.middle-header ul li a i{
+	position: absolute;
+	left: 30px;
+	top: 10px;
+	font-size: 30px;
+	padding-right: 10px;
+}
+
 .middle-header li a:hover{
-	background: #f4f4f4;
-	color: #888888;
+	color: #d4d5d6 ;
 }
 .middle-header li.current a{
-	background: #f4f4f4;
-	color: #888888;
+	color: #ffffff;
 	border-radius: 3px 3px 0px 0px;
 }
 
@@ -182,7 +338,7 @@ canvas{
 }
 .table-overview tr.header{
 	font-family: 'Raleway', sans-serif;
-	background: #333333;
+	background: #009688;
 	color: #FFFFFF;
 	text-align: left;
 	font-size: 20px;
@@ -203,12 +359,12 @@ canvas{
 .sub-charts .chart-title,
 .chart-title{
 	font-family: 'Raleway', sans-serif;
-	background: #333333;
+	background: #009688;
 	color: #FFFFFF;
 	text-align: left;
 	font-size: 20px;
 	font-weight: 100;
-	padding: 20px;
+	padding: 15px;
 	position:relative;
 }
 
@@ -241,16 +397,16 @@ canvas{
 */
 
 #filter{
-	display: inline-block;
 	float: right;
 	background: none;
-	border: none;
-	color: #CCCCCC;
+	border: 0px;
+	color: #ffffff;
 	font-size: 18px;
 	outline: none;
-	border:1px solid #666666;
+	border:1px solid #ffffff;
 	padding: 8px;
 }
+
 
  .chart-title option.filter-item{
 	color: #cccccc;
@@ -347,29 +503,32 @@ canvas{
 
 /** =========================== MY SUBSCRIPTIONS ======================== **/
 .subscriptions-holder{
-	padding-bottom: 50px;
+	background: #ffffff;
+	padding: 20px 50px;
 }
 
 .subscriptions-holder h1{
-	background: #323232;
-	padding: 20px;
-	color: #ffffff;
+	padding-top: 15px;
+	padding-left: 0;
+	padding-bottom: 10px;
+	color: #009688;
+	font-weight: 500;
 	font-size: 20px;
+	border-bottom: 1px solid #009688;
 	margin-bottom: 30px;
 	position: relative;
 }
 
-.subscriptions-holder a.new-subscribe{
+a.menu-button{
 	color: #ffffff;
 	padding: 10px;
-	top:10px;
-	right:10px;
-	position: absolute;
-	background: #16a085
+	background: #3498db;
+	font-size: 18px;
 }
 
-.subscriptions-holder a.new-subscribe i{
+a.menu-button i{
 	padding: 0 10px;
+	font-size: 16px;
 }
 
 .subscriptions-holder .subscription-details .subscription-title{
@@ -389,16 +548,15 @@ canvas{
 
 
 .subscriptions-holder .subscription-details .subscriptions{
-	
-	
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
 
 .subscriptions-holder .subscription-details .subscriptions .s-items{
-	padding: 30px 0px;
+	padding: 20px 0px;
 	margin-bottom: 10px;
-	border: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;
 }
 
 .subscriptions-holder .subscription-details .subscriptions h3{
@@ -421,7 +579,7 @@ canvas{
 	text-transform: uppercase;
 	font-weight: 600;
 	float: right;
-	background: #323232;
+	background: #95a5a6;
 	color: #ffffff;
 	margin-left: 10px;
 	margin-top: 5px;
@@ -600,7 +758,7 @@ a.btn-print i{
 
 .account-status{
 	text-align: center;
-	padding: 30px 30px;
+	padding: 100px 30px;
 	background: #ecf0f1;
 	width: 55%;
 	margin: 0 auto;
@@ -650,6 +808,79 @@ a.btn-print i{
 .totalView p.total{
 	padding: 15px;
 	font-size: 20px;
+	background: #bdc3c7;
+	color: #ffffff;
+}
+
+.body-wrapper{
+	width: 85%;
 	background: #ecf0f1;
+	margin-right: 0px;
+	float: left;
+}
+
+ .body-head{
+	background: #ffffff;
+	color: #000;
+	font-size: 20px;
+	position: relative;
+	padding: 15px;
+}
+
+.body-head img{
+	width: 15%;
+	margin: 0;
+	display: inline-block;
+}
+
+.body-head i{
+	margin-right: 10px;
+}
+
+.body-head input{
+	padding: 5px;
+	outline: none;
+	border: 0px;
+	font-size: 16px;
+	color: #a3a3a3;
+	border-bottom: 1.5px solid #ddd;
+}
+
+.body-head a{
+	margin-left: 20px;
+	color: #ffffff;
+}
+
+.body-head .search{
+	margin: 0;
+	position: absolute;
+	top:25%;
+	right: 50px;
+}
+
+.body-wrapper .admin-title{
+	padding: 20px 0;
 	color: #95a5a6;
+	text-align: center;
+}
+
+.body-wrapper .admin-title h1{
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.body-wrapper .admin-items h1{
+	font-family: 'Open Sans',sans-serif;
+	text-align: center;
+	font-size: 16px;
+	margin: 0;
+}
+
+.body-wrapper .admin-items{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 20px;
 }

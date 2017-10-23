@@ -15,6 +15,12 @@ try{
     $con = new mycon();
     $con->getconnect();
     $id = $_COOKIE["useremail"];
+
+    $user_name = "SELECT * FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
+    $getUser = $con->getrecords($user_name);
+    $rsUser = $con->getresult($getUser);
+    $user = $rsUser["Firstname"] ." ". $rsUser["Lastname"];
+
     $sqlexist = "SELECT COUNT(`tblaccount`.`GoogleEmail`) AS Existing,`tblaccount`.`AccountID` FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
     $getexist = $con->getrecords($sqlexist);
     $rs = $con->getresult($getexist);
@@ -38,7 +44,7 @@ try{
 <html>
 
 <head>
-    <title>TailorMadeTraffic Payment</title>
+    <title>Payment - Tailor Made Traffic</title>
 
     <!-- Required meta tags-->
     <meta charset="utf-8">
@@ -64,6 +70,7 @@ try{
     <script src="js/firebase-config.js"></script>
     <script src="js/logout.js"></script>
     <script src="js/google.js"></script>
+    <script src="js/responsive-side.js"></script>
     <script>
         (function(w, d, s, g, js, fs) {
             g = w.gapi || (w.gapi = {});
@@ -86,126 +93,147 @@ try{
 
 <body>
     <!-- Top Menu -->
-   <?php include('menu.php'); ?>
     <!-- Top Menu -->
     <!-- Middle Menu -->
     <div class="middle-header">
-        <div class="container">
-            <div class="full-width">
-                <ul>
-                <li><a href="dashboard.php">Dashboard</a></li>
-                <li><a href="my_subscriptions.php">My Subscriptions</a></li>
-                <li class="current"><a href="my_payment.php">Development Service</a></li>
-                </ul>
-            </div>
-        </div>
+    <div class="logo">
+        <img src="images/logo.png" >     
+    </div>  
+        <ul>
+            <li><a href="#"><i class="fa fa-bar-chart"></i> Google Marketing</a></li>
+            <li><a href="my_subscriptions.php"><i class="fa fa-check-square-o"></i> My Subscriptions</a></li>
+            <li class="current"><a href="my_payment.php"><i class="fa fa-code"></i> Development Service</a></li>
+        </ul>
     </div>
     <!-- Middle Menu -->
     <!-- Dashboard -->
+
     
-    <div class="container desktop">
-    <?php if(mysqli_num_rows($getsubscription)){ ?>
-        <div class="full-width">
-            <div class="subscriptions-holder">
-                <h1>Current Development Payment
-                <a href="https://tailormadetraffic.com/dashboard/order-plan.php" class="new-subscribe">New Development Service Payment  <i class="fa fa-plus"></i></a>
-                </h1>
-                <div class="subscription-details">
-                    <div class="one-fourth first items">
-                        <h2>Service Type</h2>
-                    </div>
-                    <div class="one-fourth items">
-                        <h2>Amount</h2>
-                    </div>
-                    <div class="one-fourth items">
-                        <h2>Charge Date</h2>
-                    </div>
-                    <div class="one-fourth last items">
-                        <h2>Status</h2>
-                    </div>
+        <div class="dashboard-wrapper">
+        <?php if(mysqli_num_rows($getsubscription)){ ?>
 
-
-                    <div class="clear"></div>
-
-        <?php
-        $x=0;
-        while($rsdata =mysqli_fetch_assoc($getsubscription)) { 
-  	    $paymentvalue=0;
-            if($rsdata["PaymentPlan"]=="Monthly") {$paymentvalue=$rsdata["DailyBudget"];}else{$paymentvalue= ($rsdata["DailyBudget"] * 30);}
-            $subscription_amount =  $rsdata["SubscriptionAmount"] + $paymentvalue;
-            $subscription_amount = number_format($subscription_amount, 2, '.','');
-
-            if($rsdata["PaymentID"]!=null){
-                try{
-                    //$ids = $rsdata["UniqueID"];
-                    //echo $rsdata["PaymentID"];
-                    $payment = $client->payments()->get($rsdata["PaymentID"]);
-                    $customer_ID = $subscription->metadata->customer_id;
-                    $payment_status = $payment->status;
-                    $subscription_amount = ($payment->amount)/100;
-                    $charge_date = $payment->charge_date;
-                    $paymentID = $payment->id;
-                }catch(Exception $error){
-                    $_SESSION['error_handler'] = $error->getMessage();
-                   echo "<script>window.location.replace('gateway/error.php');</script>";
-                  // echo $start_date. "<br/>";
-                   //echo $customer_ID. "<br/>";
-                }
-        ?>
-                    <div class="subscriptions">
-                        <div class="s-items">
+            <div class="top-header">
+                <div class="full-width">
+                    <ul class="tab-menu">
+                        <li><h1><i class="fa fa-line-chart"></i> Dashboard</h1></li>
+                        <li><a href="https://tailormadetraffic.com/dashboard/order-plan.php" class="menu-button">New Development Service Payment  <i class="fa fa-plus"></i></a></li>
+                    </ul>
+                    <div class="user-info">
+                        <img src="images/avatar.jpg" id="myavatar" class="avatar">
+                        <div class="user-options">
+                            <a href="#" id="logout">Logout</a>
+                        </div>
+                        <div>
+                            <p><?php echo $user; ?></p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>  
+            </div>
+    
+            <div class="desktop">
+   
+            
+                <div class="full-width">
+                    <div class="subscriptions-holder">
+                        <h1>Current Development Payment</h1>
+                        <div class="subscription-details">
                             <div class="one-fourth first items">
-                                <h3><?php echo $rsdata["SubscriptionTitle"];?></h3>
-                                <h4>(<?php echo $rsdata["PaymentCampaignTitle"];?>)</h4>
+                                <h2>Service Type</h2>
                             </div>
                             <div class="one-fourth items">
-                                <h3>£ <?php echo $subscription_amount ?></h3>
+                                <h2>Amount</h2>
                             </div>
                             <div class="one-fourth items">
-                                <h3><?php echo $charge_date;?></h3>
+                                <h2>Charge Date</h2>
                             </div>
                             <div class="one-fourth last items">
-        <?php 
-            switch($payment_status) {
-                case "pending_submission": $var="Payment pending";$color="orange";break;
-                case "submitted": $var="Payment Submitted";$color="orange";break;
-                case "paid_out": $var="Active";$color="green";break;
-                case "cancelled": $var="Cancelled";$color="red";break;
-            }
-        ?>
-                                  <h3 style="color:<?php echo $color;?>;">
-                                  <?php echo $var; ?></h3>
-                             </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="controls">
-                            <a href="payment-invoice.php?payment_id=<?php echo $paymentID;?>&&accid=<?php echo $accid; ?>" data-id="<?php echo $rsdata["PaymentID"];?>" class="various fancybox.ajax button">View Invoice</a>
-                            <?php if($payment_status!="cancelled"){ ?>
+                                <h2>Status</h2>
+                            </div>
 
-                            <?php } ?>
-                            <div class="clear"></div>
-                        </div>
 
+                            <div class="clear"></div>
+
+                <?php
+                $x=0;
+                while($rsdata =mysqli_fetch_assoc($getsubscription)) { 
+                $paymentvalue=0;
+                    if($rsdata["PaymentPlan"]=="Monthly") {$paymentvalue=$rsdata["DailyBudget"];}else{$paymentvalue= ($rsdata["DailyBudget"] * 30);}
+                    $subscription_amount =  $rsdata["SubscriptionAmount"] + $paymentvalue;
+                    $subscription_amount = number_format($subscription_amount, 2, '.','');
+
+                    if($rsdata["PaymentID"]!=null){
+                        try{
+                            //$ids = $rsdata["UniqueID"];
+                            //echo $rsdata["PaymentID"];
+                            $payment = $client->payments()->get($rsdata["PaymentID"]);
+                            //$customer_ID = $payment->metadata->customer_id;
+                            $payment_status = $payment->status;
+                            $subscription_amount = ($payment->amount)/100;
+                            $charge_date = $payment->charge_date;
+                            $paymentID = $payment->id;
+                        }catch(Exception $error){
+                            $_SESSION['error_handler'] = $error->getMessage();
+                        echo "<script>window.location.replace('gateway/error.php');</script>";
+                        // echo $start_date. "<br/>";
+                        //echo $customer_ID. "<br/>";
+                        }
+                ?>
+                            <div class="subscriptions">
+                                <div class="s-items">
+                                    <div class="one-fourth first items">
+                                        <h3><?php echo $rsdata["SubscriptionTitle"];?></h3>
+                                        <h4>(<?php echo $rsdata["PaymentCampaignTitle"];?>)</h4>
+                                    </div>
+                                    <div class="one-fourth items">
+                                        <h3>£ <?php echo $subscription_amount ?></h3>
+                                    </div>
+                                    <div class="one-fourth items">
+                                        <h3><?php echo $charge_date;?></h3>
+                                    </div>
+                                    <div class="one-fourth last items">
+                <?php 
+                    switch($payment_status) {
+                        case "pending_submission": $var="Payment pending";$color="orange";break;
+                        case "submitted": $var="Payment Submitted";$color="orange";break;
+                        case "paid_out": $var="Active";$color="green";break;
+                        case "cancelled": $var="Cancelled";$color="red";break;
+                    }
+                ?>
+                                        <h3 style="color:<?php echo $color;?>;">
+                                        <?php echo $var; ?></h3>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="controls">
+                                    <a href="payment-invoice.php?payment_id=<?php echo $paymentID;?>&&accid=<?php echo $accid; ?>" data-id="<?php echo $rsdata["PaymentID"];?>" class="various fancybox.ajax button">View Invoice</a>
+                                    <?php if($payment_status!="cancelled"){ ?>
+
+                                    <?php } ?>
+                                    <div class="clear"></div>
+                                </div>
+
+                            </div>
+        <?php } }?>
+                        </div>
                     </div>
-<?php } }?>
+                </div>
+            
+
+        <?php 
+        }else{
+        ?>
+            <div class="container">
+                <div class="full-width">
+                    <div class="account-status">
+                        <i class="fa fa-exclamation-circle"></i>
+                        <p>No current web service at this time.</p>
+                        <a href="https://tailormadetraffic.com/dashboard/order-plan.php" class="button blue">New web service <i class="fa fa-plus"></i></a>
+                    </div>
                 </div>
             </div>
+        <?php } ?>
         </div>
-    
-
-<?php 
-}else{
-?>
-    <div class="container">
-        <div class="full-width">
-            <div class="account-status">
-                <i class="fa fa-exclamation-circle"></i>
-                <p>No current web service at this time.</p>
-                <a href="https://tailormadetraffic.com/dashboard/order-plan.php" class="button blue">New web service <i class="fa fa-plus"></i></a>
-            </div>
-        </div>
-    </div>
-<?php } ?>
 </div>
 <!-- ========================================= Responsive ================================== -->
       
