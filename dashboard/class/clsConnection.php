@@ -5,15 +5,15 @@ class mycon {
 
 	//declare the localhost
 
-	public $myserver = '31.22.4.254';
+	public $myserver = 'localhost';
 
 	//declare the mysqlusername
 
-	public $username = 'tailorma_traffic';
+	public $username = 'root';
 
 	//declare the mysqlpassword
 
-	public $password = '12309192787899';
+	public $password = '1234';
 
 	//declare the databasename;
 
