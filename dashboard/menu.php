@@ -12,9 +12,9 @@
                     <div class="three-fourth last">
                         <ul class="main-menu">
                             <li><a href="https://tailormadetraffic.com/">Home</a></li>
-                            <!--<li><a href="#">Account Settings</a></li>-->
-                            <!--<li><a href="#">Subscriptions</a></li>-->
-                            <!--<li><a href="#">Support</a></li>-->
+                            <!-- <li><a href="#">Account Settings</a></li> -->
+                            <!-- <li><a href="#">Subscriptions</a></li> -->
+                            <!-- <li><a href="#">Support</a></li> -->
                             <li><a href="#" id="logout">Logout</a></li>
                         </ul>
                     </div>

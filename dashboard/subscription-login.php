@@ -7,9 +7,21 @@ error_reporting(0);
   $_SESSION['u_email'] = $useremail; 
   $_SESSION['u_access_token'] = $token;
   $id = $_COOKIE["useremail"];
-
   $ref = $_GET["ref"];
   $_SESSION['reference'] = $ref;
+
+  include ('class/clsConnection.php');
+  
+  $con = new mycon();
+  $con->getconnect();
+  $sqlaccount = "SELECT * FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
+  $getaccount = $con->getrecords($sqlaccount);
+  $rs = $con->getresult($getaccount);
+
+  if($rs){
+    
+  }else{echo "<script>window.location.replace('register.php');</script>";
+  }
 
 $SubscriptionTypeID = $_GET["SubscriptionTypeID"];
 if ($SubscriptionTypeID=="") { 
@@ -38,6 +50,7 @@ switch ($SubscriptionTypeID) {
         $_SESSION["Campaign"]=15;
         $_SESSION["SubscriptionTitle"] = "Custom Budget";
         break;
+
 }
 
 ?>

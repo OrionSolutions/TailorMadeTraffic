@@ -50,8 +50,8 @@ setcookie("siteID",$siteid);
 </head>
 
 <body>
+
    <?php
-   // THis is a test for sir Bols
 if ($exist == 0)
 	{
 	$jscript = "
@@ -229,8 +229,7 @@ if ($siteid != 0)
         <div class="full-width">
             <div class="account-status">
                 <i class="fa fa-exclamation-circle"></i>
-                <p>You dont have any active subscription.</p>
-                <a href="subscribe.php" class="button red">Create Subscription</a>
+                <p>Account is not yet activated.</p>
             </div>
         </div>
     </div>
