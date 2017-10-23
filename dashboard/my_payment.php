@@ -95,16 +95,7 @@ try{
     <!-- Top Menu -->
     <!-- Top Menu -->
     <!-- Middle Menu -->
-    <div class="middle-header">
-    <div class="logo">
-        <img src="images/logo.png" >     
-    </div>  
-        <ul>
-            <li><a href="#"><i class="fa fa-bar-chart"></i> Google Marketing</a></li>
-            <li><a href="my_subscriptions.php"><i class="fa fa-check-square-o"></i> My Subscriptions</a></li>
-            <li class="current"><a href="my_payment.php"><i class="fa fa-code"></i> Development Service</a></li>
-        </ul>
-    </div>
+    <?php include('sidebar.php') ?>>
     <!-- Middle Menu -->
     <!-- Dashboard -->
 
