@@ -25,6 +25,7 @@ $rssite = $con->getresult($getsiteid);
 
 $siteid = $rssite["SiteID"];
 setcookie("siteID",$siteid);
+
 ?>
 <html>
 <head>
@@ -58,6 +59,7 @@ setcookie("siteID",$siteid);
 
 <body>
    <?php
+/* ============================== pending for removal
 
 if ($exist == 0)
 	{
@@ -74,18 +76,20 @@ if ($exist == 0)
 	echo '<script>' . $jscript . "</script>";
 	echo "<script>setTimeout(function(){ window.location.replace('register.php'); }, 1500);</script>";
 	}
-
+*/
 ?>
     <!-- Middle Menu -->
     <?php include('sidebar.php'); ?>
     <!-- Middle Menu -->
 
     <!-- Dashboard -->
-    <?php if ($siteid != 0){ ?>
     <div class="dashboard-wrapper">
+    <?php if ($siteid != 0){ ?>
+    
         <!-- <div class="container"> -->
         <?php include('menu.php'); ?>
         <!-- <div class="spacer"> -->
+        <div class="desktop">
             <div class="full-width">  
             
                 <!-- Graph -->
@@ -215,8 +219,8 @@ if ($exist == 0)
                 </div>
             <!-- </div> -->
         </div>
+        </div>
     </div>
-    <div class="clear"></div>
     <?php
 	}
   else
@@ -225,8 +229,8 @@ if ($exist == 0)
         <div class="full-width">
             <div class="account-status">
                 <i class="fa fa-exclamation-circle"></i>
-                <p>You dont have any active subscription.</p>
-                <a href="subscribe.php" class="button red">Create Subscription</a>
+                <p>No current subscription at this time.</p>
+                <a href="https://tailormadetraffic.com/dashboard/subscribe.php" class="button green">New Subscription <i class="fa fa-plus"></i></a>
             </div>
         </div>
     </div>

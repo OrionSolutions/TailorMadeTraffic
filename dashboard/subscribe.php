@@ -1,4 +1,4 @@
-<?php 
+    <?php 
     error_reporting(0);
     include ('class/clsConnection.php');
     session_start();
@@ -158,7 +158,7 @@
                 </div>
                 <div class="one-half last">
                     <label><span><i class="fa fa-link"></i></span>
-                        <input type="url" class="textbox" id="campaignlink" name="campaignlink" onblur="checkURL(this)" placeholder="Website Link" required>
+                        <input type="url" class="textbox" id="campaignlink" name="campaignlink" onblur="checkURL(this)" placeholder="Website Address" required>
                     </label>            
                 </div>
                 <input type="hidden" id="mail" name="mail">
@@ -172,7 +172,6 @@
         
     <!--===========FORM CONTAINER==============-->
         
-    </body>
-  
   <script type="text/javascript" src="js/subscribe.js"></script>
+    </body>
 </html>

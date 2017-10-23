@@ -310,6 +310,11 @@ content: "";
 	border-radius: 3px 3px 0px 0px;
 }
 
+.middle-header ul.user-controls{
+	margin-top: 30px;
+	border-top: 1px solid #3b434e;
+}
+
 /* Over View Graph */
 .overview-graph{
 	background: #FFFFFF;

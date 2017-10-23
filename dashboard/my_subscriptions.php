@@ -183,7 +183,6 @@ try{
                     foreach ($payment_status->records as $payment) {
                     $payment_ID = $payment->id;
                     $payment_status = $payment->status;
-                    
                     }
                     $payment_start = $client->payments()->get($payment_ID);
                     $payment_charge = $payment_start->charge_date;
@@ -244,7 +243,7 @@ try{
             <div class="account-status">
                 <i class="fa fa-exclamation-circle"></i>
                 <p>No current subscription at this time.</p>
-                <a href="https://tailormadetraffic.com/dashboard/subscribe.php" class="button green">New Subscription <i class="fa fa-plus"></i></a>
+                <a href="subscribe.php" class="button green">New Subscription <i class="fa fa-plus"></i></a>
             </div>
         </div>
     </div>

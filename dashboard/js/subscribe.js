@@ -1,20 +1,21 @@
-$(document).ready(function(){
-    function checkURL (abc) {
-        var string = abc.value;
-        if (!~string.indexOf("http")) {
-          string = "https://" + string;
-        }
-        abc.value = string;
-        return abc
+function checkURL(abc) {
+    var string = abc.value;
+    if (!~string.indexOf("http")) {
+      string = "https://" + string;
     }
-	loadSubamount();
-    firebase.auth().onAuthStateChanged(function(user) {
+    abc.value = string;
+    return abc
+}
+$(document).ready(function(){
+    //loadSubamount();
+    
+    /*firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
         localStorage["Username"] = user.email;
         localStorage["photoURL"] = user.photoURL;   
         document.cookie = "useremail=" + user.email;    
         document.cookie = "access_token=" +  localStorage["token"];       
-        firebase.auth().currentUser.getToken(/* forceRefresh */ true).then(function(idToken) {
+        firebase.auth().currentUser.getToken(/* forceRefresh true).then(function(idToken) {
         localStorage["session_token"]= idToken;
         }).catch(function(error) {
         });
@@ -22,7 +23,7 @@ $(document).ready(function(){
             window.location.replace('https://tailormadetraffic.com/dashboard/subscription-login.php');
         }
         
-    }); 
+    }); */
     
 
       
