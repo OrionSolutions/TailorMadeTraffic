@@ -266,26 +266,28 @@ a{
     right: 0px;
     width: 30px;
     height: 30px;
-    border: 2px solid #2ecc71;
-    color: #2ecc71;
+    border: 2px solid #1abc9c;
+    color: #1abc9c;
     display: inline-block;
 
     -webkit-border-radius: 100%;
     border-radius: 100%;
 }
 
-.form-container-register label span .fa{ position: absolute; top: 5px; width: 100%; text-align: center; font-size: 18px; }
+.form-container-register label span .fa{ position: absolute; right:0px; top: 5px; width: 100%; text-align: center; font-size: 18px; }
+
 
 .form-container-register .textbox{
     outline: none;
     border: 0px;
-    border-bottom: 2px solid #DDDDDD;
+    border-bottom: 1px solid #1abc9c;
     color: #aaaaaa;
     width: 100%;
     font-size: 16px;
     padding-top: 20px;
     padding-bottom: 10px;
     margin-bottom: 19px;
+    position: relative;
 }
 
 .form-container-register textarea.instructions-field{
@@ -387,7 +389,7 @@ input[type=number]::-webkit-outer-spin-button {
 .form-container-register .selectbox{
     outline: none;
     border: 0px;
-    border-bottom: 2px solid #DDDDDD;
+    border-bottom: 1px solid #1abc9c;
     color: #aaaaaa;
     width: 100%;
     font-size: 16px;
@@ -405,7 +407,7 @@ input[type=number]::-webkit-outer-spin-button {
 .form-container-register .button{
     font-family: 'Raleway', sans-serif;
     border: 0px;
-    background: #2ecc71;
+    background: #009688;
     color: #FFFFFF;
     font-size: 15px;
     font-weight: 700;
