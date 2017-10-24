@@ -10,6 +10,6 @@
                 </ul>
 
                 <ul class="user-controls">
-                    <li><a href="#" id="logout"><i class="fa fa-sign-out"></i> Sign out</a></li>
+                    <li><a href="<?php echo $logoutAction ?>" id="logout"><i class="fa fa-sign-out"></i> Sign out</a></li>
                 </ul>
     </div>

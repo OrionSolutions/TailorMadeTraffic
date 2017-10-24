@@ -1,8 +1,11 @@
 ﻿<?php
 try{
 
-    session_start();
-    include ('class/clsConnection.php');
+    include_once('class/clsConnection.php');
+    include('includes/variable.php');
+    include('session.php');
+    include('sessionuser.php');
+    
     require 'gateway/vendor/autoload.php';
     $client = new \GoCardlessPro\Client([
         'access_token' =>'live_gZJP-n7WoRErIDs5disNaRxe14bj8oNdYgogu0BQ',

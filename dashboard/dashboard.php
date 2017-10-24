@@ -1,6 +1,10 @@
 <?php
-session_start();
-include ('class/clsConnection.php');
+//session_start();
+include_once('class/clsConnection.php');
+include('includes/variable.php');
+include('session.php');
+include('sessionuser.php');
+
 $useremail = $_COOKIE["useremail"];
 $token =  $_COOKIE["access_token"];
 $_SESSION['u_email'] = $useremail; 

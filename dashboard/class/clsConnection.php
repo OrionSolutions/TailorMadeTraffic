@@ -13,11 +13,11 @@ class mycon {
 
 	//declare the mysqlpassword
 
-	public $password = '1234';
+	public $password = '';
 
 	//declare the databasename;
 
-	public $databasename = 'tailorma_dashboard';
+	public $databasename = 'tailormadedashboard';
 
 	public $Number; //Error Number
 

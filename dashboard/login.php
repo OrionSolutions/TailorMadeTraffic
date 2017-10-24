@@ -1,3 +1,8 @@
+<?php
+      include_once('class/clsConnection.php');
+      include('authenticate.php'); 
+	  include('session.php');
+?>
 <!doctype html>
 <html>
     <head>
@@ -11,9 +16,11 @@
         <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="css/login.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="css/responsive.css">
-
+        <script type="text/javascript" src="js/jquery.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="js/firebase-config.js?nocache=1"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -39,7 +46,7 @@
             </div>    
         </div>      
             ===========NAVIGATION CONTAINER==============-->
-        
+
          <!--===========FORM CONTAINER==============-->
          <div class="preload"><img src="images/loading.gif"></div>
             <div class="container registration">
@@ -50,14 +57,16 @@
 
                         <div class="padded">
                             <div class="form-user-login">
-                                <form>
+                            <form method="post" action="<?php echo $loginFormAction; ?>">
                     
                                     <ul class="fields-user-login">
-                                        <li><input type="text" name="username" id="username" class="user-login" placeholder="Username"><i class="fa fa-user"></i></li>
-                                        <li><input type="password" name="password" id="password" class="user-login" placeholder="Password"><i class="fa fa-lock"></i></li>
-                                    </ul>
+                                        <li><input type="text" name="txtusername" id="txtusername" class="user-login" placeholder="Username"><i class="fa fa-user"></i></li>
+                                        <li><input type="password" name="txtpassword" id="txtpassword" class="user-login" placeholder="Password"><i class="fa fa-lock"></i></li>
+                                    </ul>    
+                                      <!-- <a class="button" href="#">Login</a> -->
+                                      <input type="submit" class="button" value="Log-in">
                                 </form>
-                                <a class="button" href="#">Login</a>
+                          
                             </div>
                             <div class="separator"></div>
 
@@ -72,6 +81,23 @@
     </body>
 </html>
 <?php   
-  setcookie("useremail", "", time()-3600);
-  setcookie("access_token", "", time()-3600);
+//$_SESSION['LoginFailed']="";
+  //setcookie("useremail", "", time()-3600);
+  //setcookie("access_token", "", time()-3600);
+  error_reporting(0);
+  if ($_SESSION['LoginFailed']=="Failed") {
+  $jscript = "
+  swal({
+  title: 'Account Invalid',
+  text: 'Invalid Username/Password.',
+  type: 'error',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  buttonsStyling: false
+  })";
+  echo '<script>' . $jscript . "</script>";
+  }else{
+    $_SESSION['LoginFailed']="";
+  }
 ?>
