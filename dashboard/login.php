@@ -21,7 +21,7 @@
     </head>
     <body class="register">
         
-        <!--===========NAVIGATION CONTAINER==============-->
+        <!--===========NAVIGATION CONTAINER==============
         <div class="nav-container"> 
             <div class="container">
                 <div class="full-width">
@@ -38,20 +38,27 @@
                 </div> 
             </div>    
         </div>      
-           <!--===========NAVIGATION CONTAINER==============-->
+            ===========NAVIGATION CONTAINER==============-->
         
          <!--===========FORM CONTAINER==============-->
          <div class="preload"><img src="images/loading.gif"></div>
             <div class="container registration">
                 <div class="full-width">
                     <div class="form-container-register">
-                        
+                        <img src="images/tailor_made_traffic.png">
                         <h1>Sign-In<span>Nice to see you back!</span></h1>
 
                         <div class="padded">
-
-                            <a id="login_google" class="login-google"><i class="fa fa-google" aria-hidden="true"></i>Sign-in with Google</a>
-
+                            <div class="form-user-login">
+                                <form>
+                    
+                                    <ul class="fields-user-login">
+                                        <li><input type="text" name="username" id="username" class="user-login" placeholder="Username"><i class="fa fa-user"></i></li>
+                                        <li><input type="password" name="password" id="password" class="user-login" placeholder="Password"><i class="fa fa-lock"></i></li>
+                                    </ul>
+                                </form>
+                                <a class="button" href="#">Login</a>
+                            </div>
                             <div class="separator"></div>
 
                             <p><a  id="register_google" class="reg-link">Don't have an account? Get one for free!</a></p>
@@ -62,7 +69,6 @@
             </div>    
          <!--===========FORM CONTAINER==============-->
         <script type="text/javascript" src="js/login.js"></script>
-        <script type="text/javascript" src="js/login-state-change.js"></script>   
     </body>
 </html>
 <?php   

@@ -1,5 +1,5 @@
 $( document ).ready(function(){
-
+    /*
     $('#login_google').click(function(){
         localStorage["Selection"]=0;
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -37,7 +37,7 @@ $( document ).ready(function(){
     provider.addScope('https://www.googleapis.com/auth/analytics');
     // [START signin]
 
-  firebase.auth().signInWithPopup(provider).then(function(result) {
+    firebase.auth().signInWithPopup(provider).then(function(result) {
         var token = result.credential.accessToken;
         localStorage["token"] = token;
         }).catch(function(error) {
@@ -48,7 +48,7 @@ $( document ).ready(function(){
         });
 
     });
-
+*/
 
 
 

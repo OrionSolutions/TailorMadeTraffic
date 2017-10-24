@@ -108,8 +108,7 @@
                 <div class="one-half last">
                     <div class="one-half first">
                     <label><span><i class="fa fa-chevron-down"></i></span>
-                    <select id="selectplan" name="selectplan" class="selectbox" required>
-                        <option value="">Choose Plan</option>                        
+                    <select id="selectplan" name="selectplan" class="selectbox" required>                      
                         <option value="Daily">Daily</option>
                         <option value="Monthly">Monthly</option>
                     </select>
@@ -156,6 +155,7 @@
                         <input type="text" class="textbox" id="campaigntitle" name="campaigntitle" placeholder="Campaign Title" required>
                     </label>
                 </div>
+                
                 <div class="one-half last">
                     <label><span><i class="fa fa-link"></i></span>
                         <input type="url" class="textbox" id="campaignlink" name="campaignlink" onblur="checkURL(this)" placeholder="Website Address" required>

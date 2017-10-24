@@ -223,12 +223,19 @@ a{
 /* Registration Form */
 /* ================================================================= */
 .container.registration{
+    margin-top: 100px;
     margin-bottom: 100px;
 }
 
 .form-container-register{
     width: 70%;
     margin: 0 auto;
+    text-align: center;
+}
+
+.form-container-register img{
+    width: 40%;
+    margin-bottom: 30px;
 }
 
 .form-container-register .one-half{ width: 47%; margin-left: 3%; margin-right: 3%; }
@@ -236,8 +243,8 @@ a{
 .form-container-register .one-half.last{ margin-right: 0px; }
 
 .form-container-register h1{
-    background: #009688;
-    color: #FFFFFF;
+    background: #ffffff;
+    color: #009688;
     font-size: 35px!important;
     text-transform: uppercase;
     padding: 25px;
@@ -254,9 +261,49 @@ a{
 
 .form-container-register form{
     background: #FFFFFF;
-    padding: 50px;
 }
-.form-container-register .padded{ background: #FFFFFF; text-align: center; padding-top: 100px; padding-bottom: 100px; }
+
+.form-container-register .form-user-login{
+    position: relative;
+}
+
+.form-container-register .form-user-login input.user-login{
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 50%;
+    outline: none;
+    border: 1px solid #009688;
+    font-size: 16px;
+}
+
+.form-container-register .form-user-login ul.fields-user-login li{
+    position: relative;
+}
+
+.form-container-register .form-user-login i{
+    position: absolute;
+    right: 25%;
+    font-size: 30px;
+    top: 5px;
+    color: #009688;
+}
+
+.form-container-register .form-user-login a{
+   margin-top: 20px;
+   font-size: 20px;
+   padding: 10px 30px;
+}
+
+
+.form-container-register .padded{ 
+    background: #FFFFFF; 
+    text-align: center; 
+    padding-top: 30px; 
+    padding-bottom: 100px; 
+    padding-left: 100px; 
+    padding-right: 100px; 
+}
 
 .form-container-register label{ position: relative; }
 
@@ -426,9 +473,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 .form-container-register .separator{
-    width: 15%;
-    height: 2px;
-    background: #EEEEEE;
+    width: 45%;
+    height: 1px;
+    background: #009688;
     margin: 0 auto;
     margin-top: 30px;
     margin-bottom: 30px;

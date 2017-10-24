@@ -51,8 +51,8 @@ setcookie("siteID",$siteid);
     <script src="js/firebase-config.js"></script>
     <script type="text/javascript" src="js/slicknav.js"></script>
     <script type="text/javascript" src="js/slicknav-init.js"></script>
-    <script src="js/google.js"></script>
-    <script src="js/logout.js"></script>
+    <!-- <script src="js/google.js"></script> -->
+    <script src="js/logout.js"></script> 
     <script src="js/responsive-side.js"></script>
     <script type="text/javascript" src="js/dashboard-chart-analytics.js"></script>
 </head>

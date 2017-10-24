@@ -7,7 +7,7 @@ function checkURL(abc) {
     return abc
 }
 $(document).ready(function(){
-    //loadSubamount();
+    loadSubamount();
     
     /*firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
