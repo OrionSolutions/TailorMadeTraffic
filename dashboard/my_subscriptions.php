@@ -69,7 +69,7 @@ try{
     <script src="js/fancy-custom.js"></script>
     <script src="js/firebase-config.js"></script>
     <script src="js/logout.js"></script>
-    <script src="js/google.js"></script>
+    <!-- <script src="js/google.js"></script> -->
     <script src="js/responsive-side.js"></script>
     <script>
         (function(w, d, s, g, js, fs) {

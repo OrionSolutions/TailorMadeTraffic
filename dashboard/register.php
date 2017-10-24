@@ -1,4 +1,4 @@
-<?php 
+<?php /*
 include_once('class/clsConnection.php');
 $con = new mycon();
 $con->getconnect();
@@ -12,6 +12,7 @@ $sqlexist = "SELECT COUNT(`tblaccount`.`GoogleEmail`) AS Existing FROM `tblaccou
 $getexist = $con->getrecords($sqlexist);
 $rs = $con->getresult($getexist);
 $exist = $rs["Existing"];
+*/
 ?>
 <!doctype html>
 <html>
@@ -26,7 +27,7 @@ $exist = $rs["Existing"];
         <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="css/login.css" rel="stylesheet" type="text/css">
         <link href="css/responsive.css" rel="stylesheet" type="text/css">
-
+        <link rel="shortcut icon" href="images/tailor-favicon.ico"/>
         <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
         <script src="js/firebase-config.js"></script>
@@ -38,7 +39,7 @@ $exist = $rs["Existing"];
        <!-- <script src="js/google.js?nocache=1"></script> -->
     </head>
     <body class="register">
-           <?php 
+           <?php /*
     if($exist!=0) {
         $jscript = "
               swal({
@@ -53,9 +54,9 @@ $exist = $rs["Existing"];
         echo '<script>'.$jscript."</script>";
         echo "<script>setTimeout(function(){ window.location.replace('dashboard.php'); }, 1500);</script>";
     }
+    */
     ?>
-      
-        <div class="nav-container"> 
+       <!-- <div class="nav-container"> 
             <div class="container">
                 <div class="full-width">
                     <div class="one-half first">
@@ -70,7 +71,7 @@ $exist = $rs["Existing"];
                     <div class="clear"></div>
                 </div> 
             </div>    
-        </div>   
+        </div> -->
         <!--===========NAVIGATION CONTAINER==============-->
         
         <!--===========FORM CONTAINER==============-->
@@ -79,8 +80,23 @@ $exist = $rs["Existing"];
             <div class="full-width">
                 <div class="form-container-register">
                     <h1>Register an Account<span>We'd love to be working with you!</span></h1>
-                    <form action="" method="post">
+                    <form class="subscribe-form" action="" method="post">
                     <!-- Left -->
+                    <h6>Login Details</h6>
+                    <div class="user-cred">
+                        <div class="one-half first user-field">
+                            <input type="text" id="email" name="username" class="textbox" placeholder="Username" required>
+                            <i class="fa fa-user"></i>
+                        </div>
+
+                        <div class="one-half last user-field">
+                            <input type="text" id="email" name="password" class="textbox" placeholder="Password" required>
+                            <i class="fa fa-lock"></i>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                   
+                    <h6>User Details</h6>
                     <div class="one-half first">
  <?php 
                     //error_reporting(0);
@@ -150,32 +166,35 @@ $exist = $rs["Existing"];
         echo '<script>'.$jscript."</script>";
         echo "<script>setTimeout(function(){ window.location.replace('dashboard.php'); }, 1500);</script>";
                     }
- ?>
-                        <label><span><i class="fa fa-envelope-o"></i></span>
-                            <input type="text" id="email" name="email" class="textbox disabled" placeholder="Primary Email" value="<?php echo $id; ?>" readonly>
-                        </label>
-                        <label><span><i class="fa fa-user"></i></span>
-                            <input type="text" id="firstname" name="firstname" class="textbox" placeholder="Firstname" required>
-                        </label>
-                        <label><span><i class="fa fa-building-o"></i></span>
-                            <input type="text" id="company" name="company" class="textbox" placeholder="Company" required>
-                        </label>
+ ?>                     
+                        <ul class="register-fields">
+                            <li>
+                                <input type="text" id="email" name="email" class="textbox" placeholder="Primary Email" required><i class="fa fa-envelope-o"></i>
+                            </li>
+                            <li>
+                                <input type="text" id="firstname" name="firstname" class="textbox" placeholder="Firstname" required><i class="fa fa-user"></i>
+                            </li>
+                            <li>
+                                <input type="text" id="company" name="company" class="textbox" placeholder="Company" required><i class="fa fa-building-o"></i>
+                            </li>
+                        </ul>
+                        
                     </div>
                     <!-- Left -->
                     <!-- Right -->
                     <div class="one-half last">
 
-                        <label><span><i class="fa fa-envelope-o"></i></span>
-                            <input type="text" class="textbox" id="alternate" name="alternate" placeholder="Alternative Email" required>
-                        </label>
-
-                        <label><span><i class="fa fa-user"></i></span>
-                            <input type="text" class="textbox" id="lastname" name="lastname" placeholder="Lastname" required>
-                        </label>
-
-                        <label><span><i class="fa fa-phone"></i></span>
-                            <input type="text" class="textbox" id="phone" name="phone" placeholder="Phone" required>
-                        </label>
+                        <ul class="register-fields">
+                            <li>
+                                <input type="text" class="textbox" id="alternate" name="alternate" placeholder="Alternative Email" required><i class="fa fa-envelope-o"></i>
+                            </li>
+                            <li>
+                                <input type="text" class="textbox" id="lastname" name="lastname" placeholder="Lastname" required><i class="fa fa-user"></i>
+                            </li>
+                            <li>
+                                <input type="text" class="textbox" id="phone" name="phone" placeholder="Phone" required><i class="fa fa-phone"></i>
+                            </li>
+                        </ul>
 
                     </div>
                     <!-- Right -->
@@ -194,6 +213,7 @@ $exist = $rs["Existing"];
                             <option value="Real Estate">-Real Estate</option>
                             <option value="Consulting">-Consulting</option>
                             <option value="Health Care">-Health Care</option>
+                            <option value="Health Care">-Other</option>
                         </select>
                     </label>
                     <input type="hidden" id="mail" name="mail">
@@ -219,7 +239,7 @@ $exist = $rs["Existing"];
 </script> 
 </html>
 
-<?php 
+<?php /*
  setcookie("useremail", "", time()-3600);
  setcookie("access_token", "", time()-3600);
-//setcookie("useremail", "", time()-3600); ?>
+//setcookie("useremail", "", time()-3600); */?>

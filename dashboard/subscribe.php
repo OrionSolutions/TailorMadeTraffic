@@ -75,7 +75,7 @@
         <div class="full-width">
             <div class="form-container-register">
                 <h1>Select A Subscription <span> We'd love to be working with you!</span></h1>
-                <form action="gateway/sand_box_api.php" method="get">
+                <form class="subscribe-form" action="gateway/sand_box_api.php" method="get">
                 <!-- Left -->
                   <label><span><i class="fa fa-chevron-down"></i></span>
                     <select name="premiumselection" class="selectbox" id="premiumselection">
@@ -85,22 +85,18 @@
                         <option value="Custom Advertising">Custom Budget</option>
                     </select>
                     <script type="text/javascript">
-                   // console.log($("#premiumselection").val("1"));
-                    $('select[name=premiumselection] option[value=<?php echo $SubscriptionType; ?>]').attr('selected','selected');
-                </script>
+                        $('select[name=premiumselection] option[value=<?php echo $SubscriptionType; ?>]').attr('selected','selected');
+                    </script>
                 </label>
 
                 <!--<label><span><i class="fa fa-envelope-o"></i></span>-->
                     <input type="hidden" id="emails" name="emails" class="textbox disabled" placeholder="Primary Email" value="<?php echo $id; ?>" readonly>
                 <!--</label>-->
 
-                <div class="one-half first">
-
-                   <label><span><i class="fa fa-money"></i></span>
+                <div class="one-half first subscribe-holder">
                         <input type="hidden" class="textbox disabled" id="subamount" name="subamount" value="<?php echo $Pricing; ?>" placeholder="Subscription Amount" readonly>
                         <input type="text" class="textbox disabled" id="subamount1" name="subamount1" value="<?php echo $Pricing; ?>" placeholder="Subscription Amount" readonly>
-                    </label> 
-                    
+                        <i class="fa fa-money"></i>
                 </div>
                 <!-- Left -->
 
@@ -108,58 +104,51 @@
                 <div class="one-half last">
                     <div class="one-half first">
                     <label><span><i class="fa fa-chevron-down"></i></span>
-                    <select id="selectplan" name="selectplan" class="selectbox" required>                      
+                    <select id="selectplan" name="selectplan" class="selectbox nopadding" required>                      
                         <option value="Daily">Daily</option>
                         <option value="Monthly">Monthly</option>
                     </select>
                 </label>
                     </div>
 
-                    <div class="one-half last">
-                    <label><span><i class="fa fa-money"></i></span>
+                    <div class="one-half last subscribe-holder">
                         <input type="number" class="textbox" id="dailybudget" name="dailybudget" placeholder="Budget Value" required>
-                    </label>
+                        <i class="fa fa-money"></i>
                     </div>
-                  
                 </div>
                 <!-- Right -->
                 <div class="clear"></div>
 
-                <div class="one-half first">
-                    <label><span><i class="fa fa-chevron-down"></i></span>
-                        <select id="selectplatform" name="selectplatform" class="selectbox" required>
-                            <option value="">Choose Platform</option>      
-                            <option value="Facebook Marketing">Google Marketing</option>                  
-                            <option value="Facebook Marketing">Facebook Marketing</option>
-                            <option value="Email Marketing">Email Marketing</option>
-                            <option value="Web Marketing">Web Marketing</option>
-                        </select>
-                    </label>
-                </div>
+                <div class="subscribe-holder">
+                    <div class="one-half first">
+                        <label><span><i class="fa fa-chevron-down"></i></span>
+                            <select id="selectplatform" name="selectplatform" class="selectbox" required>
+                                <option value="">Choose Platform</option>      
+                                <option value="Facebook Marketing">Google Marketing</option>                  
+                                <option value="Facebook Marketing">Facebook Marketing</option>
+                                <option value="Email Marketing">Email Marketing</option>
+                                <option value="Web Marketing">Web Marketing</option>
+                            </select>
+                        </label>
+                    </div>
 
-                <div class="one-half last">
-                    <label><span><i class="fa fa-chevron-down" required></i></span>
-                        <select id="selectcampaign" name="selectcampaign" class="selectbox" required>   
-                            <option value="">Select Campaign Objective</option>                        
-                            <option value="Get More Traffic">Get More Traffic</option>
-                            <option value="Get More Calls">Get More Calls</option>
-                            <option value="Get more convertions">Get more convertions</option>
-                        </select>
-                    </label>
-                </div>
-                    
-                <div class="clear"></div> 
-
-                <div class="one-half first">
-                    <label><span><i class="fa fa-money"></i></span>
-                        <input type="text" class="textbox" id="campaigntitle" name="campaigntitle" placeholder="Campaign Title" required>
-                    </label>
+                    <div class="one-half last">
+                        <label><span><i class="fa fa-chevron-down" required></i></span>
+                            <select id="selectcampaign" name="selectcampaign" class="selectbox" required>   
+                                <option value="">Select Campaign Objective</option>                        
+                                <option value="Get More Traffic">Get More Traffic</option>
+                                <option value="Get More Calls">Get More Calls</option>
+                                <option value="Get more convertions">Get more convertions</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="clear"></div> 
                 </div>
                 
-                <div class="one-half last">
-                    <label><span><i class="fa fa-link"></i></span>
+                
+                <div class="subscribe-holder">
                         <input type="url" class="textbox" id="campaignlink" name="campaignlink" onblur="checkURL(this)" placeholder="Website Address" required>
-                    </label>            
+                        <i class="fa fa-link"></i>           
                 </div>
                 <input type="hidden" id="mail" name="mail">
                 <input type="hidden" id="session" name="session">

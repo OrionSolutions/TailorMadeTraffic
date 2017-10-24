@@ -220,8 +220,134 @@ a{
 
 
 /* ================================================================= */
-/* Registration Form */
+/*                          Registration Form                        */                                                         
 /* ================================================================= */
+
+/* ======================================================= < Login CSS > ============================================== */
+.container.registration{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.form-container-login{
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.form-container-login img{
+    width: 40%;
+    margin-bottom: 30px;
+}
+
+.form-container-register .one-half{ width: 47%; margin-left: 3%; margin-right: 3%; }
+.form-container-register .one-half.first{ margin-left: 0px; }
+.form-container-register .one-half.last{ margin-right: 0px; }
+
+.form-container-login h1{
+    background: #ffffff;
+    color: #009688;
+    font-size: 35px!important;
+    text-transform: uppercase;
+    padding: 25px;
+    font-weight: 300;
+    text-align: center;
+    letter-spacing: 1px;
+}
+.form-container-login h1 span{
+    display: block;
+    font-size: 20px;
+    margin-top: 10px;
+    text-transform: none;
+}
+
+.form-container-login form{
+    background: #FFFFFF;
+}
+
+.form-container-login .form-user-login{
+    position: relative;
+}
+
+.form-container-login .form-user-login input.user-login{
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 50%;
+    outline: none;
+    border: 1px solid #009688;
+    font-size: 16px;
+}
+
+.form-container-login .form-user-login ul.fields-user-login li{
+    position: relative;
+}
+
+.form-container-login .form-user-login i{
+    position: absolute;
+    right: 25%;
+    font-size: 30px;
+    top: 5px;
+    color: #009688;
+}
+
+.form-container-login .form-user-login a{
+   margin-top: 20px;
+   font-size: 20px;
+   padding: 10px 30px;
+}
+
+
+.form-container-login .padded{ 
+    background: #FFFFFF; 
+    text-align: center; 
+    padding-top: 30px; 
+    padding-bottom: 30px; 
+    padding-left: 100px; 
+    padding-right: 100px; 
+}
+
+
+.form-container-login .form-user-login a{
+    margin-top: 20px;
+    font-size: 20px;
+    padding: 10px 30px;
+ }
+ 
+.form-container-login .button{
+    font-family: 'Raleway', sans-serif;
+    border: 0px;
+    background: #009688;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: inline-block;
+    cursor: pointer;
+
+    transition: 0.3s ease-in-out;
+}
+
+.form-container-login .button:hover{
+    background: #444444
+}
+
+.form-container-login .separator{
+    width: 45%;
+    height: 1px;
+    background: #009688;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* ======================================================= </ Login CSS > ============================================== */
+
+/* ======================================================= Register CSS ============================================== */
+
 .container.registration{
     margin-top: 100px;
     margin-bottom: 100px;
@@ -230,12 +356,6 @@ a{
 .form-container-register{
     width: 70%;
     margin: 0 auto;
-    text-align: center;
-}
-
-.form-container-register img{
-    width: 40%;
-    margin-bottom: 30px;
 }
 
 .form-container-register .one-half{ width: 47%; margin-left: 3%; margin-right: 3%; }
@@ -309,33 +429,66 @@ a{
 
 .form-container-register label span{
     position: absolute;
-    bottom: 0px;
-    right: 0px;
-    width: 30px;
+    top: 0px;
+    right: 15px;
     height: 30px;
-    border: 2px solid #1abc9c;
     color: #1abc9c;
     display: inline-block;
-
     -webkit-border-radius: 100%;
     border-radius: 100%;
 }
-
-.form-container-register label span .fa{ position: absolute; right:0px; top: 5px; width: 100%; text-align: center; font-size: 18px; }
-
-
-.form-container-register .textbox{
-    outline: none;
-    border: 0px;
-    border-bottom: 1px solid #1abc9c;
-    color: #aaaaaa;
-    width: 100%;
+    
+.form-container-register h6{
     font-size: 16px;
-    padding-top: 20px;
-    padding-bottom: 10px;
+    margin-bottom: 30px;
+    text-align: left;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #1abc9c;
+    color: #009688;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.form-container-register .user-cred{
+    margin-bottom: 30px;
+}
+
+.form-container-register .user-cred .fa{
+    position: absolute;
+    z-index: 99999;
+    top: 10px;
+    font-size: 20px;
+    color: #009688;
+    right: 15px;
+}
+
+.form-container-register input.textbox{
+    outline: none;
+    border: 1px solid #1abc9c;
+    color: #aaaaaa;
+    font-size: 16px;
+    padding:10px;
+    padding-right: 0;
     margin-bottom: 19px;
+    display: block;
+    width: 100%;
+    margin-right: 0px;
+}
+
+.form-container-register  ul.register-fields li{
     position: relative;
 }
+
+
+.form-container-register ul.register-fields .fa{ 
+    position: absolute; 
+    right:15px; 
+    top: 10px;  
+    font-size: 20px; 
+    color: #009688;
+}
+
+
 
 .form-container-register textarea.instructions-field{
     width: 100%;
@@ -351,6 +504,26 @@ a{
     color: #aaaaaa;
     font-size: 16px;
 }
+
+
+.form-container-register .subscribe-holder{
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-container-register .subscribe-holder .fa{
+    position: absolute;
+    top: 10px;
+    font-size: 20px;
+    right: 5px;
+    color: #009688;
+}
+
+#premiumselection{
+    margin-bottom: 40px;
+}
+
+
 
 .accordion{ margin-bottom: 50px; margin-top: 15px; } 
 
@@ -443,12 +616,15 @@ input[type=number]::-webkit-outer-spin-button {
     padding-top: 20px;
     padding-bottom: 10px;
     margin-bottom: 19px;
-
+    background: transparent;
+    position: relative;
+    z-index: 999999;
     -webkit-appearance: none;
     -moz-appearance: none;
     text-indent: 1px;
     text-overflow: '';
 }
+
 
 
 .form-container-register .button{
@@ -459,12 +635,13 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 15px;
     font-weight: 700;
     text-transform: uppercase;
-    padding: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
     display: inline-block;
     cursor: pointer;
-
+    margin-top: 20px;
     transition: 0.3s ease-in-out;
 }
 .form-container-register .button:hover{
@@ -481,13 +658,23 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 30px;
 }
 
-.form-container-register .reg-link{
+.form-container-register form.subscribe-form{
+    padding: 50px;
+    padding-bottom: 30px;
+}
+
+.form-container-register form.subscribe-form span i{
+    position: absolute;
+    z-index: 11111;
+}
+
+.form-container-login .reg-link{
     color: rgb(165, 165, 165);
     font-size: 15px;
     font-weight: 300;
 }
 
-.form-container-register .reg-link:hover {
+.form-container-login .reg-link:hover {
     color: #2ecc71;
     cursor: pointer;
 }
@@ -552,4 +739,8 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 10px;
 }
 
+#selectplan{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 /*==SUBSCRIPTION TABLE MOBILE V.==*/

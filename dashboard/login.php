@@ -51,7 +51,7 @@
          <div class="preload"><img src="images/loading.gif"></div>
             <div class="container registration">
                 <div class="full-width">
-                    <div class="form-container-register">
+                    <div class="form-container-login">
                         <img src="images/tailor_made_traffic.png">
                         <h1>Sign-In<span>Nice to see you back!</span></h1>
 
