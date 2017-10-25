@@ -70,7 +70,7 @@
                             </div>
                             <div class="separator"></div>
 
-                            <p><a  id="register_google" class="reg-link">Don't have an account? Get one for free!</a></p>
+                            <p><a href ="register.php" class="reg-link">Don't have an account? Get one for free!</a></p>
     
                         </div>
                     </div>

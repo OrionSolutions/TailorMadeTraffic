@@ -10,13 +10,13 @@ try{
         'access_token' =>'live_gZJP-n7WoRErIDs5disNaRxe14bj8oNdYgogu0BQ',
         'environment' => \GoCardlessPro\Environment::LIVE
     ]);
-    $useremail = $_COOKIE["useremail"];
+    $useremail = $_SESSION["USER_EMAIL"];//$_COOKIE["useremail"];
     $token =  $_COOKIE["access_token"];
     $_SESSION['u_email'] = $useremail; 
     $_SESSION['u_access_token'] = $token;
     $con = new mycon();
     $con->getconnect();
-    $id = $_COOKIE["useremail"];
+    $id = $_SESSION["USER_EMAIL"];//$_COOKIE["useremail"];
 
     $user_name = "SELECT * FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
     $getUser = $con->getrecords($user_name);

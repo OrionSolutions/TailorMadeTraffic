@@ -105,9 +105,15 @@ a{
 .nav-container{
     padding-top: 15px;
     padding-bottom: 15px;
-    background:#323232;
-    margin-bottom: 100px;
+    background:#ffffff;
 }
+
+.nav-container.forms{background: #ecf0f1;}
+
+.nav-container img{
+    width: 30%;
+}
+
 .nav-container h1{
     font-size: 30px;
     color: #ffffff;
@@ -122,11 +128,27 @@ a{
     font-size: 20px;
 }
 .home-button span a{
-    color: #ffffff;
+    color: #009688;
+    transition: 0.2s ease-in-out;
 }
+
+.home-button span a:hover{
+    opacity: 0.6;
+}
+
+.home-button span a span{
+    position: absolute;
+    right: 0px;
+    top: 10px;
+}
+
 .home-button span i{
+    position: absolute;
+    right: 30%;
+    top: 0px;
     padding-right: 10px;
-    font-size: 35px;
+    font-size: 40px;
+    color: #009688;
 }
 
 /*============NAVIGATION CONTAINER===========*/
@@ -224,9 +246,9 @@ a{
 /* ================================================================= */
 
 /* ======================================================= < Login CSS > ============================================== */
-.container.registration{
-    margin-top: 100px;
-    margin-bottom: 100px;
+.container.registration.forms{
+    margin-top: 0px;
+    margin-bottom: 20px;
 }
 
 .form-container-login{
@@ -349,7 +371,7 @@ a{
 /* ======================================================= Register CSS ============================================== */
 
 .container.registration{
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 100px;
 }
 
@@ -453,6 +475,14 @@ a{
     margin-bottom: 30px;
 }
 
+.form-container-register p{
+    font-size: 20px;
+    margin-top: 10px;
+    color: #009688;
+    font-weight: 100;
+    text-align: center;
+}
+
 .form-container-register .user-cred .fa{
     position: absolute;
     z-index: 99999;
@@ -469,7 +499,7 @@ a{
     font-size: 16px;
     padding:10px;
     padding-right: 0;
-    margin-bottom: 19px;
+    margin-bottom: 20px;
     display: block;
     width: 100%;
     margin-right: 0px;
@@ -666,6 +696,10 @@ input[type=number]::-webkit-outer-spin-button {
 .form-container-register form.subscribe-form span i{
     position: absolute;
     z-index: 11111;
+}
+
+.form-container-register .campaign-items{
+    margin-bottom: 20px;
 }
 
 .form-container-login .reg-link{

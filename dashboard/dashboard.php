@@ -1,17 +1,17 @@
 <?php
-//session_start();
+session_start();
 include_once('class/clsConnection.php');
 include('includes/variable.php');
 include('session.php');
 include('sessionuser.php');
 
-$useremail = $_COOKIE["useremail"];
+$useremail =   $_SESSION["USER_EMAIL"]; //$_COOKIE["useremail"];
 $token =  $_COOKIE["access_token"];
 $_SESSION['u_email'] = $useremail; 
 $_SESSION['u_access_token'] = $token;
 $con = new mycon();
 $con->getconnect();
-$id = $_COOKIE["useremail"];
+$id = $_SESSION["USER_EMAIL"];//$_COOKIE["useremail"];
 
 $user_name = "SELECT * FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
 $getUser = $con->getrecords($user_name);
@@ -23,9 +23,14 @@ $getexist = $con->getrecords($sqlexist);
 $rs = $con->getresult($getexist);
 $exist = $rs["Existing"];
 $accid = $rs["AccountID"];
+
 $sqlsiteid = "SELECT * FROM `tblwebdetails` WHERE `tblwebdetails`.`AccountID`='" . $accid . "';";
 $getsiteid = $con->getrecords($sqlsiteid);
 $rssite = $con->getresult($getsiteid);
+
+$checkSubscription = "SELECT * FROM `tblsubscription` WHERE `tblsubscription`.`AccountID`='" . $accid . "';";
+$subscriptionExist = $con->getrecords($checkSubscription);
+//$rssite = $con->getresult($getsiteid);
 
 $siteid = $rssite["SiteID"];
 setcookie("siteID",$siteid);
@@ -63,10 +68,12 @@ setcookie("siteID",$siteid);
 
 <body>
    <?php
-/* ============================== pending for removal
+/* ============================== pending for removal 
 
 if ($exist == 0)
 	{
+
+    
 	$jscript = "
               swal({
               title: 'Account Invalid',
@@ -78,9 +85,10 @@ if ($exist == 0)
               buttonsStyling: false
             })";
 	echo '<script>' . $jscript . "</script>";
-	echo "<script>setTimeout(function(){ window.location.replace('register.php'); }, 1500);</script>";
-	}
-*/
+    echo "<script>setTimeout(function(){ window.location.replace('register.php'); }, 1500);</script>";
+    
+	}*/
+
 ?>
     <!-- Middle Menu -->
     <?php include('sidebar.php'); ?>
@@ -88,8 +96,8 @@ if ($exist == 0)
 
     <!-- Dashboard -->
     <div class="dashboard-wrapper">
-    <?php if ($siteid != 0){ ?>
-    
+    <?php if (mysqli_num_rows($subscriptionExist)){ ?>
+        <script>alert("bols")</script>
         <!-- <div class="container"> -->
         <?php include('menu.php'); ?>
         <!-- <div class="spacer"> -->
@@ -98,7 +106,7 @@ if ($exist == 0)
             
                 <!-- Graph -->
                 <div class="clicks chart-title">
-                    <span>Overview</span>
+                    <span>Overview <?php echo  $email;?></span>
                     <select id="filter" name="filter" class="ga">
                             <option class="filter-item" value="ga:CTR">CTR</option>
                             <option class="filter-item" value="ga:adClicks">Clicks</option>
@@ -228,20 +236,28 @@ if ($exist == 0)
     <?php
 	}
   else
-	{ ?>
+    { ?>
+    <?php if(mysqli_num_rows($getsiteid)){?>
+        <script>alert("SITE ID EXIST")</script>
+    <?php } ?>   
+
     <div class="container">
         <div class="full-width">
             <div class="account-status">
                 <i class="fa fa-exclamation-circle"></i>
-                <p>No current subscription at this time.</p>
+
+                <p>No current subscription at this time. </p>
                 <a href="subscribe.php" class="button green">New Subscription <i class="fa fa-plus"></i></a>
             </div>
         </div>
     </div>
+
+
+
+    
     <?php
 	}
-
-?>
+    ?>
 </body>
 <script src="js/geturi.js" type="text/javascript"></script>
 <script src="https://ga-dev-tools.appspot.com/public/javascript/embed-api/components/view-selector2.js"></script>

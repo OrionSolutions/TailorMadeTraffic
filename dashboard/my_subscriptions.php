@@ -10,8 +10,8 @@ try{
         'access_token' =>'live_gZJP-n7WoRErIDs5disNaRxe14bj8oNdYgogu0BQ',
         'environment' => \GoCardlessPro\Environment::LIVE
     ]);
-    $id = $_COOKIE["useremail"];
-    $useremail = $_COOKIE["useremail"];
+    $id = $_SESSION["USER_EMAIL"];//$_COOKIE["useremail"];
+    $useremail = $_SESSION["USER_EMAIL"];//$_COOKIE["useremail"];
     $token =  $_COOKIE["access_token"];
     $_SESSION['u_email'] = $useremail; 
     $_SESSION['u_access_token'] = $token;

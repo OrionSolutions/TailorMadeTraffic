@@ -35,6 +35,7 @@ if (!((isset($_SESSION['USER_NAME'])) && (isAuthorized("",$MM_authorizedUsers, $
   header("Location: ". $MM_restrictGoTo); 
   exit;
 }
+$email = $_SESSION["USER_EMAIL"];
 $user=$_SESSION['USER_NAME'];
 $validation=$_SESSION['LoginFailed'];
 ?>

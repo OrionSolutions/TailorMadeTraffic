@@ -3,7 +3,7 @@ session_start();
 if(isset( $_SESSION['subscription_id']) && !empty( $_SESSION['subscription_id'])) {
   
  }else{
-    header('Location:index.php');;
+    //header('Location:index.php');;
  }
 ?>
 <!doctype html>

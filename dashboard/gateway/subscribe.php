@@ -9,7 +9,7 @@ try{
         $con->getconnect();
         $useremail = $_COOKIE["useremail"];
         $token =  $_COOKIE["access_token"];
-        $id =  $_SESSION['u_email'];
+        $id =  $_SESSION['USER_EMAIL'];
         $sqlaccount = "SELECT * FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
         $getaccount = $con->getrecords($sqlaccount);
         $rs = $con->getresult($getaccount);
@@ -99,12 +99,13 @@ try{
             
 
      }else{
-     echo "<script>window.location.replace('https://tailormadetraffic.com/pricing');</script>";
+    // echo "<script>window.location.replace('https://tailormadetraffic.com/pricing');</script>";
+    echo "<script>alert('BOLS');</script>";
      }
 
     
 }catch(Exception $error){
-    $_SESSION['error_handler'] = $error->getMessage();
+    $_SESSION['error_handler'] = $error->getMessage() . " on subscribe";
     echo "<script>window.location.replace('error.php');</script>";
     session_unset();
     session_destroy();

@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 try{
 session_start();
 if($_GET["payment_direct"] || $_GET["subamount"]) {
@@ -35,7 +36,7 @@ $token =  $_COOKIE["access_token"];
 $_SESSION['u_email'] = $useremail; 
 $_SESSION['u_access_token'] = $token;
 $id =  $_SESSION['u_email'];
-$sqlaccount = "SELECT * FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
+$sqlaccount = "SELECT * FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" .  $_SESSION["USER_EMAIL"] . "';";
 $getaccount = $con->getrecords($sqlaccount);
 $rs = $con->getresult($getaccount);
 $id=$googlemail;
@@ -53,12 +54,12 @@ $_SESSION['subscription-type'] = "Basic";
 $_SESSION['payment-daily']=$_GET["dailybudget"];
 $_SESSION['payment-monthly']=$_GET["subamount"];
 $_SESSION['payment'] = $daily + $sub_amount; 
-$_SESSION['given_name']=$firstname;
-$_SESSION['family_name']=$lastname;
-$_SESSION['email']= $googlemail ;
-$_SESSION['address_line1']=$address;
-$_SESSION['city']=$city;
-$_SESSION['postal_code']=$postalcode;
+
+
+echo $_SESSION['CITY']; 
+echo $_SESSION['POSTAL_CODE']; 
+echo $_SESSION["USER_EMAIL"]; //= $rowEdit["GoogleEmail"];
+
 $_SESSION['website-link']=$web_link;
 $_SESSION['contact-num'] = "01243 884333";
 
@@ -80,15 +81,15 @@ $redirectFlow = $client->redirectFlows()->create([
         "description" => "Setup bank account details for GoCardless",
         // Not the access token
         "session_token" => "dummy_session_token",
-        "success_redirect_url" => "https://tailormadetraffic.com/dashboard/gateway/debit_success.php",
+        "success_redirect_url" => "https://tailormadetraffic.com/dashboard/beta-dashboard/gateway/debit_success.php",
         // Optionally, prefill customer details on the payment page
         "prefilled_customer" => [
-          "given_name" => $_SESSION['given_name'] ,
-          "family_name" => $_SESSION['family_name'],
-          "email" => $_SESSION['email'],
-          "address_line1" => $_SESSION['address_line1'],
-          "city" => $_SESSION['city'],
-          "postal_code" => $_SESSION['postal_code']
+          "given_name" => $_SESSION['FIRSTNAME']  ,
+          "family_name" => $_SESSION['LASTNAME'] ,
+          "email" => $_SESSION['USER_EMAIL'],
+          "address_line1" => $_SESSION['ADDRESS'],
+          "city" => $_SESSION['CITY'],
+          "postal_code" => $_SESSION['POSTAL_CODE']
         ]
     ]
 ]);
@@ -107,7 +108,7 @@ if($_SESSION['redirect_url']!=null){
 }
 
 }catch(Exception $error){
-    $_SESSION['error_handler'] = $error->getMessage();
+    $_SESSION['error_handler'] = $error->getMessage()." on sand_box_api";
    //echo $error;
     echo "<script>window.location.replace('error.php');</script>";
     session_unset();

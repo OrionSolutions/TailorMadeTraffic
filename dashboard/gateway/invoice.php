@@ -5,7 +5,7 @@ if(isset( $_SESSION['subscription_id']) && !empty( $_SESSION['subscription_id'])
  }else{
     header('Location:https://tailormadetraffic.com/dashboard/my_subscriptions.php');;
  }
- $accid = $_SESSION['account-id'];
+ $accid = $_SESSION['USER_ID'];
 
 try{
     require 'vendor/autoload.php';
@@ -96,7 +96,7 @@ try{
                                     <li><?php echo $subscription_number; ?></li>
                                     <li><?php echo $_SESSION['subscription-type']; ?></li>
                                     <li><?php echo $subscription->created_at ?></li>
-                                    <li><?php echo $_SESSION['given_name'] ." ". $_SESSION['family_name'];  ?></li>
+                                    <li><?php echo $_SESSION['FIRSTNAME'] ." ". $_SESSION['LASTNAME'];  ?></li>
                                     <li><?php echo date("Y-m-d"); ?></li>
                                     </ul>
                                 </div>
@@ -107,23 +107,23 @@ try{
                         <div class="one-half first address">
                             <h1>Billing Address</h1>
                             <ul class="billing-address-details">
-                                <li><h2><?php echo $_SESSION['given_name'] ." ". $_SESSION['family_name'];  ?></h2></li>
-                                <li><h2><?php echo $_SESSION['address_line1']; ?></h2></li>
-                                <li><h2><?php echo $_SESSION['city']; ?></h2></li>
-                                <li><h2><?php echo $_SESSION['postal_code'] ?></h2></li>
-                                <li><h2><?php echo $_SESSION['email']; ?></h2></li>
-                                <li><h2><?php echo $_SESSION['contact-num']; ?></h2></li>
+                                <li><h2><?php echo $_SESSION['FIRSTNAME'] ." ". $_SESSION['LASTNAME'];  ?></h2></li>
+                                <li><h2><?php echo $_SESSION['ADDRESS']; ?></h2></li>
+                                <li><h2><?php echo $_SESSION['CITY']; ?></h2></li>
+                                <li><h2><?php echo $_SESSION['POSTAL_CODE'] ?></h2></li>
+                                <li><h2><?php echo $_SESSION['USER_EMAIL']; ?></h2></li>
+                                <li><h2><?php echo $_SESSION['Phone']; ?></h2></li>
                             </ul>
                         </div>
                         <div class="one-half last address">
                                 <h1>Company Address</h1>
                                 <ul class="billing-address-details">
-                                    <li><h2><?php echo  $_SESSION['given_name'] ." ". $_SESSION['family_name']  ?></h2></li>
-                                    <li><h2><?php echo$_SESSION['address_line1'] ?></h2></li>
-                                    <li><h2><?php echo $_SESSION['city'] ?></h2></li>
-                                    <li><h2><?php echo $_SESSION['postal_code'] ?></h2></li>
-                                    <li><h2><?php echo $_SESSION['email'] ?></h2></li>
-                                    <li><h2><?php echo $_SESSION['contact-num'] ?></h2></li>
+                                    <li><h2><?php echo $_SESSION['FIRSTNAME'] ." ". $_SESSION['LASTNAME'];  ?></h2></li>
+                                    <li><h2><?php echo $_SESSION['ADDRESS']; ?></h2></li>
+                                    <li><h2><?php echo $_SESSION['CITY']; ?></h2></li>
+                                    <li><h2><?php echo $_SESSION['POSTAL_CODE'] ?></h2></li>
+                                    <li><h2><?php echo $_SESSION['USER_EMAIL']; ?></h2></li>
+                                    <li><h2><?php echo $_SESSION['Phone']; ?></h2></li>
                                 </ul>
                         </div>
                         <div class="clear"></div>
@@ -153,6 +153,8 @@ try{
         </div>
     </div>
     <a href="https://tailormadetraffic.com/dashboard/print.php?subscription_id=<?php echo $subscriptionID."&&accid="; ?><?php echo $accid; ?>" target="_blank" id="print" class="btn-print"><i class="fa fa-print"> </i>Print</a>
-    <?php session_destroy(); ?>
+    <?php
+     session_unset();
+     session_destroy(); ?>
     </body>
 </html>

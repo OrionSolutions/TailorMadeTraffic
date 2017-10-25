@@ -13,6 +13,12 @@ $getexist = $con->getrecords($sqlexist);
 $rs = $con->getresult($getexist);
 $exist = $rs["Existing"];
 */
+
+include_once('class/clsConnection.php');
+include('includes/variable.php');
+include('session.php');
+include('sessionuser.php');
+
 ?>
 <!doctype html>
 <html>
@@ -38,25 +44,8 @@ $exist = $rs["Existing"];
         <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
        <!-- <script src="js/google.js?nocache=1"></script> -->
     </head>
-    <body class="register">
-           <?php /*
-    if($exist!=0) {
-        $jscript = "
-              swal({
-              title: 'Account Exist',
-              text: 'Redirecting to login.',
-              type: 'error',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              buttonsStyling: false
-            })";
-        echo '<script>'.$jscript."</script>";
-        echo "<script>setTimeout(function(){ window.location.replace('dashboard.php'); }, 1500);</script>";
-    }
-    */
-    ?>
-        <div class="nav-container"> 
+    <body>
+       <div class="nav-container forms"> 
             <div class="container">
                 <div class="full-width">
                     <div class="one-half first">
@@ -76,22 +65,20 @@ $exist = $rs["Existing"];
         
         <!--===========FORM CONTAINER==============-->
          
-         <div class="container registration">
+         <div class="container registration forms">
             <div class="full-width">
                 <div class="form-container-register">
-                    <h1>Register an Account<span>We'd love to be working with you!</span></h1>
+                    <h1>Verify your credentials<span>We need to verify your account to start working.</span></h1>
                     <form class="subscribe-form" action="" method="post">
                     <!-- Left -->
                     <h6>Login Details</h6>
                     <div class="user-cred">
                         <div class="one-half first user-field">
-                            <input type="text" id="email" name="username" class="textbox" placeholder="Username" required>
-                            <i class="fa fa-user"></i>
+                        <input type="text" id="email" name="email" class="textbox" placeholder="Primary Email" value="<?php echo $_SESSION["USER_EMAIL"]; ?>" required><i class="fa fa-envelope-o"></i>
                         </div>
 
                         <div class="one-half last user-field">
-                            <input type="text" id="email" name="password" class="textbox" placeholder="Password" required>
-                            <i class="fa fa-lock"></i>
+                            <p>Is this email address still valid?</p>
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -169,7 +156,7 @@ $exist = $rs["Existing"];
  ?>                     
                         <ul class="register-fields">
                             <li>
-                                <input type="text" id="email" name="email" class="textbox" placeholder="Primary Email" required><i class="fa fa-envelope-o"></i>
+                                <input type="text" id="email" name="email" class="textbox" placeholder="Primary Email" value="<?php echo $_SESSION["USER_EMAIL"]; ?>" required><i class="fa fa-envelope-o"></i>
                             </li>
                             <li>
                                 <input type="text" id="firstname" name="firstname" class="textbox" placeholder="Firstname" required><i class="fa fa-user"></i>
@@ -218,7 +205,7 @@ $exist = $rs["Existing"];
                     </label>
                     <input type="hidden" id="mail" name="mail">
                     <input type="hidden" id="session" name="session">
-                    <input type="submit" id="btnRegister" name="btnRegister" value="Register" class="button">
+                    <input type="submit" id="btnRegister" name="btnRegister" value="Verify" class="button">
                     <div class="clear"></div>
                     </form>
                 </div>

@@ -1,5 +1,6 @@
     <?php 
     error_reporting(0);
+    include('sessionuser.php');
     include ('class/clsConnection.php');
     session_start();
         if(isset( $_SESSION['SubscriptionTypeID']) && !empty( $_SESSION['SubscriptionTypeID'])) {
@@ -11,7 +12,7 @@
             //echo "Session Not Started";
         }
 
-
+    
     $useremail = $_COOKIE["useremail"];
     $token =  $_COOKIE["access_token"];
     $_SESSION['u_email'] = $useremail; 
@@ -55,11 +56,11 @@
             <div class="container">
                 <div class="full-width">
                     <div class="one-half first">
-                        <img src="images/logo.png">
+                        <img src="images/tailor_made_traffic.png">
                     </div>
                     <div class="one-half last">
                         <div class="home-button">
-                            <span><a href="https://tailormadetraffic.com/dashboard/my_subscriptions.php" id="back" ><i class="fa fa-home" aria-hidden="true"></i><span>Back</span></a></span>
+                            <span><a href="my_subscriptions.php" id="back"><i class="fa fa-home" aria-hidden="true"></i><span>Back to dashboard</span></a></span>
                         <div class="clear"></div>
                         </div>
                     </div>
@@ -119,11 +120,9 @@
                 <!-- Right -->
                 <div class="clear"></div>
 
-                <div class="subscribe-holder">
-                    <div class="one-half first">
+                    <div class="one-half first campaign-items">
                         <label><span><i class="fa fa-chevron-down"></i></span>
-                            <select id="selectplatform" name="selectplatform" class="selectbox" required>
-                                <option value="">Choose Platform</option>      
+                            <select id="selectplatform" name="selectplatform" class="selectbox" required>     
                                 <option value="Facebook Marketing">Google Marketing</option>                  
                                 <option value="Facebook Marketing">Facebook Marketing</option>
                                 <option value="Email Marketing">Email Marketing</option>
@@ -132,10 +131,9 @@
                         </label>
                     </div>
 
-                    <div class="one-half last">
+                    <div class="one-half last campaign-items">
                         <label><span><i class="fa fa-chevron-down" required></i></span>
-                            <select id="selectcampaign" name="selectcampaign" class="selectbox" required>   
-                                <option value="">Select Campaign Objective</option>                        
+                            <select id="selectcampaign" name="selectcampaign" class="selectbox" required>    
                                 <option value="Get More Traffic">Get More Traffic</option>
                                 <option value="Get More Calls">Get More Calls</option>
                                 <option value="Get more convertions">Get more convertions</option>
@@ -143,12 +141,11 @@
                         </label>
                     </div>
                     <div class="clear"></div> 
-                </div>
                 
                 
                 <div class="subscribe-holder">
-                        <input type="url" class="textbox" id="campaignlink" name="campaignlink" onblur="checkURL(this)" placeholder="Website Address" required>
-                        <i class="fa fa-link"></i>           
+                    <input type="url" class="textbox" id="campaignlink" name="campaignlink" onblur="checkURL(this)" placeholder="Website Address" required>
+                    <i class="fa fa-link"></i>           
                 </div>
                 <input type="hidden" id="mail" name="mail">
                 <input type="hidden" id="session" name="session">

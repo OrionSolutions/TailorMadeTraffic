@@ -2,7 +2,8 @@
 session_start();
 if(isset( $_SESSION['redirect_url']) && !empty( $_SESSION['redirect_url'])) {
  }else{
-    //header('Location:sand_box_api.php');
+    //header('Location:error.php');
+    $_SESSION['error_handler'] = "Invalid Request on debit_success.php";
  }
 ?>
 <!doctype html>
@@ -37,7 +38,7 @@ if(isset( $_SESSION['redirect_url']) && !empty( $_SESSION['redirect_url'])) {
                 <div class="clear"></div>
                 <div class="status">
                     <h5>Redirecting...</h5>
-                    <h6><span> <a href="https://tailormadetraffic.com/dashboard/gateway/complete_flow.php">If the redirection doesn't work, please click here.</a></span></h6>
+                    <h6><span> <a href="complete_flow.php">If the redirection doesn't work, please click here.</a></span></h6>
                     <span>Please wait...</span>
                 </div>
             </div>
@@ -46,7 +47,7 @@ if(isset( $_SESSION['redirect_url']) && !empty( $_SESSION['redirect_url'])) {
         
         <script type="text/javascript">
             setTimeout(function(){ 
-              window.location.replace('https://tailormadetraffic.com/dashboard/gateway/complete_flow.php');
+             // window.location.replace('complete_flow.php');
                 }, 3000);
         </script>
 

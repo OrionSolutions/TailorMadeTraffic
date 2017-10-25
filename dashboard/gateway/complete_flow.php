@@ -4,7 +4,8 @@ try{
     if(isset( $_SESSION['payment-type']) && !empty( $_SESSION['payment-type'])) {
       
      }else{
-        header('Location:index.php');
+        //header('Location:index.php');
+        $_SESSION['payment-type'];
      }
 require 'vendor/autoload.php';
 $id = $_GET['redirect_flow_id'];
@@ -32,12 +33,12 @@ $url = $_SESSION['redirect_url'];
     // information and is translated into all the languages we support.
     //print("Confirmation URL: " . $redirectFlow->confirmation_url . "<br />");
     if($_SESSION['payment-type']=="Direct_Payment"){
-        echo "<script>window.location.replace('https://tailormadetraffic.com/dashboard/gateway/payment.php');</script>";
+        echo "<script>window.location.replace('payment.php');</script>";
     }else{
-        echo "<script>window.location.replace('https://tailormadetraffic.com/dashboard/gateway/subscribe.php');</script>";
+        echo "<script>window.location.replace('subscribe.php');</script>";
     }
 }catch(Exception $error){
-    $_SESSION['error_handler'] = $error->getMessage();
+    $_SESSION['error_handler'] = $error->getMessage() . " on complete_flow";
     echo "<script>window.location.replace('error.php');</script>";
     session_unset();
     session_destroy();
