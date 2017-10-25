@@ -61,7 +61,6 @@ setcookie("siteID",$siteid);
     <script type="text/javascript" src="js/slicknav.js"></script>
     <script type="text/javascript" src="js/slicknav-init.js"></script>
     <!-- script src="js/google.js"></script> -->
-    <script src="js/logout.js"></script> 
     <script src="js/googleAuth.js"></script>
     <script src="js/responsive-side.js"></script>
     <script type="text/javascript" src="js/dashboard-chart-analytics.js"></script>
@@ -98,7 +97,6 @@ if ($exist == 0)
     <?php if (mysqli_num_rows($subscriptionExist)){ ?>
 
         <?php if($siteid!=0){?>
-            <?php echo "<script>alert('$token')</script>" ?>
             <?php if($token!=null){ ?>
             
                 <?php include('menu.php'); ?>
