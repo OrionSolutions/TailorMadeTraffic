@@ -1,4 +1,8 @@
 <?php 
+include_once('../class/clsConnection.php');
+include('includes/variable.php');
+include('session.php');
+include('sessionuser.php');
 session_start();
 if(isset( $_SESSION['payment-id']) && !empty( $_SESSION['payment-id'])) {
   
@@ -37,7 +41,7 @@ if(isset( $_SESSION['payment-id']) && !empty( $_SESSION['payment-id'])) {
                 <div class="clear"></div>
                 <div class="status">
                     <h5>Redirecting...</h5>
-                    <h6><span> <a href="https://tailormadetraffic.com/dashboard/gateway/invoice.php">If the redirection doesn't work, please click here.</a></span></h6>
+                    <h6><span> <a href="invoice.php">If the redirection doesn't work, please click here.</a></span></h6>
                     <span>Please wait...</span>
                 </div>
             </div>
@@ -46,7 +50,7 @@ if(isset( $_SESSION['payment-id']) && !empty( $_SESSION['payment-id'])) {
         
         <script type="text/javascript">
             setTimeout(function(){ 
-                window.location.replace('https://tailormadetraffic.com/dashboard/my_payment.php');
+                window.location.replace('https://tailormadetraffic.com/dashboard/beta-dashboard/my_payment.php');
                 }, 3000);
         </script>
 

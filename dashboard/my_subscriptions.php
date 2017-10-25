@@ -1,6 +1,5 @@
 ﻿<?php
 try{
-
     include_once('class/clsConnection.php');
     include('includes/variable.php');
     include('session.php');
@@ -15,17 +14,20 @@ try{
     $token =  $_COOKIE["access_token"];
     $_SESSION['u_email'] = $useremail; 
     $_SESSION['u_access_token'] = $token;
+    $gmail =  $_COOKIE["useremail"];
     $con = new mycon();
     $con->getconnect();
     $user_name = "SELECT * FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
     $getUser = $con->getrecords($user_name);
     $rsUser = $con->getresult($getUser);
     $user = $rsUser["Firstname"] ." ". $rsUser["Lastname"];
+
     $sqlexist = "SELECT COUNT(`tblaccount`.`GoogleEmail`) AS Existing,`tblaccount`.`AccountID` FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
     $getexist = $con->getrecords($sqlexist);
     $rs = $con->getresult($getexist);
     $exist = $rs["Existing"];
     $accid = $rs["AccountID"];
+
     $sqlsiteid = "SELECT * FROM `tblwebdetails` WHERE `tblwebdetails`.`AccountID`='" . $accid . "';";
     $getsiteid = $con->getrecords($sqlsiteid);
     $rssite = $con->getresult($getsiteid);
@@ -35,8 +37,10 @@ try{
     $idCheck = "SELECT * FROM `tblsubscription`,`tblsubscriptiontype` WHERE AccountID = '".$accid."' AND `tblsubscription`.`SubscriptionTypeID` = `tblsubscriptiontype`.`SubscriptionTypeID` AND `PaymentType`= `Subscribe_Payment`";
     $getsubscription = $con->getrecords($sqlsubscription);
     $m_subscription = $con->getrecords($sqlsubscription);
+    
     //$idRecord = $con->getrecords($idCheck);
-   
+    //$rs_subscription = $con->getresult($getsubscription);
+
 }catch(Exception $error){
     echo $error;
 }
@@ -118,7 +122,10 @@ try{
     <!-- Dashboard -->
     
     <div class="dashboard-wrapper">
-    <?php if(mysqli_num_rows($getsubscription)){ ?>
+
+    <?php
+    $validate = mysqli_num_rows($getsubscription); 
+    if($validate>0) { ?>
 
     <div class="top-header">
         <div class="full-width">
@@ -131,8 +138,8 @@ try{
                 <div class="user-options">
                     <a href="#" id="logout">Logout</a>
                 </div>
-                <div>
-                    <p><?php echo $user; ?></p>
+                <div class="gmail">
+                    <p><?php echo $gmail; ?></p>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -198,7 +205,7 @@ try{
                         <div class="s-items">
                             <div class="one-fourth first items">
                                 <h3><?php echo $rsdata["SubscriptionTitle"];?></h3>
-                                <h4>(<?php echo stripslashes($rsdata["PaymentCampaignTitle"]);?>)</h4>
+                                <h4>(<?php echo stripslashes($rsdata["PaymentPlatform"]);?>)</h4>
                             </div>
                             <div class="one-fourth items">
                                 <h3>£ <?php echo $subscription_amount ?></h3>
@@ -244,7 +251,7 @@ try{
         <div class="full-width">
             <div class="account-status">
                 <i class="fa fa-exclamation-circle"></i>
-                <p>No current subscription at this time.</p>
+                <p>No current subscription at this time. <?php echo $validate; ?></p>
                 <a href="subscribe.php" class="button green">New Subscription <i class="fa fa-plus"></i></a>
             </div>
         </div>

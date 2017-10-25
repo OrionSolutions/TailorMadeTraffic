@@ -714,6 +714,32 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
+/*================================================= FORM ORDER-PLAN ============================================== */
+.form-order-plan{
+    padding: 30px;
+}
+
+.form-order-plan ul.order-items li{
+    position: relative;
+    z-index: 1111;
+}
+
+.form-order-plan ul.order-items li i{
+    position: absolute;
+    z-index: 999999;
+    top:10px;
+    font-size: 20px;
+    right: 15px;
+    color: #009688;
+}
+
+.form-order-plan  .textbox{
+    width: 98%!important;
+} 
+
+.form-order-plan textarea{
+    border: 1px solid #1abc9c;
+}
 
 /*==SUBSCRIPTION TABLE MOBILE V.==*/
 

@@ -1,4 +1,8 @@
 <?php
+include_once('../class/clsConnection.php');
+include('includes/variable.php');
+include('session.php');
+include('sessionuser.php');
 try{
     session_start();
     $project_title = $_SESSION['project-name'];
@@ -52,7 +56,7 @@ try{
 
     $useremail = $_COOKIE["useremail"];
     $token =  $_COOKIE["access_token"];
-    $id =  $_SESSION['u_email'];
+    $id =  $_SESSION['USER_EMAIL'];
     $sqlaccount = "SELECT * FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='" . $id . "';";
     $getaccount = $con->getrecords($sqlaccount);
     $rs = $con->getresult($getaccount);
@@ -89,7 +93,7 @@ try{
     $SQLInsert = $SQLInsert."'".$project_title."',";
     $SQLInsert = $SQLInsert."'".$order_instructions."');";
     $RSInsert=$con->getrecords($SQLInsert);
-    echo "<script>window.location.replace('https://tailormadetraffic.com/dashboard/gateway/payment-stat.php');</script>"; 
+    echo "<script>window.location.replace('payment-stat.php');</script>"; 
 }catch(Exception $e){
     echo $e;
 }

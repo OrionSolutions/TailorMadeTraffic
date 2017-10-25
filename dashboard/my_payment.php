@@ -14,6 +14,7 @@ try{
     $token =  $_COOKIE["access_token"];
     $_SESSION['u_email'] = $useremail; 
     $_SESSION['u_access_token'] = $token;
+    $gmail =  $_COOKIE["useremail"];
     $con = new mycon();
     $con->getconnect();
     $id = $_SESSION["USER_EMAIL"];//$_COOKIE["useremail"];
@@ -109,15 +110,15 @@ try{
                 <div class="full-width">
                     <ul class="tab-menu">
                         <li><h1><i class="fa fa-line-chart"></i> Dashboard</h1></li>
-                        <li><a href="https://tailormadetraffic.com/dashboard/order-plan.php" class="menu-button">New Development Service Payment  <i class="fa fa-plus"></i></a></li>
+                        <li><a href="https://tailormadetraffic.com/dashboard/beta-dashboard/order-plan.php" class="menu-button">New Development Service Payment  <i class="fa fa-plus"></i></a></li>
                     </ul>
                     <div class="user-info">
                         <img src="images/avatar.jpg" id="myavatar" class="avatar">
                         <div class="user-options">
                             <a href="#" id="logout">Logout</a>
                         </div>
-                        <div>
-                            <p><?php echo $user; ?></p>
+                        <div class="gmail">
+                            <p><?php echo $gmail; ?></p>
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -221,7 +222,7 @@ try{
                     <div class="account-status">
                         <i class="fa fa-exclamation-circle"></i>
                         <p>No current web service at this time.</p>
-                        <a href="https://tailormadetraffic.com/dashboard/order-plan.php" class="button blue">New web service <i class="fa fa-plus"></i></a>
+                        <a href="order-plan.php" class="button blue">New web service <i class="fa fa-plus"></i></a>
                     </div>
                 </div>
             </div>

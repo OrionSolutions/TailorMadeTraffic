@@ -12,8 +12,8 @@
                 <div class="user-options">
                     <a href="#" id="logout">Logout</a>
                 </div>
-                <div>
-                    <p><?php echo $user; ?></p>
+                <div class="gmail">
+                    <p><?php echo $gmail; ?></p>
                 </div>
                 <div class="clear"></div>
             </div>

@@ -1,6 +1,9 @@
 <?php 
     error_reporting(0);
-    include ('class/clsConnection.php');
+    include_once('class/clsConnection.php');
+    include('includes/variable.php');
+    include('session.php');
+    include('sessionuser.php');
     session_start();
         if(isset( $_SESSION['SubscriptionTypeID']) && !empty( $_SESSION['SubscriptionTypeID'])) {
             $SubscriptionType = $_SESSION["SubscriptionTypeID"];
@@ -38,7 +41,7 @@
         <script src="js/firebase-config.js?nocache=1"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="js/order-plan.js"></script>
+        <!-- <script src="js/order-plan.js"></script> -->
      <script>
   $( function() {
     $( "#accordion" ).accordion();
@@ -55,11 +58,11 @@
             <div class="container">
                 <div class="full-width">
                     <div class="one-half first">
-                        <img src="images/logo.png">
+                        <img src="images/tailor_made_traffic.png">
                     </div>
                     <div class="one-half last">
                         <div class="home-button">
-                            <span><a href="https://tailormadetraffic.com/dashboard/my_subscriptions.php" id="back" ><i class="fa fa-home" aria-hidden="true"></i><span>Back</span></a></span>
+                        <span><a href="my_payment.php" id="back"><i class="fa fa-home" aria-hidden="true"></i><span>Back to dashboard</span></a></span>
                         <div class="clear"></div>
                         </div>
                     </div>
@@ -75,7 +78,7 @@
         <div class="full-width">
             <div class="form-container-register">
                 <h1>Select A Payment <span> We'd love to be working with you!</span></h1>
-                <form action="gateway/sand_box_api.php" method="get">
+                <form class="form-order-plan" action="gateway/sand_box_api.php" method="get">
                 <!-- Left -->
                 <input id="projectName" name="projectName" class="textbox enabled" placeholder="Project Name" required>
                 <label><span><i class="fa fa-chevron-down"></i></span>
@@ -98,13 +101,21 @@
                 </label>
 
                 <!--<label><span><i class="fa fa-envelope-o"></i></span>-->
-                    <input type="hidden" id="emails" name="emails" class="textbox disabled" placeholder="Primary Email" value="<?php echo $id; ?>" readonly>
                 <!--</label>-->
-
-                   <label><span><i class="fa fa-money"></i></span>
-                        <input type="text" class="textbox disabled" id="payment_direct1" name="payment_direct1" value="<?php echo $Pricing; ?>" placeholder="Subscription Amount" readonly>
-                  </label> 
-                  <textarea id="instructions" name="instructions" class="instructions-field" placeholder="Set Instructions here.." required></textarea>
+                        <ul class="order-items">
+                            <li>
+                                <input type="hidden" id="emails" name="emails" class="textbox disabled" placeholder="Primary Email" value="<?php echo $id; ?>" readonly>                            
+                            </li>
+                            <li>
+                                <input type="text" class="textbox disabled" id="payment_direct1" name="payment_direct1" value="<?php echo $Pricing; ?>" placeholder="Subscription Amount" readonly>                                
+                                <i class="fa fa-money"></i>
+                            </li>
+                            <li>
+                                <textarea id="instructions" name="instructions" class="instructions-field" placeholder="Set Instructions here.." required></textarea>                                
+                            </li>
+                        </ul>
+                        
+            
                     
 
                 <!-- Left -->

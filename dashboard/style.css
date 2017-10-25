@@ -111,8 +111,27 @@ a{ text-decoration: none; color: #323232 }
 .top-header .user-info{ 
 	position: absolute;
 	display: table;
-	right: 5px;
+	right: 70px;
 	top:15px;
+}
+
+.top-header .user-info .avatar{
+	border-radius: 100%;
+	width: 40px;
+	height: 40px;
+	display: table-cell;
+	vertical-align: middle;
+	float: left;
+	margin-right: 10px;
+}
+
+.top-header .user-info .gmail{
+	border-radius: 100%;
+	width: 40px;
+	height: 40px;
+	display: table-cell;
+	vertical-align: middle;
+
 }
 
 .top-header .user-info .user-options{
@@ -146,16 +165,6 @@ content: "";
 	font-weight: 600;
 }
 
-
-.top-header .user-info .avatar{
-	border-radius: 100%;
-	width: 40px;
-	height: 40px;
-	display: table-cell;
-	vertical-align: middle;
-	float: left;
-	margin-right: 10px;
-}
 
 .top-header .user-info p{ 
 	display: table-cell;
@@ -802,6 +811,50 @@ a.btn-print i{
 	color: #ffffff;
 	font-size: 25px;
     vertical-align: middle;
+}
+
+.descrip{
+	background: #ffffff;
+	padding: 20px;
+}
+
+.descrip h1,
+.descrip p{
+	color: #009688;
+}
+
+.descrip h1{
+	font-size: 20px;
+	font-weight: 700;
+	padding-bottom: 5px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #16a085;
+}
+
+.account-status.googleAuth{
+	background: #f39c12;
+	padding: 10px;
+	margin-top: 40px;
+	transition: 0.2s ease-in-out;
+}
+
+.account-status.googleAuth:hover{
+	background: #009688;
+	cursor: pointer;
+	opacity: 0.7;
+}
+
+.account-status.googleAuth i{
+	font-size: 40px;
+	margin-right: 20px;
+}
+
+.account-status.googleAuth i,
+.account-status.googleAuth p{
+	color: #ffffff;
+	font-size: 30px;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .item p.total{
