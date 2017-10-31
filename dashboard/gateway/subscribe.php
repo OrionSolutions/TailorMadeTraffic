@@ -2,7 +2,8 @@
 try{
     session_start();
      if(isset( $_SESSION['redirect_url']) && !empty( $_SESSION['redirect_url'])) {
-        echo $_SESSION['redirect_url'];
+        //echo $_SESSION['redirect_url'];
+        $channel = $_SESSION['channel'];
         $subscriptionTitle = $_SESSION["SubscriptionTitle"];
         include ('../class/clsConnection.php');
         $con = new mycon();
@@ -28,7 +29,7 @@ try{
         $payment_campaign = $_SESSION['payment-campaign'];
         $payment_type = $_SESSION['payment-type'];
         $customerID = $_SESSION['customer_id'];
-        $SQLInsert ="INSERT INTO `tblsubscription`(`MandateID`,`AccountID`,`SubscriptionTypeID`,`SubscriptionAmount`,`DailyBudget`,`websitelink`,`StartDate`,`PaymentCampaign`,`PaymentPlan`,`PaymentPlatform`,`CustomerID`,`PaymentType`,`SubscriptionTitle`,`PaymentCampaignTitle`)";
+        $SQLInsert ="INSERT INTO `tblsubscription`(`MandateID`,`AccountID`,`SubscriptionTypeID`,`SubscriptionAmount`,`DailyBudget`,`websitelink`,`StartDate`,`PaymentCampaign`,`PaymentPlan`,`PaymentPlatform`,`CustomerID`,`PaymentType`,`SubscriptionTitle`,`Channel`,`PaymentCampaignTitle`)";
         $SQLInsert = $SQLInsert." VALUES('".$mandateID."',";
         $SQLInsert = $SQLInsert."'".$accid."',";
         $SQLInsert = $SQLInsert."'1',";
@@ -42,6 +43,7 @@ try{
         $SQLInsert = $SQLInsert."'".$customerID."',";
         $SQLInsert = $SQLInsert."'".$payment_type."',";
         $SQLInsert = $SQLInsert."'".$subscriptionTitle."',";
+        $SQLInsert = $SQLInsert."'".$channel."',";
         $SQLInsert = $SQLInsert."'".$campaign_title."');";
         $RSInsert=$con->getrecords($SQLInsert);
         $sqlinvoice = "SELECT LPAD( MAX(`tblsubscription`.`SubscriptionID`), 11, '0') AS MAX
@@ -100,7 +102,7 @@ try{
 
      }else{
     // echo "<script>window.location.replace('https://tailormadetraffic.com/pricing');</script>";
-    echo "<script>alert('BOLS');</script>";
+    //echo "<script>alert('BOLS');</script>";
      }
 
     

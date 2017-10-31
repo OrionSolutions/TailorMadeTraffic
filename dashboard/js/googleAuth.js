@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    var timeout=0;
 
     if(getCookie("access_token")==""){
         $('#myavatar').css("display", "none");
@@ -10,6 +10,7 @@ $(document).ready(function(){
     }
 
     $('#auth').click(function(){
+        timeout++;
         localStorage["Selection"]=0;
         var provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({
@@ -33,6 +34,7 @@ $(document).ready(function(){
         var email = error.email;
         var credential = error.credential;
         });
+
     });
   
     firebase.auth().onAuthStateChanged(function(user) {
@@ -47,6 +49,10 @@ $(document).ready(function(){
             }).catch(function(error) {
             });
            // $('.preload').addClass("show");
+                if(timeout==1){
+                    location.reload();
+                    timeout = 0;
+                }
             }
         }); 
 

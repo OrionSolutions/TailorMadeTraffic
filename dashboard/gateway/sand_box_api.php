@@ -4,6 +4,7 @@ error_reporting(0);
 try{
 session_start();
 if($_GET["payment_direct"] || $_GET["subamount"]) {
+    $_SESSION['channel'] = $_GET["channelitems"];
     $_SESSION["SubscriptionTitle"] = $_GET["premiumselection"];
     $_SESSION['order-instructions'] = $_GET["instructions"];
     $_SESSION['project-name'] = $_GET["projectName"];
