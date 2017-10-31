@@ -774,7 +774,6 @@ a.btn-print i{
 	text-align: center;
 	padding: 100px 30px;
 	background: #ecf0f1;
-	width: 55%;
 	margin: 0 auto;
 }
 
@@ -809,7 +808,7 @@ a.btn-print i{
 
 .account-status a i{
 	color: #ffffff;
-	font-size: 25px;
+	font-size: 20px;
     vertical-align: middle;
 }
 
@@ -831,11 +830,14 @@ a.btn-print i{
 	border-bottom: 1px solid #16a085;
 }
 
+
 .account-status.googleAuth{
 	background: #f39c12;
 	padding: 10px;
 	margin-top: 40px;
 	transition: 0.2s ease-in-out;
+	display: inline-block;
+	width: auto;
 }
 
 .account-status.googleAuth:hover{
@@ -845,17 +847,20 @@ a.btn-print i{
 }
 
 .account-status.googleAuth i{
-	font-size: 40px;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 
 .account-status.googleAuth i,
 .account-status.googleAuth p{
 	color: #ffffff;
-	font-size: 30px;
+	font-size: 20px;
 	display: inline-block;
 	vertical-align: middle;
 }
+
+
+
+
 
 .item p.total{
 	padding: 10px;

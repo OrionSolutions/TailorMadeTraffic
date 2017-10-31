@@ -10,7 +10,7 @@
             <div class="user-info">
                 <img src="images/avatar.jpg" id="myavatar" class="avatar">
                 <div class="user-options">
-                    <a href="#" id="logout">Logout</a>
+                    <a href="#" id="logout-google">Logout</a>
                 </div>
                 <div class="gmail">
                     <p><?php echo $gmail; ?></p>

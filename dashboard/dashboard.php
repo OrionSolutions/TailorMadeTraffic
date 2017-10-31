@@ -4,9 +4,6 @@ include_once('class/clsConnection.php');
 include('includes/variable.php');
 include('session.php');
 include('sessionuser.php');
-
-$useremail =   $_SESSION["USER_EMAIL"]; //$_COOKIE["useremail"];
-$token =  $_COOKIE["access_token"];
 $gmail =  $_COOKIE["useremail"];
 $_SESSION['u_email'] = $useremail; 
 $_SESSION['u_access_token'] = $token;
@@ -60,8 +57,8 @@ setcookie("siteID",$siteid);
     <script src="js/firebase-config.js"></script>
     <script type="text/javascript" src="js/slicknav.js"></script>
     <script type="text/javascript" src="js/slicknav-init.js"></script>
-    <!-- script src="js/google.js"></script> -->
     <script src="js/googleAuth.js"></script>
+    <script type="text/javascript" src="js/logout.js"></script>
     <script src="js/responsive-side.js"></script>
     <script type="text/javascript" src="js/dashboard-chart-analytics.js"></script>
 </head>
@@ -94,17 +91,18 @@ if ($exist == 0)
     <?php include('sidebar.php'); ?>
 
     <div class="dashboard-wrapper">
-    <?php if (mysqli_num_rows($subscriptionExist)){ ?>
-
+    <?php
+    $token =  $_COOKIE["access_token"];
+    if (mysqli_num_rows($subscriptionExist)){ ?>
+       
         <?php if($siteid!=0){?>
             <?php if($token!=null){ ?>
-            
                 <?php include('menu.php'); ?>
 
                 <div class="desktop">
                     <div class="full-width">  
                         <div class="clicks chart-title">
-                            <span>Overview <?php echo  $email;?></span>
+                            <span>Overview</span>
                             <select id="filter" name="filter" class="ga">
                                     <option class="filter-item" value="ga:CTR">CTR</option>
                                     <option class="filter-item" value="ga:adClicks">Clicks</option>
@@ -232,14 +230,13 @@ if ($exist == 0)
                 <div class="container">
                     <div class="full-width">
                         <div class="descrip">
-                            <h1>Account is activated</h1>
-                            <p>Great! Your account is already activated. We need your authorization to show the data. Link your gooogle account below to proceed.</p>
-                        
+                            <h1 id="authStat">Account is activated <?php echo $token; ?></h1>
+                            <p id="auth-desc">Great! Your account is already activated. We need your authorization to show the data. Link your gooogle account below to proceed.</p>
+
                             <div class="account-status googleAuth" id="auth">
                                 <i class="fa fa-line-chart"></i>
-                                <p>Link your google account</p>
+                                <p id="reauth">Link your google account</p>
                             </div>
-                        
                         </div>
                         
                     </div>
@@ -285,6 +282,6 @@ if ($exist == 0)
 <script src="https://ga-dev-tools.appspot.com/public/javascript/embed-api/components/view-selector2.js"></script>
 <script src="https://ga-dev-tools.appspot.com/public/javascript/embed-api/components/date-range-selector.js"></script>
 <script type="text/javascript" src="js/custom.js"></script>
- <script type="text/javascript" src="js/chart-functions.js"></script>
-<script type="text/javascript" src="js/avatar.js"></script>
+<script type="text/javascript" src="js/chart-functions.js"></script>
+<script src="js/google.js"></script>
 </html>

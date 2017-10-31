@@ -1,8 +1,12 @@
 $( document ).ready(function(){
     
-    $('#logout').click(function(){
-        document.cookie = "access_token=" +localStorage["token"]; 
-        firebase.auth().signOut();
+    $('#logout-google').click(function(){
+        document.cookie = "access_token="; 
+        firebase.auth().signOut().then(function() {
+            window.location.replace('login.php')
+          }).catch(function(error) {
+            console.log(error);
+        });
     });
     
-    });
+}); 

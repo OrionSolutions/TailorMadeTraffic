@@ -131,7 +131,7 @@ try{
         <div class="full-width">
             <ul class="tab-menu">
                 <li><h1><i class="fa fa-line-chart"></i> Dashboard</h1></li>
-                <li><a href="https://tailormadetraffic.com/dashboard/subscribe.php" class="menu-button">New Subscription <i class="fa fa-plus"></i></a></li>
+                <li><a href="https://tailormadetraffic.com/dashboard/beta-dashboard/subscribe.php" class="menu-button">New Subscription <i class="fa fa-plus"></i></a></li>
             </ul>
             <div class="user-info">
                 <img src="images/avatar.jpg" id="myavatar" class="avatar">

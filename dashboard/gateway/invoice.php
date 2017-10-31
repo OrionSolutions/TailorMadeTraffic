@@ -1,4 +1,5 @@
 <?php 
+
 session_start();
 if(isset( $_SESSION['subscription_id']) && !empty( $_SESSION['subscription_id'])) {
    $subscriptionID =  $_SESSION['subscription_id'];
@@ -52,7 +53,7 @@ try{
                     </div>
                     <div class="one-half last">
                         <div class="home-button">
-                            <span><a href="https://tailormadetraffic.com/dashboard/my_subscriptions.php"><i class="fa fa-home" aria-hidden="true"></i>Back to Home</a></span>
+                            <span><a href="https://tailormadetraffic.com/dashboard/beta-dashboard/my_subscriptions.php"><i class="fa fa-home" aria-hidden="true"></i>Back to Home</a></span>
                         <div class="clear"></div>
                         </div>
                     </div>

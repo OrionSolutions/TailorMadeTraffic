@@ -1,7 +1,9 @@
-<?php /*
+<?php 
 include_once('class/clsConnection.php');
 $con = new mycon();
 $con->getconnect();
+
+/*
 $useremail = $_COOKIE["useremail"];
 if($useremail=="") {  header('Location:login.php'); }
 $token =  $_COOKIE["access_token"];
@@ -64,7 +66,7 @@ $exist = $rs["Existing"];
                     </div>
                     <div class="one-half last">
                         <div class="home-button">
-                        <span><a href="my_subscriptions.php" id="back"><i class="fa fa-home" aria-hidden="true"></i><span>Back to dashboard</span></a></span>
+                        <span><a href="login.php" id="back"><i class="fa fa-home" aria-hidden="true"></i><span>Back to Login</span></a></span>
                         <div class="clear"></div>
                         </div>
                     </div>
@@ -85,12 +87,12 @@ $exist = $rs["Existing"];
                     <h6>Login Details</h6>
                     <div class="user-cred">
                         <div class="one-half first user-field">
-                            <input type="text" id="email" name="username" class="textbox" placeholder="Username" required>
+                            <input type="text" id="txtusername" name="txtusername" class="textbox" placeholder="Username" auto-complete="off" required>
                             <i class="fa fa-user"></i>
                         </div>
 
                         <div class="one-half last user-field">
-                            <input type="text" id="email" name="password" class="textbox" placeholder="Password" required>
+                            <input type="password" id="txtpassword" name="txtpassword" class="textbox" placeholder="Password" auto-complete="off" required>
                             <i class="fa fa-lock"></i>
                         </div>
                         <div class="clear"></div>
@@ -103,22 +105,26 @@ $exist = $rs["Existing"];
                     if (isset($_POST["btnRegister"])) {
                     $Mail = $_POST["mail"];
                     $Maily = $_POST["email"];
-                    $myMail = $_GET["email"];
+                    $myMail = $_POST["email"];
                     $Session = $_POST["session"];
                     $Company = $_POST["company"];
-                    $Email = $_GET["email"];
+                    $Username = $_POST["txtusername"];
+                    $password = $_POST["txtpassword"];
+                    $Email = $_POST["email"];
                     $Firstname = $_POST["firstname"];
                     $Lastname = $_POST["lastname"];
                     $Alternate = $_POST["alternate"];
                     $Phone = $_POST["phone"];
-                    $SQLInsert ="INSERT INTO `tblaccount`(`GoogleEmail`,`Firstname`,`Lastname`,`AlternateEmail`,`Phone`,`Company`,`Industry`)";
+                    $SQLInsert ="INSERT INTO `tblaccount`(`GoogleEmail`,`Firstname`,`Lastname`,`AlternateEmail`,`Phone`,`Company`,`Industry`,`Username`,`Passwords`)";
 	                $SQLInsert = $SQLInsert." VALUES('".$Maily."',";
                     $SQLInsert = $SQLInsert."'".$Firstname."',";
                     $SQLInsert = $SQLInsert."'".$Lastname."',";
                     $SQLInsert = $SQLInsert."'".$Alternate."',";
                     $SQLInsert = $SQLInsert."'".$Phone."',";
                     $SQLInsert = $SQLInsert."'".$Company."',";	
-                    $SQLInsert = $SQLInsert."'".$Company."');";
+                    $SQLInsert = $SQLInsert."'".$Company."',";
+                    $SQLInsert = $SQLInsert."'".$Username."',";
+                    $SQLInsert = $SQLInsert."md5('".$password."'));";
                     $RSInsert=$con->getrecords($SQLInsert);
                     $SQLGetAccountID = "SELECT * from tblaccount WHERE `GoogleEmail`='".$Maily."';";
                     $getAccountID = $con->getrecords($SQLGetAccountID);
@@ -129,7 +135,7 @@ $exist = $rs["Existing"];
                     $SQLInsertWebDetails = $SQLInsertWebDetails."0);";
                     //echo $SQLInsertWebDetails;
                     $RSExecute=$con->getrecords($SQLInsertWebDetails);
-                    
+                    setcookie("access_token", "", time()-3600);
                     $ch = curl_init('https://crm.zoho.eu/crm/private/xml/Leads/insertRecords');
                     curl_setopt($ch, CURLOPT_VERBOSE, 1);//standard i/o streams 
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);// Turn off the server and peer verification 
@@ -186,7 +192,7 @@ $exist = $rs["Existing"];
 
                         <ul class="register-fields">
                             <li>
-                                <input type="text" class="textbox" id="alternate" name="alternate" placeholder="Alternative Email" required><i class="fa fa-envelope-o"></i>
+                                <input type="text" class="textbox" id="alternate" name="alternate" placeholder="Alternative Email"><i class="fa fa-envelope-o"></i>
                             </li>
                             <li>
                                 <input type="text" class="textbox" id="lastname" name="lastname" placeholder="Lastname" required><i class="fa fa-user"></i>

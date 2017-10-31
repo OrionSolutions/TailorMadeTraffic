@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(0);
 try{
 session_start();
@@ -55,11 +56,6 @@ $_SESSION['payment-daily']=$_GET["dailybudget"];
 $_SESSION['payment-monthly']=$_GET["subamount"];
 $_SESSION['payment'] = $daily + $sub_amount; 
 
-
-echo $_SESSION['CITY']; 
-echo $_SESSION['POSTAL_CODE']; 
-echo $_SESSION["USER_EMAIL"]; //= $rowEdit["GoogleEmail"];
-
 $_SESSION['website-link']=$web_link;
 $_SESSION['contact-num'] = "01243 884333";
 
@@ -87,9 +83,9 @@ $redirectFlow = $client->redirectFlows()->create([
           "given_name" => $_SESSION['FIRSTNAME']  ,
           "family_name" => $_SESSION['LASTNAME'] ,
           "email" => $_SESSION['USER_EMAIL'],
-          "address_line1" => $_SESSION['ADDRESS'],
-          "city" => $_SESSION['CITY'],
-          "postal_code" => $_SESSION['POSTAL_CODE']
+         // "address_line1" => $_SESSION['ADDRESS'],
+          //"city" => $_SESSION['CITY'],
+          //"postal_code" => $_SESSION['POSTAL_CODE']
         ]
     ]
 ]);
