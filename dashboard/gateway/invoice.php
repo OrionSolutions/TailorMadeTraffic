@@ -1,10 +1,10 @@
 <?php 
-
+error_reporting(0);
 session_start();
 if(isset( $_SESSION['subscription_id']) && !empty( $_SESSION['subscription_id'])) {
    $subscriptionID =  $_SESSION['subscription_id'];
  }else{
-    header('Location:https://tailormadetraffic.com/dashboard/my_subscriptions.php');;
+    //header('Location:https://tailormadetraffic.com/dashboard/my_subscriptions.php');;
  }
  $accid = $_SESSION['USER_ID'];
 
@@ -37,7 +37,7 @@ try{
         <title>Invoice Tailor Made Traffic</title>
         <link href="css/reset.css" rel="stylesheet" type="text/css">
         <link href="css/grid.css" rel="stylesheet" type="text/css">
-        <link href="https://tailormadetraffic.com/dashboard/gateway/style.css" rel="stylesheet" type="text/css">
+        <link href="style.css" rel="stylesheet" type="text/css">
         <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         
        <!-- <script src="js/google.js?nocache=1"></script> -->
@@ -153,7 +153,13 @@ try{
            
         </div>
     </div>
-    <a href="https://tailormadetraffic.com/dashboard/print.php?subscription_id=<?php echo $subscriptionID."&&accid="; ?><?php echo $accid; ?>" target="_blank" id="print" class="btn-print"><i class="fa fa-print"> </i>Print</a>
+    <div class="container">
+        <div class="full-width">
+            <div class="print-div">
+            <a href="https://tailormadetraffic.com/dashboard/print.php?subscription_id=<?php echo $subscriptionID."&&accid="; ?><?php echo $accid; ?>" target="_blank" id="print" class="btn-print"><i class="fa fa-print"> </i>Print</a>
+            </div>
+        </div>
+    </div>
     <?php
      session_unset();
      session_destroy(); ?>

@@ -1,6 +1,5 @@
 <?php 
-
-
+error_reporting(0);
     $subscriptionID = $_GET["subscription_id"];
     $paymentID = $_GET["payment_id"];
 

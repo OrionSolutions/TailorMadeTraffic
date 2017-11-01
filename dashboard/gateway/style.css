@@ -31,12 +31,12 @@ a{ text-decoration: none; color: #323232 }
 .nav-container{
     padding-top: 25px;
     padding-bottom: 25px;
-    background:#323232;
+    background: #FFFFFF;
     margin-bottom: 50px;
 }
 .nav-container h1{
     font-size: 30px;
-    color: #ffffff;
+    color: #009688;
     font-weight: 00;
 }
 .home-button{
@@ -47,10 +47,17 @@ a{ text-decoration: none; color: #323232 }
     float: right;
 }
 .home-button span a{
-    color: #ffffff;
+	color: #009688;
+	font-size: 20px;
+	transition: 0.3s ease-in-out;
+}
+.home-button span a:hover{
+	opacity:0.7;
 }
 .home-button span i{
-    padding-right: 10px;
+	padding-right: 10px;
+	font-weight: 900;
+	font-size: 25px;
 }
 
 /*============NAVIGATION CONTAINER===========*/
@@ -368,7 +375,7 @@ canvas{
 
 .invoice-body{
 	padding-top: 50px;
-	padding-bottom: 100px;
+	padding-bottom: 50px;
 	font-family: 'Open Sans',sans-serif;
 }
 .invoice-body .details{
@@ -593,4 +600,9 @@ a.btn-print{
 }
 a.btn-print i{
 	margin-right: 10px;
+}
+
+.print-div{
+	padding-top: 20px;
+	padding-bottom: 50px;
 }

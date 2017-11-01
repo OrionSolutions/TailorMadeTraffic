@@ -675,6 +675,10 @@ a.menu-button i{
 	font-weight: 500;
 }
 
+.invoice-body .address ul.billing-address-details li h2{
+	font-family: 'Open Sans',sans-serif;
+}
+
 .invoice-body .details ul.invoice-payment-fields{
 	display: inline-block;
 	width: 100%;
@@ -717,6 +721,7 @@ a.btn-print i{
 	font-weight: 700;
 }
 .invoice-body .invoice-subscription .subscription-items h2{
+	font-family: 'Open Sans', sans-serif;
 	padding: 10px;
 	text-align: center;
 	text-transform: uppercase;
@@ -736,6 +741,7 @@ a.btn-print i{
 	padding: 10px;
 	text-align: center;
 	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .invoice-body .invoice-subscription .sub-total{
