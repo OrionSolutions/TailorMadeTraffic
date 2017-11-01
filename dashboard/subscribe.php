@@ -79,21 +79,27 @@
                 <form class="subscribe-form" action="gateway/sand_box_api.php" method="get">
                 <!-- Left -->
                 <select name="channelitems" class="selectbox" id="channelitems">
+                    <option>Choose a channel</option>
                     <option value="Single Channel">Single Channel</option>
                     <option value="Multi Channel">Multi Channel</option>
                 </select>
 
-                    <label><span><i class="fa fa-chevron-down"></i></span>
-                        <select name="premiumselection" class="selectbox" id="premiumselection">
-                            <option value="Basic Advertising">Basic Advertising</option>
-                            <option value="Advance Advertising">Advance Advertising</option>
-                            <option value="Package Advertising">Package Advertising</option>
-                            <option value="Custom Advertising">Custom Budget</option>
-                        </select>
-                        <script type="text/javascript">
-                            $('select[name=premiumselection] option[value=<?php echo $SubscriptionType; ?>]').attr('selected','selected');
-                        </script>
-                    </label>
+                <select name="channelTitle" class="selectbox" id="channelTitle">
+                    <option value="Facebook">Facebook</option>
+                    <option value="AdWords">AdWords</option>
+                </select>
+
+                <label><span><i class="fa fa-chevron-down"></i></span>
+                    <select name="premiumselection" class="selectbox" id="premiumselection">
+                        <option value="Basic Advertising">Basic Advertising</option>
+                        <option value="Advance Advertising">Advance Advertising</option>
+                        <option value="Package Advertising">Package Advertising</option>
+                        <option value="Custom Advertising">Custom Budget</option>
+                    </select>
+                    <script type="text/javascript">
+                        $('select[name=premiumselection] option[value=<?php echo $SubscriptionType; ?>]').attr('selected','selected');
+                    </script>
+                </label>
 
                 <!--<label><span><i class="fa fa-envelope-o"></i></span>-->
                     <input type="hidden" id="emails" name="emails" class="textbox disabled" placeholder="Primary Email" value="<?php echo $id; ?>" readonly>
@@ -130,7 +136,6 @@
                             <select id="selectplatform" name="selectplatform" class="selectbox" required>     
                                 <option value="Facebook Marketing">Google Marketing</option>                  
                                 <option value="Facebook Marketing">Facebook Marketing</option>
-                                <option value="Email Marketing">Email Marketing</option>
                                 <option value="Web Marketing">Web Marketing</option>
                             </select>
                         </label>

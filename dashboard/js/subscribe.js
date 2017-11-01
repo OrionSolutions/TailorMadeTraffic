@@ -94,6 +94,7 @@ $(document).ready(function(){
                 var channelChoice = $("#channelitems").val();
                  loadSubamount();
                 if(channelChoice=="Single Channel"){
+                    $("#channelTitle").css("display","block");
                     var channelItems = '<label><span><i class="fa fa-chevron-down"></i></span>';
                     channelItems = channelItems + '<select name="premiumselection" class="selectbox" id="premiumselection">';
                     channelItems = channelItems + '<option value="Facebook or Google Basic Advertising"> Facebook or Google Basic Advertising </option>';
@@ -106,8 +107,8 @@ $(document).ready(function(){
                     $("#premiumselection").html(channelItems);
                     var redeclareJava = '<script type="text/javascript" src="js/subscribe.js"></script>'; 
                     $("#section-accordion").append(redeclareJava);
-
                 }else{
+                    $("#channelTitle").css("display","none");
                     var channelItems = '<label><span><i class="fa fa-chevron-down"></i></span>';
                     channelItems = channelItems + '<select name="premiumselection" class="selectbox" id="premiumselection">';
                     channelItems = channelItems + '<option value="Basic Advertising"> Basic Advertising </option>';

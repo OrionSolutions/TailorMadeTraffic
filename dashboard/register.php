@@ -115,62 +115,73 @@ $exist = $rs["Existing"];
                     $Lastname = $_POST["lastname"];
                     $Alternate = $_POST["alternate"];
                     $Phone = $_POST["phone"];
-                    $SQLInsert ="INSERT INTO `tblaccount`(`GoogleEmail`,`Firstname`,`Lastname`,`AlternateEmail`,`Phone`,`Company`,`Industry`,`Username`,`Passwords`)";
-	                $SQLInsert = $SQLInsert." VALUES('".$Maily."',";
-                    $SQLInsert = $SQLInsert."'".$Firstname."',";
-                    $SQLInsert = $SQLInsert."'".$Lastname."',";
-                    $SQLInsert = $SQLInsert."'".$Alternate."',";
-                    $SQLInsert = $SQLInsert."'".$Phone."',";
-                    $SQLInsert = $SQLInsert."'".$Company."',";	
-                    $SQLInsert = $SQLInsert."'".$Company."',";
-                    $SQLInsert = $SQLInsert."'".$Username."',";
-                    $SQLInsert = $SQLInsert."md5('".$password."'));";
-                    $RSInsert=$con->getrecords($SQLInsert);
-                    $SQLGetAccountID = "SELECT * from tblaccount WHERE `GoogleEmail`='".$Maily."';";
-                    $getAccountID = $con->getrecords($SQLGetAccountID);
-                    $RSAccountID = $con->getresult($getAccountID);
-                    $RSAccountID["AccountID"];
-                    $SQLInsertWebDetails = "INSERT INTO `tblwebdetails`(`AccountID`,`SiteID`)";
-                    $SQLInsertWebDetails = $SQLInsertWebDetails." VALUES('".$RSAccountID["AccountID"]."',";
-                    $SQLInsertWebDetails = $SQLInsertWebDetails."0);";
-                    //echo $SQLInsertWebDetails;
-                    $RSExecute=$con->getrecords($SQLInsertWebDetails);
-                    setcookie("access_token", "", time()-3600);
-                    $ch = curl_init('https://crm.zoho.eu/crm/private/xml/Leads/insertRecords');
-                    curl_setopt($ch, CURLOPT_VERBOSE, 1);//standard i/o streams 
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);// Turn off the server and peer verification 
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); 
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//Set to return data to string ($response) 
-                    curl_setopt($ch, CURLOPT_POST, 1);//Regular post 
-                    $redir = curl_init('https://crm.zoho.eu/crm/private/xml/Leads/insertRecords');
-                    $authtoken = "ddbb9983706b0694795323fc05b470ef";
-                    $xmlData = "<Leads>
-	                <row no='1'>
-                    <FL val='Company'>$Company</FL>
-                    <FL val='First Name'>$Firstname</FL>
-                    <FL val='Last Name'>$Lastname</FL>
-                    <FL val='Email'>$Email</FL>
-                    <FL val='Lead Source'>Tailor Made Dashboard</FL>
-				    <FL val='Description'>New Leads Registered</FL>
-                    </row>
-                    </Leads>";
-                    $query = "newFormat=1&authtoken=".$authtoken."&scope=crmapi&xmlData=".$xmlData; 
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $query);// Set the request as a POST FIELD for curl. 
-                    curl_setopt($redir,CURLOPT_POSTFIELDS,'');
-                    $response = curl_exec($ch);  	
-                    curl_close($ch); 
-                     $jscript = "
-              swal({
-              title: 'Registered',
-              text: 'Successfully Registered.',
-              type: 'error',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              buttonsStyling: false
-            })";
-        echo '<script>'.$jscript."</script>";
-        echo "<script>setTimeout(function(){ window.location.replace('dashboard.php'); }, 1500);</script>";
+
+                    $sqlexist = "SELECT (`tblaccount`.`Username`) AS Existing FROM `tblaccount` WHERE `tblaccount`.`Username`='".$Username."';";
+                    $getexist = $con->getrecords($sqlexist);
+                    $rs = $con->getresult($getexist);
+
+                    if(mysqli_num_rows($getexist)){
+                        echo '<script> $("#txtusername").css("border","1px solid #e74c3c"); $("#txtusername").attr("value", "Username already exist"); </script>'; 
+                    }else{
+                        $SQLInsert ="INSERT INTO `tblaccount`(`GoogleEmail`,`Firstname`,`Lastname`,`AlternateEmail`,`Phone`,`Company`,`Industry`,`Username`,`Passwords`)";
+                        $SQLInsert = $SQLInsert." VALUES('".$Maily."',";
+                        $SQLInsert = $SQLInsert."'".$Firstname."',";
+                        $SQLInsert = $SQLInsert."'".$Lastname."',";
+                        $SQLInsert = $SQLInsert."'".$Alternate."',";
+                        $SQLInsert = $SQLInsert."'".$Phone."',";
+                        $SQLInsert = $SQLInsert."'".$Company."',";	
+                        $SQLInsert = $SQLInsert."'".$Company."',";
+                        $SQLInsert = $SQLInsert."'".$Username."',";
+                        $SQLInsert = $SQLInsert."md5('".$password."'));";
+                        $RSInsert=$con->getrecords($SQLInsert);
+                        $SQLGetAccountID = "SELECT * from tblaccount WHERE `GoogleEmail`='".$Maily."';";
+                        $getAccountID = $con->getrecords($SQLGetAccountID);
+                        $RSAccountID = $con->getresult($getAccountID);
+                        $RSAccountID["AccountID"];
+                        $SQLInsertWebDetails = "INSERT INTO `tblwebdetails`(`AccountID`,`SiteID`)";
+                        $SQLInsertWebDetails = $SQLInsertWebDetails." VALUES('".$RSAccountID["AccountID"]."',";
+                        $SQLInsertWebDetails = $SQLInsertWebDetails."0);";
+                        //echo $SQLInsertWebDetails;
+                        $RSExecute=$con->getrecords($SQLInsertWebDetails);
+                        setcookie("access_token", "", time()-3600);
+                        $ch = curl_init('https://crm.zoho.eu/crm/private/xml/Leads/insertRecords');
+                        curl_setopt($ch, CURLOPT_VERBOSE, 1);//standard i/o streams 
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);// Turn off the server and peer verification 
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); 
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//Set to return data to string ($response) 
+                        curl_setopt($ch, CURLOPT_POST, 1);//Regular post 
+                        $redir = curl_init('https://crm.zoho.eu/crm/private/xml/Leads/insertRecords');
+                        $authtoken = "ddbb9983706b0694795323fc05b470ef";
+                        $xmlData = "<Leads>
+                        <row no='1'>
+                        <FL val='Company'>$Company</FL>
+                        <FL val='First Name'>$Firstname</FL>
+                        <FL val='Last Name'>$Lastname</FL>
+                        <FL val='Email'>$Email</FL>
+                        <FL val='Lead Source'>Tailor Made Dashboard</FL>
+                        <FL val='Description'>New Leads Registered</FL>
+                        </row>
+                        </Leads>";
+                        $query = "newFormat=1&authtoken=".$authtoken."&scope=crmapi&xmlData=".$xmlData; 
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $query);// Set the request as a POST FIELD for curl. 
+                        curl_setopt($redir,CURLOPT_POSTFIELDS,'');
+                        $response = curl_exec($ch);  	
+                        curl_close($ch); 
+                         $jscript = "
+                  swal({
+                  title: 'Registered',
+                  text: 'Successfully Registered.',
+                  type: 'error',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  buttonsStyling: false
+                })";
+            echo '<script>'.$jscript."</script>";
+            echo "<script>setTimeout(function(){ window.location.replace('dashboard.php'); }, 1500);</script>";
+                    }
+                    
+                   
                     }
  ?>                     
                         <ul class="register-fields">
