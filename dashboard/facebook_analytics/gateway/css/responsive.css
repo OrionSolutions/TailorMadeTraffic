@@ -1,0 +1,266 @@
+@media only screen and (min-width: 480px) and (max-width: 768px ) {
+	
+	.container{ width: 100%; }
+
+	.one-sixth,
+	.one-fifth,
+	.one-fourth,
+	.one-third,
+	.one-half,
+	.two-third,
+	.three-fourth,
+	.content,
+	.leftSidebar,
+	.rightSidebar{
+		width: 100%;
+		margin: 0px;
+		padding: 0px;
+	}
+
+
+	/* =============================================================================================================================== */
+	/* Header */
+	/* =============================================================================================================================== */
+	.responsive-main-menu{ display: block; border-bottom: 1px solid rgba(255,255,255,0.1); }
+	.top-menu{ display: none; }
+	.nav-bar{ border: none; }
+
+	.logo-container{
+		width: 100%;
+		text-align: center;
+		margin-bottom: 30px;
+	}
+	.logo-container.ads-enabled{ padding-top:0px; }
+	.banner-ads-container{
+		width: 100%;
+		text-align: center;
+	}
+
+	.nav-container .one-third{ margin:0px; padding: 0px; margin-bottom: 10px; }
+
+	.main-slider-pager{ display: none; }
+	.main-slider-description h1{ font-size:35px; }
+	.main-slider-description p{ display: none; }
+	.four-column-layout .post-item p{ font-size: 13px; }
+
+	.header-carousel-container{ display: none; }
+
+
+	/* =============================================================================================================================== */
+	/* Layout */
+	/* =============================================================================================================================== */
+	.four-column-layout .post-item{ margin-bottom: 40px; }
+	.four-column-layout .post-item h1{ font-size: 25px; line-height: 1.1em; }
+
+	.three-column-layout .post-item{ margin-bottom: 40px; }
+	.three-column-layout .post-item h1{ font-size: 25px; line-height: 1.1em; }
+
+	.two-column-layout .post-item{ margin-bottom: 40px; }
+	.two-column-layout .post-item h1{ font-size: 25px; line-height: 1.1em; }
+
+	.thumb-list .small-thumb{ margin-bottom: 10px; }
+	.thumb-list .small-thumb h1{ font-size: 12px; }
+
+	.half-list-layout .post-item.list h1{ font-size: 12px; }
+
+	.posts-container .post-item .thumb-container{ float: none; width: 100%; height: auto; margin-bottom: 20px; }
+	.posts-container .post-item h1{ font-size: 25px; }
+	.posts-container.big .post-item h1{ font-size: 25px; }
+
+	.playlist .description{ display: none; }
+
+	.content,
+	.content.single-sidebar,
+	.content.index,
+	.single-post .content{
+		width: 100%;
+	}
+
+	.widget-thumbed-post h1{ font-size: 20px; }
+
+
+
+	/* =============================================================================================================================== */
+	/* Single */
+	/* =============================================================================================================================== */
+	.action-container{ text-align: center; }
+	.action-container .one-fourth{ display: inline; width:auto; margin-right: 20px; }
+
+	.share-label{ font-size: 16px; margin-bottom: 20px; }
+	.sharer a{ display: block; width: 100%; min-width: 100%; max-width: 100%; padding: 0px; padding-top: 10px; padding-bottom: 10px; font-size: 12px; margin-bottom:2px; }
+	.sharer a .fa{ position:static; font-size:16px; margin-left: 20px; float: left; margin-right: 10px; }
+
+	.related-container .one-fourth{ margin-bottom: 20px; }
+	.related-container .thumb-container{ height: auto; }
+	.related-container .related-post-title{ font-size: 25px; }
+
+
+
+	/* =============================================================================================================================== */
+	/* Widget */
+	/* =============================================================================================================================== */
+	.widget-categorized-post .small{ display: block; width: 100%; }
+	.widget-categorized-post .small h1{ font-size: 12px; }
+
+
+
+	/* =============================================================================================================================== */
+	/* Footer */
+	/* =============================================================================================================================== */
+	.copyright-container{ width:100%; display:block; text-align: center; }
+
+	.footer-menu{ display: none; }
+
+
+
+
+} /* End of Query */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 320px) and (max-width: 480px ) {
+
+	.container{ width: 100%; }
+
+	.one-sixth,
+	.one-fifth,
+	.one-fourth,
+	.one-third,
+	.one-half,
+	.two-third,
+	.three-fourth,
+	.content,
+	.leftSidebar,
+	.rightSidebar,
+	.content,
+	.content.single-sidebar,
+	.content.index,
+	.single-post .content,
+	.content .one-half,
+	.content .one-third{
+		width: 100%;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.content,
+	.content.single-sidebar,
+	.content.index,
+	.single-post .content,
+	.content .one-half{
+		width: 100%;
+	}
+
+
+	/* =============================================================================================================================== */
+	/* Header */
+	/* =============================================================================================================================== */
+	.responsive-main-menu{ display: block; border-bottom: 1px solid rgba(255,255,255,0.1); }
+	.top-menu{ display: none; }
+	.nav-bar{ border: none; }
+
+	.logo-container{
+		width: 100%;
+		text-align: center;
+		margin-bottom: 30px;
+	}
+	.logo-container.ads-enabled{ padding-top:0px; }
+	.banner-ads-container{
+		width: 100%;
+		text-align: center;
+	}
+
+	.nav-container .one-third{ margin:0px; padding: 0px; margin-bottom: 10px; }
+
+	.main-slider-pager{ display: none; }
+	.main-slider-description h1{ font-size:16px; line-height: 1.4em; }
+	.main-slider-description p{ display: none; }
+	.main-slider-description .star-ratings{ display: none; }
+	.four-column-layout .post-item p{ font-size: 13px; }
+
+	.header-carousel-container{ display: none; }
+
+
+	/* =============================================================================================================================== */
+	/* Layout */
+	/* =============================================================================================================================== */
+	.four-column-layout .post-item{ margin-bottom: 40px; }
+	.four-column-layout .post-item h1{ font-size: 25px; line-height: 1.1em; }
+
+	.three-column-layout .post-item{ margin-bottom: 40px; }
+	.three-column-layout .post-item h1,
+	.three-column-layout.double-sidebar .post-item h1{ font-size: 20px; line-height: 1.4em; }
+
+	.two-column-layout .post-item{ margin-bottom: 40px; }
+	.two-column-layout .post-item h1{ font-size: 25px; line-height: 1.1em; }
+
+	.thumb-list .small-thumb{ margin-bottom: 10px; }
+	.thumb-list .small-thumb h1{ font-size: 12px; }
+
+	.half-list-layout .post-item.list h1{ font-size: 12px; }
+
+	.big-list .small .thumb-container,
+	.big-list .big .thumb-container{
+		width: 100%;
+		float: none;
+		margin-bottom: 20px;
+	}
+
+	.single-block .item h1{
+		font-size: 16px;
+	}
+
+	.widget-thumbed-post h1{ font-size: 20px; }
+
+
+
+	/* =============================================================================================================================== */
+	/* Single */
+	/* =============================================================================================================================== */
+	.action-container{ text-align: center; }
+	.action-container .one-fourth{ display: inline; width:auto; margin-right: 20px; }
+
+	.share-label{ font-size: 16px; margin-bottom: 20px; }
+	.sharer a{ display: block; width: 100%; min-width: 100%; max-width: 100%; padding: 0px; padding-top: 10px; padding-bottom: 10px; font-size: 12px; margin-bottom:2px; }
+	.sharer a .fa{ position:static; font-size:16px; margin-left: 20px; float: left; margin-right: 10px; }
+
+	.related-container .one-fourth{ margin-bottom: 20px; }
+	.related-container .thumb-container{ height: auto; }
+	.related-container .related-post-title{ font-size: 25px; }
+
+
+
+	/* =============================================================================================================================== */
+	/* Widget */
+	/* =============================================================================================================================== */
+	.widget-categorized-post .small{ display: block; width: 100%; }
+	.widget-categorized-post .small h1{ font-size: 12px; }
+
+
+
+	/* =============================================================================================================================== */
+	/* Footer */
+	/* =============================================================================================================================== */
+	.copyright-container{ width:100%; display:block; text-align: center; }
+
+	.footer-menu{ display: none; }
+
+} /* End of Query */

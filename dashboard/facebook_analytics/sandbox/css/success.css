@@ -1,0 +1,68 @@
+
+/*============NAVIGATION CONTAINER===========*/
+.nav-container{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background:#323232;
+    margin-bottom: 100px;
+}
+.nav-container h1{
+    font-size: 30px;
+    color: #ffffff;
+    font-weight: 00;
+}
+.home-button{
+    padding-top: 5px;
+}
+
+.home-button span{
+    float: right;
+}
+.home-button span a{
+    color: #ffffff;
+}
+.home-button span i{
+    padding-right: 10px;
+}
+
+/*============NAVIGATION CONTAINER===========*/
+
+
+.item-pricing{
+	padding-top: 50px;
+	padding-bottom: 50px;
+    background: #1abc9c;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.item-pricing .details{
+    width: 80%;
+    margin: 0 auto;
+    padding: 30px;
+    background: #16a085;
+}
+
+.item-pricing h1{
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.item-pricing p{
+    font-size: 18px;
+    color: #ffffff;
+    line-height: 1.3em;
+}
+
+.item-pricing i.fa{
+    font-size: 60px;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;   
+    border: 5px solid #ffffff;
+    margin-bottom: 20px;
+}

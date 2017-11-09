@@ -1,0 +1,109 @@
+/*
+    Mobile Menu Core Style
+*/
+
+.slicknav_btn { position: relative; display: block; vertical-align: middle; float: left; padding: 0.438em 0.625em 0.438em 0.625em; line-height: 1.125em; cursor: pointer; }
+.slicknav_menu  .slicknav_menutxt { display: block; line-height: 1.188em; float: left; }
+.slicknav_menu .slicknav_icon { float: left; margin: 0.188em 0 0 0.438em; }
+.slicknav_menu .slicknav_no-text { margin: 0 }
+.slicknav_menu .slicknav_icon-bar { display: block; width: 1.125em; height: 0.125em; -webkit-border-radius: 1px; -moz-border-radius: 1px; border-radius: 1px;  }
+.slicknav_btn .slicknav_icon-bar + .slicknav_icon-bar { margin-top: 0.188em }
+.slicknav_nav { clear: both }
+.slicknav_nav ul,
+.slicknav_nav li { display: block }
+.slicknav_nav .slicknav_arrow { font-size: 0.8em; margin: 0 0 0 0.4em; }
+.slicknav_nav .slicknav_item { display: block; cursor: pointer; }
+.slicknav_nav a { display: block }
+.slicknav_nav .slicknav_item a { display: inline }
+.slicknav_menu:before,
+.slicknav_menu:after { content: " "; display: table; }
+.slicknav_menu:after { clear: both }
+/* IE6/7 support */
+.slicknav_menu { *zoom: 1 }
+
+/* 
+    User Default Style
+    Change the following styles to modify the appearance of the menu.
+*/
+
+.slicknav_menu {
+	position: fixed;
+	width: 100%;
+	background: #2cc185;
+	font-family: 'Roboto', sans-serif;
+	font-size:16px;
+	font-weight: 300;
+
+	-webkit-box-shadow: 0 0 50px 0 #000000;
+	box-shadow: 0 0 50px 0 #000000;
+	z-index: 99999
+}
+/* Button */
+.slicknav_btn{
+	text-decoration:none;
+	outline:none;
+	width:100%;
+	padding:20px;
+}
+/* Button Text */
+.slicknav_menu  .slicknav_menutxt {
+	font-size:13px;
+	color: #FFFFFF;
+}
+/* Button Lines */
+.slicknav_menu .slicknav_icon-bar { background-color: #f5f5f5; }
+
+.slicknav_nav {
+	margin:0;	
+	padding:0;
+	color:#FFFFFF;
+	text-transform:uppercase;
+	font-size:11px;
+	text-align:left;
+}
+
+.slicknav_nav .fa{ margin-right:5px; }
+
+.slicknav_nav, .slicknav_nav ul {
+	list-style: none;
+	overflow:hidden;
+}
+.slicknav_nav ul {
+	padding:0;
+	margin:0 0 0 20px;
+}
+.slicknav_nav .slicknav_item {
+	padding:10px 10px;
+	margin:2px 5px;
+}
+.slicknav_nav a{
+	padding:10px 10px;
+	margin:2px 5px;
+	text-decoration:none;
+	color:#fff;
+}
+.slicknav_nav .slicknav_item a {
+	padding:0;
+	margin:0;
+}
+.slicknav_nav .slicknav_item:hover {
+	background:#86EFC5;
+	color:#888888;	
+}
+.slicknav_nav a:hover{
+	background:#86EFC5;
+	color:#888888;
+}
+.slicknav_nav .slicknav_txtnode {
+     margin-left:15px;   
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px ) {
+.sf-menu{ display:none; }
+.sf-responsive{ display:block; }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px ) {
+.sf-menu{ display:none; }
+.sf-responsive{ display:block; }
+}

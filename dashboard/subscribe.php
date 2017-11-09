@@ -76,6 +76,7 @@
         <div class="full-width">
             <div class="form-container-register">
                 <h1>Select A Subscription <span> We'd love to be working with you!</span></h1>
+                
                 <form class="subscribe-form" action="gateway/sand_box_api.php" method="get">
                 <!-- Left -->
                 <select name="channelitems" class="selectbox" id="channelitems">
@@ -89,7 +90,7 @@
                     <option value="AdWords">AdWords</option>
                 </select>
 
-                <label><span><i class="fa fa-chevron-down"></i></span>
+                <label><span> <!-- <i class="fa fa-chevron-down"></i> --> </span>
                     <select name="premiumselection" class="selectbox" id="premiumselection">
                         <option value="Basic Advertising">Basic Advertising</option>
                         <option value="Advance Advertising">Advance Advertising</option>

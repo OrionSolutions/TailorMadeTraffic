@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700');
+@import url('https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900');
+/*==============GLOBAL DEC==================*/
+body{
+    font-family: 'Open Sans', sans-serif;
+    position: relative;
+}
+
+.preload{
+    height: 100%;
+    width: 100%;
+    top: 0;
+    position: fixed;
+    background:url(images/loading.gif) center center #FFFFFF;
+    z-index: 999999999999999999999999999999999;
+    text-align: center;
+    display: none;
+    transition: 0.4s ease-in-out;
+}
+
+.show{
+    display: block;
+}
+
+.preload img{
+    width: 15%;
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 40%;
+    left: 42%;
+}
+.login-google{
+    transition: 0.2s ease-in-out;
+}
+
+.login-google:hover,.login-google:focus{
+    cursor: pointer;
+    background: #16a085;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+}
+h1{ font-size: 40px; }
+h2{ font-size: 38px; }
+h3{ font-size: 36px; }
+h4{ font-size: 34px; }
+h5{ font-size: 32px; }
+h6{ font-size: 30px; }
+
+p{
+    line-height: 1.8em;
+    font-size: 13px;
+    font-weight:400;
+    font-family: 'Open Sans', sans-serif;
+   
+}
+
+a{
+    text-decoration: none;
+}
+.over-lay{
+    background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5));
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+/*============GLOBAL DECLARATION===========/
+
+/*============NAVIGATION CONTAINER===========*/
+.nav-container{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background:#323232;
+    margin-bottom: 100px;
+}
+.nav-container h1{
+    font-size: 30px;
+    color: #ffffff;
+    font-weight: 00;
+}
+.home-button{
+    padding-top: 5px;
+}
+
+.home-button span{
+    float: right;
+}
+.home-button span a{
+    color: #ffffff;
+}
+.home-button span i{
+    padding-right: 10px;
+}
+/*============NAVIGATION CONTAINER===========*/
+
+/*============FORM CONTAINER===========*/
+.form-container{
+    padding-bottom: 20px;
+}
+.header-content h1{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: #ffffff;
+}
+.header-content{
+    background: #3FC380;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.login-content{
+    padding-bottom: 30px;
+    width: 50%;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 0 30px 10px #ecf0f1;
+}
+
+.login-content .reg_google{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #3FC380;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    
+}
+
+.header-content .fa-user-circle-o{
+    padding: 20px;
+    position: absolute;
+    left: 225px;
+    display: inline;
+    background: #3FC380;
+    font-size: 40px;
+    border-radius: 40px;
+    top: -35px;
+    color: #ffffff;
+}
+.header-content .fa-sign-in{
+    padding: 20px;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    left: 45%;
+    background: #3FC380;
+    font-size: 55px;
+    border-radius: 90px;
+    top: -50px;
+    color: #ffffff;
+    overflow: hidden;
+}
+.form-body{
+    padding: 30px;
+    text-align: center;
+    border:none;
+}
+.form-body p{
+    padding-bottom: 20px;
+}
+.form-body a{
+    padding: 10px;
+    padding-right: 30px;
+    padding-left: 20px;
+    color: #ffffff;
+    background: #dc4b38;
+    display: inline-block;
+}
+.form-body i{
+    padding-right: 20px;
+}
+.register-content{
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+}
+/*============FORM CONTAINER===========*/
+
+.item-pricing{
+	padding-top: 50px;
+	padding-bottom: 50px;
+    background: #1abc9c;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.item-pricing .details{
+    width: 80%;
+    margin: 0 auto;
+    padding: 30px;
+    background: #16a085;
+}
+
+.item-pricing h1{
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.item-pricing p{
+    font-size: 18px;
+    color: #ffffff;
+    line-height: 1.3em;
+}
+
+.item-pricing i.fa{
+    font-size: 60px;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;   
+    border: 5px solid #ffffff;
+    margin-bottom: 20px;
+}

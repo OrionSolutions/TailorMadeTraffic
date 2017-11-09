@@ -1,7 +1,7 @@
 <div class="middle-header">
         <div class="logo">
              
-            <img src="images/logo.png" >     
+            <a href="https://tailormadetraffic.com"><img src="images/logo.png" ></a>     
         </div>  
                 <ul class="links">
                     <li><a href="dashboard.php"><i class="fa fa-bar-chart"></i> Google Marketing</a></li>

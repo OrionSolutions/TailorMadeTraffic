@@ -12,7 +12,7 @@
         $('#reauth').text("Reauthenticate");
         $('#myavatar').css("display", "none");
         $('.gmail').css("display", "none");
-
+        firebase.auth().signOut();
         /*swal({
           title: 'Session Expired',
           text: "Relogin using your Google account.",

@@ -7,6 +7,8 @@ function checkURL(abc) {
     return abc
 }
 $(document).ready(function(){
+    $('#premiumselection').addClass("hidden");
+    $('#channelTitle').addClass("hidden");
     loadSubamount();
     loadChannel();
     /*firebase.auth().onAuthStateChanged(function(user) {
@@ -25,7 +27,6 @@ $(document).ready(function(){
         
     }); */
     
-
       
     $('.toggle').click(function (e) {
           e.preventDefault();
@@ -43,8 +44,9 @@ $(document).ready(function(){
 
     $("#premiumselection").change(function () {
                 var premselector = $("#premiumselection").val();
+                var advertising = $('#channelTitle').val();
                 $("#section-accordion").html("");
-            
+
                 var headertoggle = '';
                 var marketing = '';
                 var objective = '';
@@ -65,18 +67,16 @@ $(document).ready(function(){
                 if (premselector=="Custom Advertising") {var x=0;var counter = 15; $("#numcampaigns").val(15);$("#subamount1").val("£"+99+" (Management Fee)");}
                
 
-                if (premselector=="Facebook or Google Basic Advertising") { var x = 0; var counter = 1; $("#numcampaigns").val(1);$("#subamount").val(29);}
-                if (premselector=="Advanced Facebook or Google Marketing") {var x=0;var counter = 5; $("#numcampaigns").val(5);$("#subamount").val(59);}
-                if (premselector=="Premium Facebook or Google Advertising") {var x=0;var counter = 10; $("#numcampaigns").val(10);$("#subamount").val(89);}
+                if (premselector=="Facebook Basic Advertising"||premselector=="AdWords Basic Advertising") { var x = 0; var counter = 1; $("#numcampaigns").val(1);$("#subamount").val(29);}
+                if (premselector=="Advanced Facebook Marketing"||premselector=="Advanced AdWords Marketing") {var x=0;var counter = 5; $("#numcampaigns").val(5);$("#subamount").val(59);}
+                if (premselector=="Premium Facebook Advertising"||premselector=="Premium AdWords Advertising") {var x=0;var counter = 10; $("#numcampaigns").val(10);$("#subamount").val(89);}
                 if (premselector=="Custom Budget") {var x=0;var counter = 15; $("#numcampaigns").val(15);$("#subamount").val(99);}
 
-                if (premselector=="Facebook or Google Basic Advertising") { var x = 0; var counter = 1; $("#numcampaigns").val(1);$("#subamount1").val("£"+29+" (Management Fee)");}
-                if (premselector=="Advanced Facebook or Google Marketing") {var x=0;var counter = 5; $("#numcampaigns").val(5);$("#subamount1").val("£"+59+" (Management Fee)");}
-                if (premselector=="Premium Facebook or Google Advertising") {var x=0;var counter = 10; $("#numcampaigns").val(10);$("#subamount1").val("£"+89+" (Management Fee)");}
+                if (premselector=="Facebook Basic Advertising"||premselector=="AdWords Basic Advertising") { var x = 0; var counter = 1; $("#numcampaigns").val(1);$("#subamount1").val("£"+29+" (Management Fee)");}
+                if (premselector=="Advanced Facebook Marketing"||premselector=="Advanced AdWords Marketing") {var x=0;var counter = 5; $("#numcampaigns").val(5);$("#subamount1").val("£"+59+" (Management Fee)");}
+                if (premselector=="Premium Facebook Advertising"||premselector=="Premium AdWords Advertising") {var x=0;var counter = 10; $("#numcampaigns").val(10);$("#subamount1").val("£"+89+" (Management Fee)");}
                 if (premselector=="Custom Budget") {var x=0;var counter = 15; $("#numcampaigns").val(15);$("#subamount1").val("£"+99+" (Management Fee)");}
                
-
-
                 channelItems = channelItems + '<select name="premiumselection" class="selectbox" id="premiumselection">';
                 channelItems = channelItems + '<option value="Facebook or Google Basic Advertising"> Facebook or Google Basic Advertising </option>';
                 channelItems = channelItems + '<option value="Advanced Facebook or Google Marketing"> Advanced Facebook or Google Marketing </option>';
@@ -91,24 +91,30 @@ $(document).ready(function(){
 
 
             $("#channelitems").change(function () {
+                $('#premiumselection').addClass("disp");
+                $('#channelTitle').addClass("disp");
                 var channelChoice = $("#channelitems").val();
+                var advertising = $('#channelTitle').val();
                  loadSubamount();
                 if(channelChoice=="Single Channel"){
                     $("#channelTitle").css("display","block");
-                    var channelItems = '<label><span><i class="fa fa-chevron-down"></i></span>';
-                    channelItems = channelItems + '<select name="premiumselection" class="selectbox" id="premiumselection">';
-                    channelItems = channelItems + '<option value="Facebook or Google Basic Advertising"> Facebook or Google Basic Advertising </option>';
-                    channelItems = channelItems + '<option value="Advanced Facebook or Google Marketing"> Advanced Facebook or Google Marketing </option>';
-                    channelItems = channelItems + '<option value="Premium Facebook or Google Advertising"> Premium Facebook or Google Advertising </option>';
-                    channelItems = channelItems + '<option value="Custom Budget"> Custom Budget </option>';
-                    channelItems = channelItems + '</select>'
-                    channelItems = channelItems + '</label>'
-    
+
+                        var channelItems = '<label><span><i class="fa fa-chevron-down"></i></span>';
+                        channelItems = channelItems + '<select name="premiumselection" class="selectbox" id="premiumselection">';
+                        channelItems = channelItems + '<option value="Facebook or Google Basic Advertising"> '+advertising+' Basic Advertising </option>';
+                        channelItems = channelItems + '<option value="Advanced Facebook or Google Marketing"> Advanced '+advertising+' Marketing </option>';
+                        channelItems = channelItems + '<option value="Premium Facebook or Google Advertising"> Premium '+advertising+' Advertising </option>';
+                        channelItems = channelItems + '<option value="Custom Budget"> Custom Budget </option>';
+                        channelItems = channelItems + '</select>'
+                        channelItems = channelItems + '</label>'
+                    
                     $("#premiumselection").html(channelItems);
                     var redeclareJava = '<script type="text/javascript" src="js/subscribe.js"></script>'; 
                     $("#section-accordion").append(redeclareJava);
+
                 }else{
                     $("#channelTitle").css("display","none");
+
                     var channelItems = '<label><span><i class="fa fa-chevron-down"></i></span>';
                     channelItems = channelItems + '<select name="premiumselection" class="selectbox" id="premiumselection">';
                     channelItems = channelItems + '<option value="Basic Advertising"> Basic Advertising </option>';
@@ -126,8 +132,24 @@ $(document).ready(function(){
             });
 
 
+            $("#channelTitle").change(function () {
+                var advertising = $('#channelTitle').val();
+
+                var channelItems = '<label><span><i class="fa fa-chevron-down"></i></span>';
+                channelItems = channelItems + '<select name="premiumselection" class="selectbox" id="premiumselection">';
+                channelItems = channelItems + '<option value="'+advertising+' Basic Advertising"> '+advertising+' Basic Advertising </option>';
+                channelItems = channelItems + '<option value="Advanced '+advertising+' Marketing"> Advanced '+advertising+' Marketing </option>';
+                channelItems = channelItems + '<option value="Premium '+advertising+' Advertising"> Premium '+advertising+' Advertising </option>';
+                channelItems = channelItems + '<option value="Custom Budget"> Custom Budget </option>';
+                channelItems = channelItems + '</select>'
+                channelItems = channelItems + '</label>'
+            
+            $("#premiumselection").html(channelItems);
+            });
+
 
             function loadChannel(){
+                //var advertising = $('#channelTitle').val();
                 var channelItems = '<label><span><i class="fa fa-chevron-down"></i></span>';
                 channelItems = channelItems + '<select name="premiumselection" class="selectbox" id="premiumselection">';
                 channelItems = channelItems + '<option value="Facebook or Google Basic Advertising"> Facebook or Google Basic Advertising </option>';
@@ -141,6 +163,7 @@ $(document).ready(function(){
             }
 
             function loadSubamount(){
+                //var advertising = $('#channelTitle').val();
                 var premselector = $("#premiumselection").val();
                 if (premselector=="Basic Advertising") { var x = 0; var counter = 1; $("#numcampaigns").val(1);$("#subamount").val(39);}
                 if (premselector=="Advance Advertising") {var x=0;var counter = 5; $("#numcampaigns").val(5);$("#subamount").val(69);}

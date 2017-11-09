@@ -655,6 +655,13 @@ input[type=number]::-webkit-outer-spin-button {
     text-overflow: '';
 }
 
+.form-container-register .selectbox.hidden{
+    display: none;
+}
+
+.form-container-register .selectbox.disp{
+    display: block;
+}
 
 
 .form-container-register .button{
