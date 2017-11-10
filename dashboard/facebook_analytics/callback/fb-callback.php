@@ -72,6 +72,6 @@ if(!session_id()) {
     
     // User is logged in with a long-lived access token.
     // You can redirect them to a members-only page.
-    echo'<script>window.location.replace("http://localhost/OrionShare/TailorMadeTraffic/dashboard/facebook_analytics/dashboard.php");</script> ';
-
+    //echo'<script>window.location.replace("http://localhost/OrionShare/TailorMadeTraffic/dashboard/facebook_analytics/dashboard.php");</script> ';
+    echo'<script>window.location.replace("https://tailormadetraffic.com/dashboard/beta-dashboard/facebook_analytics/dashboard.php");</script> ';
 ?>

@@ -12,13 +12,5 @@ $(document).ready(function() {
 		href: "graph_facebook.php" 
 	});
 
-
-		$('#btn_submit').on("click", function (e) {
-			alert("Bols");
-			jQuery(".fancybox-inner").html(content);
-			$.fancybox.update();
-		}); 
- 
-
 	
 });

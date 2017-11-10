@@ -46,9 +46,13 @@ if(isset( $_SESSION['redirect_url']) && !empty( $_SESSION['redirect_url'])) {
         </div>
         
         <script type="text/javascript">
+            
+            
             setTimeout(function(){ 
               window.location.replace('complete_flow.php');
                 }, 3000);
+
+                
         </script>
 
     </body>

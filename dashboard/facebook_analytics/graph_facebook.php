@@ -1,8 +1,13 @@
 <?php 
     session_start();
     $id = $_GET['id'];
+    $name = $_GET['name'];
+    $_COOKIE['id'] = $id;
+    $_COOKIE['token_fb'] = $_SESSION['fb_access_token'];
     include('fb-get-data.php');
-    require 'facebook_sdk/vendor/autoload.php';    
+    require 'facebook_sdk/vendor/autoload.php';   
+    $last_week_date = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') - 7, date('Y')));
+
     $data =  getMonthly($id);
     foreach ($data as $i){        
         $reach  = $i['reach'];
@@ -30,16 +35,16 @@
         $spend_last_month = $i['spend'];
         $sDate = $i['date_start'];
     }
- 
 ?>
 
 <!doctype html>
 <html>
     <head>
-        <title>Invoice Tailor Made Traffic</title>
+        <title>Graph Facebook</title>
         <link href="css/reset.css" rel="stylesheet" type="text/css">
         <link href="css/grid.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
+        <link rel="shortcut icon" href="images/tailor-favicon.ico"/>
         <link href="style.css" rel="stylesheet" type="text/css">
         <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -62,12 +67,14 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
-
+<?php include('menu.php'); ?>
         <div class="facebook-graph">
+
+        <h1 class="page-title"><?php echo $name; ?></h1>
 
                     <div class="one-third first days">
                         <div class="days-content">
-                            <h1>This Month<?php echo $sDate; ?></h1>
+                            <h1>This Month</h1>
 
                             <div class="one-fifth first">
                                 <div class="stats">
@@ -182,44 +189,72 @@
                     <div class="clear"></div>
 
 
-                    <form action="graph_facebook.php?id=<?php echo $id?>" id="dateForm" method="POST" class="date-form">
+                   <form action="graph_facebook.php?id=<?php echo $id?>&name=<?php echo $name;?>" id="dateForm" method="POST" class="date-form"> 
+                  <!-- <form id="dateForm" class="date-form"> -->
                         <div class="date-wrapper">
                             <span>Date from:</span>                       
-                            <input type="date" name="start_date" class="date-selector">
+                            <input type="date" id="start_date" name="start_date" class="date-selector">
                         </div> 
                         <div class="date-wrapper">
                             <span>Date to:</span>
-                            <input type="date" name="end_date" class="date-selector">
+                            <input type="date" id="end_date" name="end_date" class="date-selector">
                         </div>
                         <!-- <div class="breaker"></div> -->
                         <!-- <input type="submit" value="Query" class="submit-btn" id="btn_submit" name="btn_submit"> -->
-                        <a href="#" value="Query" class="submit-btn" id="btn_submit" name="btn_submit">Query</a>
+                        <input type="submit" value="Query" class="submit-btn" id="btn_submit" name="btn_submit">
+                        
                     </form>
 
 
+            <div id="charts-container">
+           
                 <div id="reach_chart"></div>
+                <div id="cpa_chart"></div>
+                <div id="cpc_chart"></div> 
+            </div>
                 
-                <div class="one-half first l-chart">
-                    <div id="cpa_chart"></div>
-                </div>
-                <div class="one-half last l-chart">
-                    <div id="cpc_chart"></div>
-                </div>
-                <div class="clear"></div>
+
         </div>
 
-
     </body>
-    <script>
-        	$('#btn_submit').on("click", function (e) {
-			alert("Bols");
-		}); 
-    </script>
+
+    
     <script type="text/javascript">
         $(document).ready(function(){
+            google.charts.load('current', {'packages':['corechart']});
 
-        
-        google.charts.load('current', {'packages':['corechart']});
+            /*$('#btn_submit').on("click", function(){
+            $("#cht").html('');
+            $("#loader").show();
+            
+            console.log(getCookie("useremail"));
+                var myData = 'start_date=' + encodeURIComponent( $("#start_date" ).val()) +
+                        '&end_date=' + encodeURIComponent( $("#end_date").val() );
+                    $.ajax( {
+                        type: "POST",
+                        url: "response.php?TypeID=LoadData&id=<?php echo $id; ?>",
+                        dataType: "html",
+                        data: myData,
+                        success: function ( response ) {
+            
+                            setTimeout(function() {
+                                $("#loader").hide();
+                                $("#charts-container").html(response); 
+                                //google.charts.load('current', {'packages':['corechart']});
+                                //updateData();
+                                alert("ajax");
+                                
+                            }, 2000);
+                        
+                        },
+                        error: function ( xhr, ajaxOptions, thrownError ) {
+                            alert( thrownError );
+                            $("#loader").hide();
+                        }
+                    }); 
+                  
+            });*/
+
         google.charts.setOnLoadCallback(drawChart);
         
         function drawChart() {
@@ -240,15 +275,14 @@
 
 
         <?php 
-
+            $start_date = $last_week_date;
+            $end_date = date("Y-m-d");
             if(isset($_POST['btn_submit'])){
-                $start_date = $_POST["start_date"];
-                $end_date = $_POST["end_date"];
-            }else{
-                $start_date = "2017-11-1";
-                $end_date = "2017-11-6";
-            }   
-              
+                $start_date = $_POST['start_date'];
+                $end_date = $_POST['end_date'];
+            }
+               
+ 
             $chart_month =  getMonthlyDate($start_date,$end_date,$id);
                 foreach ($chart_month as $j){        
                     $reach  = $j['reach'];
@@ -268,8 +302,8 @@
             title: 'Reach, Impressions, Spend Insights',
             curveType: 'function',
             pointSize: 10,
-            height: 400,
-            width: '100%',
+            width: '1400',
+            height: 350,
             curveType: 'none',
             pointShape: 'circle',
             legend: {position: 'top'}
@@ -279,6 +313,7 @@
             title: 'Cost Per Click Insights',
             curveType: 'function',
             pointSize: 10,
+            width: '1400',
             colors: ['#c0392b', 'blue', '#3fc26b'],
             curveType: 'none',
             pointShape: 'circle',
@@ -290,9 +325,11 @@
             title: 'Cost Per Action Insights',
             curveType: 'function',
             pointSize: 10,
+            width: '1400',
             colors: ['#16a085', 'blue', '#3fc26b'],
             curveType: 'none',
             pointShape: 'circle',
+            lineWidth: 3,
             legend: {position: 'top'}
         };
         
@@ -303,8 +340,8 @@
         chart.draw(data, options);
         cpc_chart.draw(cpc, options1);
         cpa_chart.draw(cpa, options2);
-
         }
+
     });
     </script>
 </html>

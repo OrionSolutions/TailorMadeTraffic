@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Raleway:300,400,500,600,700,800,900');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,600,700|Raleway:300,400,500,600,700,800,900');
 
 /*
 font-family: 'Open Sans', sans-serif;
@@ -9,6 +9,9 @@ body{
 	font-family: 'Open Sans', sans-serif;
 	background: #ecf0f1;
 	font-size: 14px;
+}
+body.white{
+	background: #ffffff;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -57,6 +60,10 @@ a{ text-decoration: none; color: #323232 }
 
 .breaker{
 	height: 10px;
+}
+
+.centered{
+	text-align: center;
 }
 
 /* ======================================= Top Header ======================================= */
@@ -889,6 +896,11 @@ a.btn-print i{
 	margin-bottom: 20px;
 }
 
+.middle-header ul.user-controls {
+    margin-top: 30px;
+    border-top: 1px solid #3b434e;
+}
+
 
 
 /** =============================================== FB Marketing ========================================== **/
@@ -923,7 +935,8 @@ a.btn-print i{
 	padding: 10px;
 	font-size: 18px;
 	margin-bottom: 30px;
-	display: inline-block;
+	display: block;
+	text-align: center;
 	transition: 0.3s ease-in-out;
 }
 
@@ -1011,6 +1024,7 @@ a.btn-print i{
 .campaign-items h3{
 	font-size: 16px;
 	font-weight: 300;
+	color: #009688;
 	font-family: 'Open Sans',sans-serif;
 }
 
@@ -1080,6 +1094,7 @@ a.btn-print i{
 	padding: 10px;
 	background: #ffffff;
 	margin-bottom: 20px;
+	color: #2ABB9B;
 }
 
 .ad-items h3{
@@ -1100,10 +1115,19 @@ a.btn-print i{
 
 /** ====================================== FACEBOOK GRAPH  ====================================== **/
 .facebook-graph{
-	padding-top: 50px;
-	padding-bottom: 50px;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding:50px;
+	padding-top: 0px;
+}
+
+.facebook-graph h1.page-title{
+	margin-bottom: 30px;
+	padding-bottom: 10px;
+	color: #009688;
+	border-bottom: 1px solid #16a085;
+}
+
+.charts-container{
+	text-align: center;
 }
 
 #reach_chart,#cpc_chart,#cpa_chart{
@@ -1112,9 +1136,11 @@ a.btn-print i{
 	padding-bottom: 20px;
 	height: auto;
 	margin: 0 auto;
+	margin-bottom: 20px;
 	background: #ffffff;
 	/*box-shadow: 0 0 20px 1px #eeeeee;*/
 	border: 1px solid #2980b9;
+	
 }
 
 

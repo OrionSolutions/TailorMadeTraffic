@@ -1,6 +1,6 @@
 <?php
-session_start();
 error_reporting(0);
+session_start();
 require 'src/Facebook/autoload.php';
 require 'facebook_sdk/vendor/autoload.php';
 
@@ -30,7 +30,7 @@ $fb = new Facebook\Facebook([
 'app_secret' => '8c135ba81b086443c41ee685ff2756f6',
 'default_graph_version' => 'v2.10',
 ]);
-
+/*
 include ('class/clsConnection.php');
 $fb_token = 'EAAYMuI8CoxUBAFcCHcsOkdiqIGJfLT75IEjEZCSGdBJY0FiLihrmsshrFCAs1ZCO5XO5H8pumtBTscJlGJBrt8QlP2oEfEic37WZAsdpMqvw8f4KCPPhJSIUm0ZB2ph3P1gLuIRCGJrSo6SmbJT8vywALZBEy5JZCTAmX8TbSaOPbeZAKjIPSX5gXlSZCHwyHClYIbkh5EOjsQZDZD';
 $useremail = $_COOKIE["useremail"];
@@ -57,7 +57,7 @@ $rssite = $con->getresult($getsiteid);
 
 $siteid = $rssite["SiteID"];
 setcookie("siteID",$siteid);
-
+*/
 include ('fb-get-data.php');
 
 ?>
@@ -77,18 +77,12 @@ include ('fb-get-data.php');
     <link rel="stylesheet" type="text/css" href="css/responsive.css">
     <link rel="shortcut icon" href="images/tailor-favicon.ico"/>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-    <script src="js/firebase-config.js"></script>
     <script type="text/javascript" src="js/slicknav.js"></script>
     <script type="text/javascript" src="js/slicknav-init.js"></script>
-    <script src="js/google.js"></script>
-    <script src="js/logout.js"></script>
     <script src="js/responsive-side.js"></script>
-    <script type="text/javascript" src="js/dashboard-chart-analytics.js"></script>
 </head>
 
 <body>
@@ -111,7 +105,7 @@ include ('fb-get-data.php');
 
 
    <?php
-
+/*
 if ($exist == 0)
 	{
 	$jscript = "
@@ -127,20 +121,10 @@ if ($exist == 0)
 	echo '<script>' . $jscript . "</script>";
 	echo "<script>setTimeout(function(){ window.location.replace('register.php'); }, 1500);</script>";
 	}
-
+*/
 ?>
     <!-- Middle Menu -->
-    <div class="middle-header">
-        <div class="logo">
-            <img src="images/logo.png" >     
-        </div>  
-        <ul>
-            <li><a href="dashboard.php"><i class="fa fa-bar-chart"></i> Google Marketing</a></li>
-            <li><a href="my_subscriptions.php"><i class="fa fa-check-square-o"></i> My Subscriptions</a></li>
-            <li><a href="my_payment.php"><i class="fa fa-code"></i> Development Service</a></li>
-            <li class="current"><a href="my_payment.php"><i class="fa fa-facebook-square"></i> Facebook Marketing</a></li>
-        </ul>
-    </div>
+    <?php include('sidebar.php'); ?>
     <!-- Middle Menu -->
 
    
@@ -158,10 +142,11 @@ if ($exist == 0)
 
                     $helper = $fb->getRedirectLoginHelper();
                     $permissions = ['email']; // Optional permissions
-                    $loginUrl = $helper->getLoginUrl('http://localhost/OrionShare/TailorMadeTraffic/dashboard/facebook_analytics/callback/fb-callback.php', $permissions);
-                    $next = "http://localhost/OrionShare/TailorMadeTraffic/dashboard/facebook_analytics/dashboard.php?status=logout";
-                    
-                    if($_GET['status']=="logout"){
+                    $loginUrl = $helper->getLoginUrl('https://tailormadetraffic.com/dashboard/beta-dashboard/facebook_analytics/callback/fb-callback.php', $permissions);
+                    //$next = "http://localhost/OrionShare/TailorMadeTraffic/dashboard/facebook_analytics/dashboard.php?status=logout";
+                    $next = "https://tailormadetraffic.com/dashboard/beta-dashboard/facebook_analytics/dashboard.php?status=logout";
+                    if($_GET['status']=="logout" || empty($_SESSION['fb_access_token'])){
+                        $_SESSION['fb_access_token'] = "";
                         echo '<a class="fb-login" href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
                     }else{
                         echo '<a class="fb-logout" href="' . $helper->getLogoutUrl($_SESSION['fb_access_token'], $next, $separator = '&') . '">Logout</a>';
@@ -181,7 +166,7 @@ if ($exist == 0)
                 ?>
                
                        <div class="campaign-items">
-                       <a href="page-details.php?id=<?php echo $id; ?>" class="campaign-btn">Go to Ads</a>
+                       <a href="page-details.php?id=<?php echo $id; ?>" target="_blank" class="campaign-btn">Go to Ads</a>
                             <div class="one-half first campaign-title">
                                 <h2>Campaign ID</h2>
                                 <h3><?php echo $id;?> </h3>

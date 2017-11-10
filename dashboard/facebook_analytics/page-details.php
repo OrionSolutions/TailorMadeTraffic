@@ -1,5 +1,5 @@
 <?php 
-    error_reporting(0);
+    //error_reporting(0);
     session_start();
     if($_GET['id']){
         $pageid = $_GET['id'];
@@ -12,13 +12,15 @@
 <!doctype html>
 <html>
     <head>
-        <title>Invoice Tailor Made Traffic</title>
+        <title>Managed Campaigns</title>
         <link href="css/reset.css" rel="stylesheet" type="text/css">
         <link href="css/grid.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
+        <link rel="shortcut icon" href="images/tailor-favicon.ico"/>
         <link href="style.css" rel="stylesheet" type="text/css">
         <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="js/jquery.fancybox.js"></script>
         <script src="js/fancy-custom.js"></script>
    
     </head>
@@ -65,35 +67,35 @@
                 <div class="ad-items">
                     <div class="spacer">
                         <?php 
-                             $data =  getMonthly($ID);
+                             /*$data =  getMonthly($ID);
                              foreach ($data as $i){        
                                  $reach  = $i['reach'];
                                  $cpc  = $i['cpc'];
                                  $impressions  = $i['impressions'];
                                  $cpa  = $i['cost_per_total_action'];
                                  $spend  = $i['spend'];
-                             }
+                             }*/
                         ?>
-                        <h2><?php echo $AdName; ?> <a href="graph_facebook.php?id=<?php echo $ID ?>" class="chart fancybox.ajax"> <i class="fa fa-line-chart"></i>Detailed Chart</a> </h2>
+                        <h2><?php echo $AdName; ?> <a href="graph_facebook.php?id=<?php echo $ID ?>&name=<?php echo $AdName ?>" target="_blank" class="chart fancybox.ajax"> <i class="fa fa-line-chart"></i>Detailed Chart</a> </h2>
                         
                         <div class="one-fifth first ">
-                            <h3>Reach: <span><?php echo $reach;?></span></h3>
+                            <h3>Reach: <span><?php echo getAdReach($ID); //$reach;?></span></h3>
                         </div>
 
                         <div class="one-fifth">
-                            <h3>CPC: <span><?php echo $cpc; ?></span></h3>
+                            <h3>CPC: <span><?php echo getAdCPC($ID); //$cpc; ?></span></h3>
                         </div>
 
                         <div class="one-fifth">
-                            <h3>CPA: <span><?php echo $cpa; ?></span></h3>
+                            <h3>CPA: <span><?php echo getCPTA($ID); //$cpa; ?></span></h3>
                         </div>
 
                         <div class="one-fifth">
-                            <h3>Impressions: <span><?php echo $impressions; ?></span></h3>
+                            <h3>Impressions: <span><?php echo getAdImpressions($ID); //$impressions; ?></span></h3>
                         </div>
 
                         <div class="one-fifth last">
-                            <h3>Spend: <span><?php echo $spend; ?></span></h3>
+                            <h3>Spend: <span><?php echo getAdSpend($ID); //$spend; ?></span></h3>
                         </div>
 
                         <div class="clear"></div>
@@ -107,5 +109,5 @@
 
 
     </body>
-    <script src="js/jquery.fancybox.js"></script>
+   
 </html>
