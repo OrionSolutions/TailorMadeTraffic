@@ -38,9 +38,10 @@ try{
     $getsubscription = $con->getrecords($sqlsubscription);
     $m_subscription = $con->getrecords($sqlsubscription);
     
+    
     //$idRecord = $con->getrecords($idCheck);
     //$rs_subscription = $con->getresult($getsubscription);
-
+    //$update = "UPDATE table_name SET `Status`=value, column2=value2,... WHERE some_column=some_value ";
 }catch(Exception $error){
     echo $error;
 }
@@ -161,18 +162,18 @@ try{
             $payment_test_s = $payment_start->status;
             if($rsdata["UniqueID"]!=null){
          
-                    //$ids = $rsdata["UniqueID"];
-                   /* $subscription = $client->subscriptions()->get($rsdata["UniqueID"]);
-                    $customer_ID = $subscription->metadata->customer_id;
-                    $start_date = $subscription->start_date;
-                    $payment_status =$client->payments()->list(); //list of 
-                    $payment_status = $client->payments()->list([
-                    "params" => ["customer" => $customer_ID]
-                    ]);
-                    foreach ($payment_status->records as $payment) {
-                    $payment_ID = $payment->id;
-                    $payment_status = $payment->status;
-                    }*/
+                //$ids = $rsdata["UniqueID"];
+                /* $subscription = $client->subscriptions()->get($rsdata["UniqueID"]);
+                $customer_ID = $subscription->metadata->customer_id;
+                $start_date = $subscription->start_date;
+                $payment_status =$client->payments()->list(); //list of 
+                $payment_status = $client->payments()->list([
+                "params" => ["customer" => $customer_ID]
+                ]);
+                foreach ($payment_status->records as $payment) {
+                $payment_ID = $payment->id;
+                $payment_status = $payment->status;
+                }*/
 
                     
     
