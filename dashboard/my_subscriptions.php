@@ -5,10 +5,6 @@ try{
     include('session.php');
     include('sessionuser.php');
     require 'gateway/vendor/autoload.php';
-    $client = new \GoCardlessPro\Client([
-        'access_token' =>'live_gZJP-n7WoRErIDs5disNaRxe14bj8oNdYgogu0BQ',
-        'environment' => \GoCardlessPro\Environment::LIVE
-    ]);
     $id = $_SESSION["USER_EMAIL"];//$_COOKIE["useremail"];
     $useremail = $_SESSION["USER_EMAIL"];//$_COOKIE["useremail"];
     $token =  $_COOKIE["access_token"];
@@ -37,7 +33,9 @@ try{
     $idCheck = "SELECT * FROM `tblsubscription`,`tblsubscriptiontype` WHERE AccountID = '".$accid."' AND `tblsubscription`.`SubscriptionTypeID` = `tblsubscriptiontype`.`SubscriptionTypeID` AND `PaymentType`= `Subscribe_Payment`";
     $getsubscription = $con->getrecords($sqlsubscription);
     $m_subscription = $con->getrecords($sqlsubscription);
-    
+
+    $sqlstatus = "SELECT `subscription_status`.`status_description` FROM `subscription_status`,`tblsubscription` WHERE `subscription_status`.`Status` = `tblsubscription`.`Status`";
+    $s_status = $con->getrecords($sqlstatus); 
     //$idRecord = $con->getrecords($idCheck);
     //$rs_subscription = $con->getresult($getsubscription);
 
@@ -171,9 +169,14 @@ try{
 
         <?php
         $x=0;
-        while($rsdata =mysqli_fetch_assoc($getsubscription)) { 
-  	    $paymentvalue=0;
-            if($rsdata["PaymentPlan"]=="Monthly") {$paymentvalue=$rsdata["DailyBudget"];}else{$paymentvalue= ($rsdata["DailyBudget"] * 30);}
+        while($rsdata =mysqli_fetch_assoc($getsubscription)) {
+           
+            while($rs_status = mysqli_fetch_assoc($s_status)){
+                $status = $rs_status["status_description"];
+            
+              
+            $paymentvalue=0;
+            if($rsdata["PaymentPlan"]=="Monthly") {$paymentvalue=$rsdata["DailyBudget"];}else{$paymentvalue= ($rsdata["DailyBudget"] * 30); }
             $subscription_amount =  $rsdata["SubscriptionAmount"] + $paymentvalue;
             $subscription_amount = number_format($subscription_amount, 2, '.','');
 
@@ -192,9 +195,9 @@ try{
                     $payment_status = $payment->status;
                     }*/
 
-                    $payment_start = $client->payments()->get($rsdata["PaymentID"]);
+                    /*$payment_start = $client->payments()->get($rsdata["PaymentID"]);
                     $payment_charge = $payment_start->charge_date;
-                    $payment_test_s = $payment_start->status;
+                    $payment_test_s = $payment_start->status;*/
     
               
         ?>
@@ -212,7 +215,7 @@ try{
                             </div>
                             <div class="one-fourth last items">
         <?php 
-            switch($payment_test_s) {
+            switch($status) {
                 case "pending_submission": $var="Payment pending";$color="orange";break;
                 case "submitted": $var="Payment Submitted";$color="orange";break;
                 case "paid_out": $var="Active";$color="green";break;
@@ -226,7 +229,7 @@ try{
                         </div>
                         <div class="controls">
                             <a href="invoice-subscription.php?subscription_id=<?php echo $rsdata["UniqueID"];?>&&accid=<?php echo $accid; ?>" data-id="<?php echo $rsdata["UniqueID"];?>" class="various fancybox.ajax button">View Invoice</a>
-                            <?php if($payment_test_s!="cancelled"){ ?>
+                            <?php if($status!="cancelled"){ ?>
                             <?php $_SESSION['paymentID'] = $payment_ID; ?>
                             <a href="gateway/cancel_subscription.php?subscription_id=<?php echo $rsdata["UniqueID"];?>&&accid=<?php echo $accid; ?>" class="button cancel">Cancel Subscription</a>
                             <?php } ?>
@@ -234,7 +237,10 @@ try{
                         </div>
 
                     </div>
-<?php } }?>
+<?php } }
+}
+
+?>
                 </div>
             </div>
         </div>

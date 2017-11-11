@@ -38,7 +38,8 @@ try{
     $getsubscription = $con->getrecords($sqlsubscription);
     $m_subscription = $con->getrecords($sqlsubscription);
     
-
+    $sqlstatus = "SELECT `subscription_status`.`status_description`,`tblsubscription`.`UniqueID`,`tblsubscription`.`PaymentID`,`tblsubscription`.`SubscriptionID` FROM `subscription_status`,`tblsubscription` WHERE `subscription_status`.`Status` = `tblsubscription`.`Status` AND `tblsubscription`.`Status` != 6 ";
+    $s_status = $con->getrecords($sqlstatus);
     //$idRecord = $con->getrecords($idCheck);
     //$rs_subscription = $con->getresult($getsubscription);
     //$update = "UPDATE table_name SET `Status`=value, column2=value2,... WHERE some_column=some_value ";
@@ -152,28 +153,25 @@ try{
 
         <?php
         $x=0;
-        while($rsdata =mysqli_fetch_assoc($getsubscription)) { 
-  	    $paymentvalue=0;
-            if($rsdata["PaymentPlan"]=="Monthly") {$paymentvalue=$rsdata["DailyBudget"];}else{$paymentvalue= ($rsdata["DailyBudget"] * 30);}
-            $subscription_amount =  $rsdata["SubscriptionAmount"] + $paymentvalue;
-            $subscription_amount = number_format($subscription_amount, 2, '.','');
+        while($rsdata =mysqli_fetch_assoc($s_status)) { 
+            
             $payment_start = $client->payments()->get($rsdata["PaymentID"]);
             $payment_charge = $payment_start->charge_date;
             $payment_test_s = $payment_start->status;
 
-            $sqlstatus = "SELECT `subscription_status`.`status_description` FROM `subscription_status`,`tblsubscription` WHERE `subscription_status`.`Status` = '".$rsdata["Status"]."' ";
-            $s_status = $con->getrecords($sqlstatus);
-            while($rs_status= mysqli_fetch_assoc($s_status)){
-                if($rs_status["status_description"]==$payment_test_s ){
-                    $status = $rs_status["status_description"];
-                }else{
-                    $status = $payment_test_s;
-                }
+            switch($payment_test_s){
+                case "pending_customer_approval": $gc_status=1; break;
+                case "pending_submission": $gc_status=2; break;
+                case "submitted": $gc_status=3; break;
+                case "confirmed": $gc_status=4; break;
+                case "paid_out": $gc_status=5; break;
+                case "cancelled": $gc_status=6; break;
+                case "customer_approval_denied": $gc_status=7; break;
+                case "failed": $gc_status=8; break;
+                case "charged_back": $gc_status=9; break;
             }
-            
         
             if($rsdata["UniqueID"]!=null){
-         
                 //$ids = $rsdata["UniqueID"];
                 /* $subscription = $client->subscriptions()->get($rsdata["UniqueID"]);
                 $customer_ID = $subscription->metadata->customer_id;
@@ -186,12 +184,14 @@ try{
                 $payment_ID = $payment->id;
                 $payment_status = $payment->status;
                 }*/
-    
+                $x=$x+1;
+                $update[$x] = "UPDATE tblsubscription SET Status= '".$gc_status."' WHERE `tblsubscription`.`SubscriptionID` = '".$rsdata["SubscriptionID"]."' ";
+                $con->getrecords($update[$x]);
         ?>
                     <div class="subscriptions">
                         <div class="s-items">
                             <div class="one-fourth first items">
-                                <h3><?php echo $payment_test_s; echo $rsdata["SubscriptionTitle"];?></h3>
+                                <h3><?php echo $payment_test_s; echo $update[$x]?></h3>
                                 <h4>(<?php echo stripslashes($rsdata["PaymentPlatform"]);?>)</h4>
                             </div>
                             <div class="one-fourth items">
@@ -210,7 +210,7 @@ try{
             }
         ?>
                                   <h3 style="color:<?php echo $color;?>;">
-                                  <?php echo $var; ?></h3>
+                                  <?php echo $rsdata["status_description"]?></h3>
                              </div>
                             <div class="clear"></div>
                         </div>
