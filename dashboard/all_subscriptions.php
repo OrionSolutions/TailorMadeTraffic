@@ -38,7 +38,7 @@ try{
     $getsubscription = $con->getrecords($sqlsubscription);
     $m_subscription = $con->getrecords($sqlsubscription);
     
-    
+
     //$idRecord = $con->getrecords($idCheck);
     //$rs_subscription = $con->getresult($getsubscription);
     //$update = "UPDATE table_name SET `Status`=value, column2=value2,... WHERE some_column=some_value ";
@@ -160,6 +160,18 @@ try{
             $payment_start = $client->payments()->get($rsdata["PaymentID"]);
             $payment_charge = $payment_start->charge_date;
             $payment_test_s = $payment_start->status;
+
+            $sqlstatus = "SELECT `subscription_status`.`status_description` FROM `subscription_status`,`tblsubscription` WHERE `subscription_status`.`Status` = '".$rsdata["Status"]."' ";
+            $s_status = $con->getrecords($sqlstatus);
+            while($rs_status= mysqli_fetch_assoc($s_status)){
+                if($rs_status["status_description"]==$payment_test_s ){
+                    $status = $rs_status["status_description"];
+                }else{
+                    $status = $payment_test_s;
+                }
+            }
+            
+        
             if($rsdata["UniqueID"]!=null){
          
                 //$ids = $rsdata["UniqueID"];
@@ -174,15 +186,12 @@ try{
                 $payment_ID = $payment->id;
                 $payment_status = $payment->status;
                 }*/
-
-                    
     
-              
         ?>
                     <div class="subscriptions">
                         <div class="s-items">
                             <div class="one-fourth first items">
-                                <h3><?php echo $rsdata["SubscriptionTitle"];?></h3>
+                                <h3><?php echo $payment_test_s; echo $rsdata["SubscriptionTitle"];?></h3>
                                 <h4>(<?php echo stripslashes($rsdata["PaymentPlatform"]);?>)</h4>
                             </div>
                             <div class="one-fourth items">
@@ -193,7 +202,7 @@ try{
                             </div>
                             <div class="one-fourth last items">
         <?php 
-            switch($payment_test_s) {
+            switch($status) {
                 case "pending_submission": $var="Payment pending";$color="orange";break;
                 case "submitted": $var="Payment Submitted";$color="orange";break;
                 case "paid_out": $var="Active";$color="green";break;
