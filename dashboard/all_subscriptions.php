@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 try{
     include_once('class/clsConnection.php');
     include('includes/variable.php');
@@ -33,7 +33,7 @@ try{
     $rssite = $con->getresult($getsiteid);
     $siteid = $rssite["SiteID"];
     
-    $sqlsubscription = "SELECT * FROM `tblsubscription` WHERE AccountID = '".$accid."' AND `PaymentType`= 'Subscribe_Payment'";
+    $sqlsubscription = "SELECT * FROM `tblsubscription` WHERE `PaymentType` = 'Subscribe_Payment'";
     $idCheck = "SELECT * FROM `tblsubscription`,`tblsubscriptiontype` WHERE AccountID = '".$accid."' AND `tblsubscription`.`SubscriptionTypeID` = `tblsubscriptiontype`.`SubscriptionTypeID` AND `PaymentType`= `Subscribe_Payment`";
     $getsubscription = $con->getrecords($sqlsubscription);
     $m_subscription = $con->getrecords($sqlsubscription);
@@ -97,29 +97,9 @@ try{
     <!-- Top Menu -->
    <?php //include('menu.php'); ?>
 
-   <!-- <div class="top-header">
-        <div class="container">
-            <div class="full-width">
-            <h1><i class="fa fa-line-chart"></i> Dashboard</h1>
-            <a href="https://tailormadetraffic.com/dashboard/subscribe.php" class="new-subscribe">New Subscription <i class="fa fa-plus"></i></a>
-            <div class="clear"></div>
-                <div class="user-info">
-                    <img src="images/avatar.jpg" id="myavatar" class="avatar">
-                    <p>Larry Mark</p>
-                    <div class="clear"></div>
-                </div>
-            
-            </div>    
-        </div> 
-    </div> -->
-
-    <!-- Top Menu -->
-    <!-- Middle Menu -->
-    <?php include('sidebar.php') ?>
-    <!-- Middle Menu -->
-    <!-- Dashboard -->
     
-    <div class="dashboard-wrapper">
+
+    <div class="all-subscription">
 
     <?php
     $validate = mysqli_num_rows($getsubscription); 
@@ -176,7 +156,9 @@ try{
             if($rsdata["PaymentPlan"]=="Monthly") {$paymentvalue=$rsdata["DailyBudget"];}else{$paymentvalue= ($rsdata["DailyBudget"] * 30);}
             $subscription_amount =  $rsdata["SubscriptionAmount"] + $paymentvalue;
             $subscription_amount = number_format($subscription_amount, 2, '.','');
-
+            $payment_start = $client->payments()->get($rsdata["PaymentID"]);
+            $payment_charge = $payment_start->charge_date;
+            $payment_test_s = $payment_start->status;
             if($rsdata["UniqueID"]!=null){
          
                     //$ids = $rsdata["UniqueID"];
@@ -192,9 +174,7 @@ try{
                     $payment_status = $payment->status;
                     }*/
 
-                    $payment_start = $client->payments()->get($rsdata["PaymentID"]);
-                    $payment_charge = $payment_start->charge_date;
-                    $payment_test_s = $payment_start->status;
+                    
     
               
         ?>
@@ -352,8 +332,4 @@ try{
     </div>
 </body>
 
-
-<script src="js/geturi.js" type="text/javascript"></script>
-<script src="js/jquery.fancybox.js"></script>
-<script type="text/javascript" src="js/avatar.js"></script>
 </html>

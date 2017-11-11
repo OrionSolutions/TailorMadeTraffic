@@ -1,4 +1,9 @@
 <?php 
+    require 'vendor/autoload.php';
+        $client = new \GoCardlessPro\Client([
+        'access_token' =>'live_gZJP-n7WoRErIDs5disNaRxe14bj8oNdYgogu0BQ',
+        'environment' => \GoCardlessPro\Environment::LIVE
+    ]);
 try{
     session_start();
      if(isset( $_SESSION['redirect_url']) && !empty( $_SESSION['redirect_url'])) {
@@ -29,7 +34,18 @@ try{
         $payment_campaign = $_SESSION['payment-campaign'];
         $payment_type = $_SESSION['payment-type'];
         $customerID = $_SESSION['customer_id'];
-        $SQLInsert ="INSERT INTO `tblsubscription`(`MandateID`,`AccountID`,`SubscriptionTypeID`,`SubscriptionAmount`,`DailyBudget`,`websitelink`,`StartDate`,`PaymentCampaign`,`PaymentPlan`,`PaymentPlatform`,`CustomerID`,`PaymentType`,`SubscriptionTitle`,`Channel`,`PaymentCampaignTitle`)";
+
+        $payment_status =$client->payments()->list(); //list of 
+        $payment_status = $client->payments()->list([
+        "params" => ["customer" => $customer_ID]
+        ]);
+        foreach ($payment_status->records as $payment) {
+        $payment_ID = $payment->id;
+        $payment_status = $payment->status;
+        }
+
+
+        $SQLInsert ="INSERT INTO `tblsubscription`(`MandateID`,`AccountID`,`SubscriptionTypeID`,`SubscriptionAmount`,`DailyBudget`,`websitelink`,`StartDate`,`PaymentCampaign`,`PaymentPlan`,`PaymentPlatform`,`CustomerID`,`PaymentType`,`SubscriptionTitle`,`Channel`,`PaymentID`,`PaymentCampaignTitle`)";
         $SQLInsert = $SQLInsert." VALUES('".$mandateID."',";
         $SQLInsert = $SQLInsert."'".$accid."',";
         $SQLInsert = $SQLInsert."'1',";
@@ -44,6 +60,7 @@ try{
         $SQLInsert = $SQLInsert."'".$payment_type."',";
         $SQLInsert = $SQLInsert."'".$subscriptionTitle."',";
         $SQLInsert = $SQLInsert."'".$channel."',";
+        $SQLInsert = $SQLInsert."'".$payment_ID ."',";
         $SQLInsert = $SQLInsert."'".$campaign_title."');";
         $RSInsert=$con->getrecords($SQLInsert);
         $sqlinvoice = "SELECT LPAD( MAX(`tblsubscription`.`SubscriptionID`), 11, '0') AS MAX

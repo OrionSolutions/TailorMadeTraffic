@@ -166,7 +166,7 @@ if ($exist == 0)
                 ?>
                
                        <div class="campaign-items">
-                       <a href="page-details.php?id=<?php echo $id; ?>" target="_blank" class="campaign-btn">Go to Ads</a>
+                       <a href="page-details.php?id=<?php echo $id; ?>" target="_blank" class="campaign-btn">View Ads</a>
                             <div class="one-half first campaign-title">
                                 <h2>Campaign ID</h2>
                                 <h3><?php echo $id;?> </h3>
