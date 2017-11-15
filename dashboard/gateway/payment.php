@@ -1,5 +1,5 @@
 <?php
-include_once('../class/clsConnection.php');
+include_once('./class/clsConnection.php');
 include('includes/variable.php');
 include('session.php');
 include('sessionuser.php');
@@ -93,6 +93,31 @@ try{
     $SQLInsert = $SQLInsert."'".$project_title."',";
     $SQLInsert = $SQLInsert."'".$order_instructions."');";
     $RSInsert=$con->getrecords($SQLInsert);
+
+    $status = $client->payments()->get($paymentID);
+    $payment_status = $status->status;
+    switch($payment_status){
+        case "pending_customer_approval": $gc_status=1; break;
+        case "pending_submission": $gc_status=2; break;
+        case "submitted": $gc_status=3; break;
+        case "confirmed": $gc_status=4; break;
+        case "paid_out": $gc_status=5; break;
+        case "cancelled": $gc_status=6; break;
+        case "customer_approval_denied": $gc_status=7; break;
+        case "failed": $gc_status=8; break;
+        case "charged_back": $gc_status=9; break;
+    }
+
+    $UpdateSQL="UPDATE tblsubscription SET";
+    $UpdateSQL=$UpdateSQL."`PaymentID`='".$payment_ID."',";
+    $UpdateSQL=$UpdateSQL."`Status`='".$gc_status."',";
+    $UpdateSQL=$UpdateSQL."`UniqueID`='".$subscription->id."'";
+    $UpdateSQL=$UpdateSQL." WHERE `SubscriptionID`='".$invoiceid."';";
+    $RSUpdate = $con->getrecords($UpdateSQL);
+
+
+
+
     echo "<script>window.location.replace('payment-stat.php');</script>"; 
 }catch(Exception $e){
     echo $e;

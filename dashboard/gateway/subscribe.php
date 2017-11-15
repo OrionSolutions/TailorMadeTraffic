@@ -35,17 +35,9 @@ try{
         $payment_type = $_SESSION['payment-type'];
         $customerID = $_SESSION['customer_id'];
 
-        $payment_status =$client->payments()->list(); //list of 
-        $payment_status = $client->payments()->list([
-        "params" => ["customer" => $customer_ID]
-        ]);
-        foreach ($payment_status->records as $payment) {
-        $payment_ID = $payment->id;
-        $payment_status = $payment->status;
-        }
 
 
-        $SQLInsert ="INSERT INTO `tblsubscription`(`MandateID`,`AccountID`,`SubscriptionTypeID`,`SubscriptionAmount`,`DailyBudget`,`websitelink`,`StartDate`,`PaymentCampaign`,`PaymentPlan`,`PaymentPlatform`,`CustomerID`,`PaymentType`,`SubscriptionTitle`,`Channel`,`PaymentID`,`PaymentCampaignTitle`)";
+        $SQLInsert ="INSERT INTO `tblsubscription`(`MandateID`,`AccountID`,`SubscriptionTypeID`,`SubscriptionAmount`,`DailyBudget`,`websitelink`,`StartDate`,`PaymentCampaign`,`PaymentPlan`,`PaymentPlatform`,`CustomerID`,`PaymentType`,`SubscriptionTitle`,`Channel`,`PaymentCampaignTitle`)";
         $SQLInsert = $SQLInsert." VALUES('".$mandateID."',";
         $SQLInsert = $SQLInsert."'".$accid."',";
         $SQLInsert = $SQLInsert."'1',";
@@ -60,47 +52,19 @@ try{
         $SQLInsert = $SQLInsert."'".$payment_type."',";
         $SQLInsert = $SQLInsert."'".$subscriptionTitle."',";
         $SQLInsert = $SQLInsert."'".$channel."',";
-        $SQLInsert = $SQLInsert."'".$payment_ID ."',";
         $SQLInsert = $SQLInsert."'".$campaign_title."');";
         $RSInsert=$con->getrecords($SQLInsert);
-        $sqlinvoice = "SELECT LPAD( MAX(`tblsubscription`.`SubscriptionID`), 11, '0') AS MAX
-        FROM `tblsubscription`";
-        $getinvoicenumber = $con->getrecords($sqlinvoice);
-        $rsinvoice = $con->getresult($getinvoicenumber);
+       
     
-        $invoiceid = $rsinvoice["MAX"];
+        //$star_date = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 7, date('Y')));
     
-        $star_date = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 7, date('Y')));
-    
-            $daily = $_GET["dailybudget"];
+        //$daily = $_GET["dailybudget"];
             //$email = $_GET["emails"];
-        require 'vendor/autoload.php';
-        $unique_key = md5( $_SESSION['mandate_id'].date("M:d:Y h:i A ") ) ;
-        $client = new \GoCardlessPro\Client([
+        
+        /*$client = new \GoCardlessPro\Client([
             'access_token' =>'live_gZJP-n7WoRErIDs5disNaRxe14bj8oNdYgogu0BQ',
             'environment' => \GoCardlessPro\Environment::LIVE
-        ]);
-        
-    
-        $subscription = $client->subscriptions()->create([
-          "params" => [
-              "amount" => $_SESSION['payment'] , // 15 GBP in pence
-              "currency" => "GBP",
-              "interval_unit" => "monthly",
-              "name" => $subscriptionTitle,
-              "links" => [
-                  "mandate" =>  $_SESSION['mandate_id']
-                               // Mandate ID from the last section
-              ],
-              "metadata" => [
-                  "subscription_number" => $invoiceid,
-                  "customer_id" => $_SESSION['customer_id']
-              ]
-          ],
-          "headers" => [
-              "Idempotency-Key" => $unique_key
-          ]
-        ]);
+        ]);*/
         
         // Keep hold of this subscription ID - we'll use it in a minute.
         // It should look a bit like "SB00003GKMHFFY"
@@ -108,12 +72,66 @@ try{
         
         //$subscriptions = $client->subscriptions()->get($subscription->id);
         
+        $sqlinvoice = "SELECT LPAD( MAX(`tblsubscription`.`SubscriptionID`), 11, '0') AS MAX
+        FROM `tblsubscription`";
+        $getinvoicenumber = $con->getrecords($sqlinvoice);
+        $rsinvoice = $con->getresult($getinvoicenumber);
+        $invoiceid = $rsinvoice["MAX"];
+
+        $unique_key = md5( $_SESSION['mandate_id'].date("M:d:Y h:i A ") ) ;
+        $subscription = $client->subscriptions()->create([
+            "params" => [
+                "amount" => $_SESSION['payment'] , // 15 GBP in pence
+                "currency" => "GBP",
+                "interval_unit" => "monthly",
+                "name" => $subscriptionTitle,
+                "links" => [
+                    "mandate" =>  $_SESSION['mandate_id']
+                                 // Mandate ID from the last section
+                ],
+                "metadata" => [
+                    "subscription_number" => $invoiceid,
+                    "customer_id" => $_SESSION['customer_id']
+                ]
+            ],
+            "headers" => [
+                "Idempotency-Key" => $unique_key
+            ]
+        ]);
+
         $_SESSION['subscription_id'] = $subscription->id;
+
+        $payment_status =$client->payments()->list(); //list of 
+        $payment_status = $client->payments()->list([
+        "params" => ["customer" => $customerID] 
+        ]);
+        foreach ($payment_status->records as $payment) {
+        $payment_ID = $payment->id; 
+        $status = $payment->status;
+        }
+        switch($status){
+            case "pending_customer_approval": $gc_status=1; break;
+            case "pending_submission": $gc_status=2; break;
+            case "submitted": $gc_status=3; break;
+            case "confirmed": $gc_status=4; break;
+            case "paid_out": $gc_status=5; break;
+            case "cancelled": $gc_status=6; break;
+            case "customer_approval_denied": $gc_status=7; break;
+            case "failed": $gc_status=8; break;
+            case "charged_back": $gc_status=9; break;
+        }
     
-            $updateSQL = "UPDATE tblsubscription SET UniqueID='".$_SESSION['subscription_id']."'";
-            $updateSQL = $updateSQL." WHERE SubscriptionID='".$invoiceid."'";
-            $RSUpdate = $con->getrecords($updateSQL);
-    
+        $UpdateSQL="UPDATE tblsubscription SET";
+        $UpdateSQL=$UpdateSQL."`PaymentID`='".$payment_ID."',";
+        $UpdateSQL=$UpdateSQL."`Status`='".$gc_status."',";
+        $UpdateSQL=$UpdateSQL."`UniqueID`='".$subscription->id."'";
+        $UpdateSQL=$UpdateSQL." WHERE `SubscriptionID`='".$invoiceid."';";
+        $RSUpdate = $con->getrecords($UpdateSQL);
+        //echo $UpdateSQL; 
+        /*$updateSQL = "UPDATE tblsubscription SET UniqueID='".$_SESSION['subscription_id']."'";
+        $updateSQL = $updateSQL." WHERE SubscriptionID='".$invoiceid."'";
+        $RSUpdate = $con->getrecords($updateSQL);*/
+        //echo 
         echo "<script>window.location.replace('success.php');</script>";
             
 

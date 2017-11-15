@@ -1,10 +1,14 @@
-﻿<?php
+<?php
 try{
     include_once('class/clsConnection.php');
     include('includes/variable.php');
     include('session.php');
     include('sessionuser.php');
     require 'gateway/vendor/autoload.php';
+    $client = new \GoCardlessPro\Client([
+        'access_token' =>'live_gZJP-n7WoRErIDs5disNaRxe14bj8oNdYgogu0BQ',
+        'environment' => \GoCardlessPro\Environment::LIVE
+    ]);
     $id = $_SESSION["USER_EMAIL"];//$_COOKIE["useremail"];
     $useremail = $_SESSION["USER_EMAIL"];//$_COOKIE["useremail"];
     $token =  $_COOKIE["access_token"];
@@ -29,15 +33,26 @@ try{
     $rssite = $con->getresult($getsiteid);
     $siteid = $rssite["SiteID"];
     
-    $sqlsubscription = "SELECT * FROM `tblsubscription` WHERE AccountID = '".$accid."' AND `PaymentType`= 'Subscribe_Payment'";
-    $idCheck = "SELECT * FROM `tblsubscription`,`tblsubscriptiontype` WHERE AccountID = '".$accid."' AND `tblsubscription`.`SubscriptionTypeID` = `tblsubscriptiontype`.`SubscriptionTypeID` AND `PaymentType`= `Subscribe_Payment`";
+    $sqlsubscription = "SELECT * FROM `tblsubscription` WHERE `PaymentType` = 'Direct_Payment'";
+    $idCheck = "SELECT * FROM `tblsubscription`,`tblsubscriptiontype` WHERE AccountID = '".$accid."' AND `tblsubscription`.`SubscriptionTypeID` = `tblsubscriptiontype`.`SubscriptionTypeID` AND `PaymentType`= `Direct_Payment`";
     $getsubscription = $con->getrecords($sqlsubscription);
     $m_subscription = $con->getrecords($sqlsubscription);
-
-    $sqlstatus = "SELECT * FROM `subscription_status`,`tblsubscription` WHERE `subscription_status`.`Status` = `tblsubscription`.`Status` AND `PaymentType`= 'Subscribe_Payment'";
-    $s_status = $con->getrecords($sqlstatus); 
+    
+    $sqlstatus = "SELECT `subscription_status`.`status_description`,`tblsubscription`.`PaymentID`,`tblsubscription`.`CustomerID`,`tblsubscription`.`SubscriptionID` FROM `subscription_status`,`tblsubscription` WHERE `subscription_status`.`Status` = `tblsubscription`.`Status` AND `tblsubscription`.`Status` != 6 AND `tblsubscription`.`PaymentType`= 'Direct_Payment'";
+    $s_status = $con->getrecords($sqlstatus);
     //$idRecord = $con->getrecords($idCheck);
     //$rs_subscription = $con->getresult($getsubscription);
+    //$update = "UPDATE table_name SET `Status`=value, column2=value2,... WHERE some_column=some_value ";
+
+
+    $payment_status =$client->payments()->list(); //list of 
+    $payment_status = $client->payments()->list([
+    "params" => ["customer" => "CU0007B8MDTVXV"]
+    ]);
+    foreach ($payment_status->records as $payment) {
+    $payment_ID = $payment->id;
+    $payment_status = $payment->status;
+    }
 
 }catch(Exception $error){
     echo $error;
@@ -66,8 +81,8 @@ try{
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-    <script src="js/jquery.fancybox.js"></script>
     <script src="js/fancy-custom.js"></script>
+    <script src="js/firebase-config.js"></script>
     <script src="js/logout.js"></script>
     <!-- <script src="js/google.js"></script> -->
     <script src="js/responsive-side.js"></script>
@@ -95,29 +110,9 @@ try{
     <!-- Top Menu -->
    <?php //include('menu.php'); ?>
 
-   <!-- <div class="top-header">
-        <div class="container">
-            <div class="full-width">
-            <h1><i class="fa fa-line-chart"></i> Dashboard</h1>
-            <a href="https://tailormadetraffic.com/dashboard/subscribe.php" class="new-subscribe">New Subscription <i class="fa fa-plus"></i></a>
-            <div class="clear"></div>
-                <div class="user-info">
-                    <img src="images/avatar.jpg" id="myavatar" class="avatar">
-                    <p>Larry Mark</p>
-                    <div class="clear"></div>
-                </div>
-            
-            </div>    
-        </div> 
-    </div> -->
-
-    <!-- Top Menu -->
-    <!-- Middle Menu -->
-    <?php include('sidebar.php') ?>
-    <!-- Middle Menu -->
-    <!-- Dashboard -->
     
-    <div class="dashboard-wrapper">
+
+    <div class="all-subscription">
 
     <?php
     $validate = mysqli_num_rows($getsubscription); 
@@ -152,7 +147,7 @@ try{
                 <h1>Current Subscriptions</h1>
                 <div class="subscription-details">
                     <div class="one-fourth first items">
-                        <h2>Subscription Type</h2>
+                        <h2>Subscription Type <?php echo $payment_ID; ?></h2>
                     </div>
                     <div class="one-fourth items">
                         <h2>Subscription Amount</h2>
@@ -169,49 +164,52 @@ try{
 
         <?php
         $x=0;
-        while($rsdata =mysqli_fetch_assoc($getsubscription)) {
-           
-            while($rs_status = mysqli_fetch_assoc($s_status)){
-                $status = $rs_status["status_description"];
+        while($rsdata =mysqli_fetch_assoc($s_status)) { 
             
-              
-            $paymentvalue=0;
-            if($rs_status["PaymentPlan"]=="Monthly") {$paymentvalue=$rs_status["DailyBudget"];}else{$paymentvalue= ($rs_status["DailyBudget"] * 30); }
-            $subscription_amount =  $rs_status["SubscriptionAmount"] + $paymentvalue;
-            $subscription_amount = number_format($subscription_amount, 2, '.','');
+            $payment_start = $client->payments()->get($rsdata["PaymentID"]);
+            $payment_charge = $payment_start->charge_date;
+            $payment_test_s = $payment_start->status;
 
-            if($rsdata["UniqueID"]!=null){
-         
-                    //$ids = $rsdata["UniqueID"];
-                   /* $subscription = $client->subscriptions()->get($rsdata["UniqueID"]);
-                    $customer_ID = $subscription->metadata->customer_id;
-                    $start_date = $subscription->start_date;
-                    $payment_status =$client->payments()->list(); //list of 
-                    $payment_status = $client->payments()->list([
-                    "params" => ["customer" => $customer_ID]
-                    ]);
-                    foreach ($payment_status->records as $payment) {
-                    $payment_ID = $payment->id;
-                    $payment_status = $payment->status;
-                    }*/
-
-                    /*$payment_start = $client->payments()->get($rsdata["PaymentID"]);
-                    $payment_charge = $payment_start->charge_date;
-                    $payment_test_s = $payment_start->status;*/
-    
-              
+            switch($payment_test_s){
+                case "pending_customer_approval": $gc_status=1; break;
+                case "pending_submission": $gc_status=2; break;
+                case "submitted": $gc_status=3; break;
+                case "confirmed": $gc_status=4; break;
+                case "paid_out": $gc_status=5; break;
+                case "cancelled": $gc_status=6; break;
+                case "customer_approval_denied": $gc_status=7; break;
+                case "failed": $gc_status=8; break;
+                case "charged_back": $gc_status=9; break;
+            }
+        
+            if($rsdata["PaymentID"]!=null){
+                //$ids = $rsdata["UniqueID"];
+                /* $subscription = $client->subscriptions()->get($rsdata["UniqueID"]);
+                $customer_ID = $subscription->metadata->customer_id;
+                $start_date = $subscription->start_date;
+                $payment_status =$client->payments()->list(); //list of 
+                $payment_status = $client->payments()->list([
+                "params" => ["customer" => $customer_ID]
+                ]);
+                foreach ($payment_status->records as $payment) {
+                $payment_ID = $payment->id;
+                $payment_status = $payment->status;
+                }*/
+                $x=$x+1;
+                $update[$x] = "UPDATE tblsubscription SET Status= '".$gc_status."' WHERE `tblsubscription`.`PaymentID` = '".$rsdata["PaymentID"]."' ";
+                $con->getrecords($update[$x]);
         ?>
                     <div class="subscriptions">
                         <div class="s-items">
                             <div class="one-fourth first items">
-                                <h3><?php echo $rs_status["SubscriptionTitle"];?></h3>
-                                <h4>(<?php echo stripslashes($rs_status["PaymentPlatform"]);?>)</h4>
+                                <h3><?php echo $payment_test_s; echo $update[$x]?></h3>
+                                <h4>(<?php echo stripslashes($rsdata["PaymentPlatform"]);?>)</h4>
                             </div>
                             <div class="one-fourth items">
-                                <h3>£ <?php echo $subscription_amount ?></h3>
+                                <h3>£ <?php echo $gc_status ?></h3>
                             </div>
                             <div class="one-fourth items">
-                                <h3><?php echo $rs_status["StartDate"];?></h3>
+                                <h3><?php echo $payment_charge."". $rsdata["CustomerID"];?></h3>
                             </div>
                             <div class="one-fourth last items">
         <?php 
@@ -223,13 +221,13 @@ try{
             }
         ?>
                                   <h3 style="color:<?php echo $color;?>;">
-                                  <?php echo $var; ?></h3>
+                                  <?php echo $rsdata["status_description"]?></h3>
                              </div>
                             <div class="clear"></div>
                         </div>
                         <div class="controls">
                             <a href="invoice-subscription.php?subscription_id=<?php echo $rsdata["UniqueID"];?>&&accid=<?php echo $accid; ?>" data-id="<?php echo $rsdata["UniqueID"];?>" class="various fancybox.ajax button">View Invoice</a>
-                            <?php if($status!="cancelled"){ ?>
+                            <?php if($payment_test_s!="cancelled"){ ?>
                             <?php $_SESSION['paymentID'] = $payment_ID; ?>
                             <a href="gateway/cancel_subscription.php?subscription_id=<?php echo $rsdata["UniqueID"];?>&&accid=<?php echo $accid; ?>" class="button cancel">Cancel Subscription</a>
                             <?php } ?>
@@ -237,10 +235,7 @@ try{
                         </div>
 
                     </div>
-<?php } }
-}
-
-?>
+<?php } }?>
                 </div>
             </div>
         </div>
@@ -263,103 +258,6 @@ try{
 
 <!-- ========================================= Responsive ================================== -->
       
-    
-
-
-<div class="container mobile">
-    <div class="full-width">
-        <h1 class="content-title">Current Subscriptions</h1>    
-   
-    <?php
-    
-        while($rsdata =mysqli_fetch_assoc($m_subscription)) { 
-            $paymentvalue=0;
-            if($rsdata["PaymentPlan"]=="Monthly") {$paymentvalue=$rsdata["DailyBudget"];}else{$paymentvalue= ($rsdata["DailyBudget"] * 30);}
-            $subscription_amount =  $rsdata["SubscriptionAmount"] + $paymentvalue;
-            $subscription_amount = number_format($subscription_amount, 2, '.','');
-
-
-            if($rsdata["UniqueID"]!=null){
-                try{
-                    //$ids = $rsdata["UniqueID"];
-                    $subscription = $client->subscriptions()->get($rsdata["UniqueID"]);
-                    $customer_ID = $subscription->metadata->customer_id;
-                    $start_date = $subscription->start_date;
-                    $payment_status =$client->payments()->list();
-                    $payment_status = $client->payments()->list([
-                    "params" => ["customer" => $customer_ID]
-                    ]);
-                    foreach ($payment_status->records as $payment) {
-                    $payment_ID = $payment->id;
-                    $payment_status = $payment->status;
-                    
-                    }
-                    $payment_start = $client->payments()->get($payment_ID);
-                    $payment_charge = $payment_start->charge_date;
-    
-                }catch(Exception $error){
-                    $_SESSION['error_handler'] = $error->getMessage();
-                    echo "<script>window.location.replace('sandbox/error.php');</script>";
-                }
-            ?>
-        <div class="sub-content">
-            <div class="sub-center-left">
-
-          
-                <div class="sub-column">
-                    <h2>Subscription Type: <span><?php echo $rsdata["SubscriptionTitle"];?></span></h2>
-                </div>
-
-                <div class="sub-column">
-                    <h2>Subscription Amount: <span><strong>£</strong><?php echo $subscription_amount ?></span></h2>
-
-                </div>
-
-                <div class="sub-column">
-                    <h2>Start Date: <span><?php echo $payment_charge;?></span></h2>
-                </div>
-
-                <div class="sub-column">
-                    <h2>Status: <span class="status">
-                    <?php try{
-                        //$ids = $rsdata["UniqueID"];
-                        $subscription = $client->subscriptions()->get($rsdata["UniqueID"]);
-                        $status = $subscription->status;
-                    }catch(Exception $error){
-                        $_SESSION['error_handler'] = $error->getMessage();
-                        echo "<script>window.location.replace('sandbox/error.php');</script>";
-                    }
-                    switch($status) {
-                        case "pending_customer_approval": $var="Pending for approval";$color="orange";break;
-                        case "customer_approval_denied": $var="Subscription not approve";$color="orange";break;
-                        case "active": $var="Active";$color="green";break;
-                        case "cancelled": $var="Cancelled";$color="red";break;
-                    }
-                ?>
-                                        <?php echo $var; ?>
-                </h2>
-                </div>
-            </div>   
-            
-            <div class="controls">
-                <a href="invoice-subscription.php?subscription_id=<?php echo $rsdata["UniqueID"];?>&&accid=<?php echo $accid; ?>" data-id="" class="various fancybox.ajax button">View Invoice</a>
-                <a href="sandbox/cancel_subscription.php?subscription_id=<?php echo $rsdata["UniqueID"];?>&&accid=<?php echo $accid; ?>" class="button cancel">Cancel Subscription</a>
-            </div>
-            
-        </div>
-        
-            <div class="clear"></div>
-            
-    <?php 
-    } }
-    ?>
-        
-        </div>
-    </div>
 </body>
 
-
-<script src="js/geturi.js" type="text/javascript"></script>
-
-<script type="text/javascript" src="js/avatar.js"></script>
 </html>

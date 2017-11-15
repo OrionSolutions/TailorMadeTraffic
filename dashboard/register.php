@@ -116,12 +116,23 @@ $exist = $rs["Existing"];
                     $Alternate = $_POST["alternate"];
                     $Phone = $_POST["phone"];
 
-                    $sqlexist = "SELECT (`tblaccount`.`Username`) AS Existing FROM `tblaccount` WHERE `tblaccount`.`Username`='".$Username."';";
-                    $getexist = $con->getrecords($sqlexist);
-                    $rs = $con->getresult($getexist);
+                    $userexist = "SELECT (`tblaccount`.`Username`) AS Existing FROM `tblaccount` WHERE `tblaccount`.`Username`='".$Username."';";
+                    $getUserexist = $con->getrecords($userexist);
+                    $rs = $con->getresult($getUserexist);
+                    
+                    $emailexist = "SELECT (`tblaccount`.`Username`) AS Existing FROM `tblaccount` WHERE `tblaccount`.`GoogleEmail`='".$Email."';";
+                    $getEmailexist = $con->getrecords($emailexist);
+                    $rs = $con->getresult($getUserexist);
 
-                    if(mysqli_num_rows($getexist)){
-                        echo '<script> $("#txtusername").css("border","1px solid #e74c3c"); $("#txtusername").attr("value", "Username already exist"); </script>'; 
+                    if(mysqli_num_rows($getUserexist) || mysqli_num_rows($getEmailexist)){
+                        if(mysqli_num_rows($getEmailexist)){
+                            echo '<script> 
+                            $(document).ready(function(){ $("#email").css("border","1px solid #e74c3c"); $("#email").attr("value", "Google already taken!"); });
+                            </script>'; 
+                        }else{
+                            echo '<script> $("#txtusername").css("border","1px solid #e74c3c"); $("#txtusername").attr("value", "Username already exist!"); </script>'; 
+                        }
+                        
                     }else{
                         $SQLInsert ="INSERT INTO `tblaccount`(`GoogleEmail`,`Firstname`,`Lastname`,`AlternateEmail`,`Phone`,`Company`,`Industry`,`Username`,`Passwords`)";
                         $SQLInsert = $SQLInsert." VALUES('".$Maily."',";

@@ -39,6 +39,15 @@ try{
     $getsubscription = $con->getrecords($sqlsubscription);
     $mobile_subscription = $con->getrecords($sqlsubscription);
     //$idRecord = $con->getrecords($idCheck);
+
+    //$sqlstatus = "SELECT  FROM `subscription_status`,`tblsubscription` WHERE `subscription_status`.`Status` = `tblsubscription`.`Status` AND `tblsubscription`.`PaymentType`='Direct_Payment' ";
+    $sqlstatus = $sqlstatus . "SELECT `tblsubscription`.`PaymentPlan`,`tblsubscription`.`SubscriptionAmount`,`tblsubscription`.`PaymentID`,";
+    $sqlstatus = $sqlstatus . "`tblsubscription`.`SubscriptionTitle`,`tblsubscription`.`PaymentCampaignTitle`,`tblsubscription`.`SubscriptionAmount`,";
+    $sqlstatus = $sqlstatus . "`tblsubscription`.`StartDate`,`subscription_status`.`status_description`,`tblsubscription`.`Status`";
+    $sqlstatus = $sqlstatus . "FROM `tblsubscription`";
+    $sqlstatus = $sqlstatus . "INNER JOIN `subscription_status` ON `tblsubscription`.`Status` = `subscription_status`.`Status`"; 
+    $sqlstatus = $sqlstatus . "WHERE `tblsubscription`.`PaymentType` = 'Direct_Payment'";
+    $s_status = $con->getrecords($sqlstatus); 
    
 }catch(Exception $error){
     echo $error;
@@ -139,7 +148,7 @@ try{
                                 <h2>Amount</h2>
                             </div>
                             <div class="one-fourth items">
-                                <h2>Charge Date</h2>
+                                <h2>Start Date</h2>
                             </div>
                             <div class="one-fourth last items">
                                 <h2>Status</h2>
@@ -151,13 +160,16 @@ try{
                 <?php
                 $x=0;
                 while($rsdata =mysqli_fetch_assoc($getsubscription)) { 
+                    while($rs_status = mysqli_fetch_assoc($s_status)){
+                        $status = $rs_status["status_description"];
+
                 $paymentvalue=0;
-                    if($rsdata["PaymentPlan"]=="Monthly") {$paymentvalue=$rsdata["DailyBudget"];}else{$paymentvalue= ($rsdata["DailyBudget"] * 30);}
-                    $subscription_amount =  $rsdata["SubscriptionAmount"] + $paymentvalue;
+                    if($rs_status["PaymentPlan"]=="Monthly") {$paymentvalue=$rs_status["DailyBudget"];}else{$paymentvalue= ($rs_status["DailyBudget"] * 30);}
+                    $subscription_amount =  $rs_status["SubscriptionAmount"] + $paymentvalue;
                     $subscription_amount = number_format($subscription_amount, 2, '.','');
 
-                    if($rsdata["PaymentID"]!=null){
-                        try{
+                    if($rs_status["PaymentID"]!=null){
+                       /* try{
                             //$ids = $rsdata["UniqueID"];
                             //echo $rsdata["PaymentID"];
                             $payment = $client->payments()->get($rsdata["PaymentID"]);
@@ -170,24 +182,25 @@ try{
                             $_SESSION['error_handler'] = $error->getMessage();
                         echo "<script>window.location.replace('gateway/error.php');</script>";
                         // echo $start_date. "<br/>";
-                        //echo $customer_ID. "<br/>";
-                        }
+                        //echo $customer_ID. "<br/>";*/
+                        
                 ?>
                             <div class="subscriptions">
                                 <div class="s-items">
                                     <div class="one-fourth first items">
-                                        <h3><?php echo $rsdata["SubscriptionTitle"];?></h3>
-                                        <h4>(<?php echo $rsdata["PaymentCampaignTitle"];?>)</h4>
+                                        <h3><?php echo $rs_status["SubscriptionTitle"];?></h3>
+                                        <h4>(<?php echo $rs_status["PaymentCampaignTitle"];?>)</h4>
+                                        <h4>(<?php echo $rs_status["PaymentID"];?>)</h4>
                                     </div>
                                     <div class="one-fourth items">
                                         <h3>£ <?php echo $subscription_amount ?></h3>
                                     </div>
                                     <div class="one-fourth items">
-                                        <h3><?php echo $charge_date;?></h3>
+                                        <h3><?php echo $rs_status["StartDate"];?></h3>
                                     </div>
                                     <div class="one-fourth last items">
                 <?php 
-                    switch($payment_status) {
+                    switch($status) {
                         case "pending_submission": $var="Payment pending";$color="orange";break;
                         case "submitted": $var="Payment Submitted";$color="orange";break;
                         case "paid_out": $var="Active";$color="green";break;
@@ -200,15 +213,15 @@ try{
                                     <div class="clear"></div>
                                 </div>
                                 <div class="controls">
-                                    <a href="payment-invoice.php?payment_id=<?php echo $paymentID;?>&&accid=<?php echo $accid; ?>" data-id="<?php echo $rsdata["PaymentID"];?>" class="various fancybox.ajax button">View Invoice</a>
-                                    <?php if($payment_status!="cancelled"){ ?>
+                                    <a href="payment-invoice.php?payment_id=<?php echo $rsdata["PaymentID"];?>&&accid=<?php echo $accid; ?>" data-id="<?php echo $rsdata["PaymentID"];?>" class="various fancybox.ajax button">View Invoice</a>
+                                    <?php if($status!="cancelled"){ ?>
 
                                     <?php } ?>
                                     <div class="clear"></div>
                                 </div>
 
                             </div>
-        <?php } }?>
+        <?php } } } ?>
                         </div>
                     </div>
                 </div>
@@ -233,7 +246,7 @@ try{
       
     
 <div class="container mobile">
- <?php if(mysqli_num_rows($mobile_subscription)){ ?>
+ <?php if(mysqli_num_rows($mobile_subscription)){ ?> 
 
     <div class="full-width">
         <h1 class="content-title">Current Development Payment</h1>    
@@ -300,7 +313,7 @@ try{
                 <a href="payment-invoice.php?payment_id=<?php echo $paymentID;?>&&accid=<?php echo $accid; ?>" data-id="<?php echo $rsdata["PaymentID"];?>" class="various fancybox.ajax button">View Invoice</a>
             </div>
             
-        </div>
+        </div> 
         
             <div class="clear"></div>
             

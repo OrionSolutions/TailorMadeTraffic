@@ -1,6 +1,5 @@
 ﻿<?php
 try{
-
     session_start();
     include ('class/clsConnection.php');
     require 'gateway/vendor/autoload.php';
