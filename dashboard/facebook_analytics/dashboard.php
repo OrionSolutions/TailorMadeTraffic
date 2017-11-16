@@ -1,6 +1,10 @@
 <?php
 error_reporting(0);
 session_start();
+include_once('../class/clsConnection.php');
+include('../includes/variable.php');
+include('../session.php');
+include('../sessionuser.php');
 require 'src/Facebook/autoload.php';
 require 'facebook_sdk/vendor/autoload.php';
 
@@ -124,7 +128,7 @@ if ($exist == 0)
 */
 ?>
     <!-- Middle Menu -->
-    <?php include('sidebar.php'); ?>
+    <?php include('./sidebar.php'); ?>
     <!-- Middle Menu -->
 
    
@@ -154,8 +158,10 @@ if ($exist == 0)
 
                 ?>
                 <div class="campaign">
-                    
-                <h1>Managed Campaigns</h1>
+                <?php if(checkData()){
+                    $addExist = "data exist";
+                ?>
+                <h1> Managed Campaigns </h1>
                 
                 <?php 
                 $data_week = getCampaigns();
@@ -166,7 +172,7 @@ if ($exist == 0)
                 ?>
                
                        <div class="campaign-items">
-                       <a href="page-details.php?id=<?php echo $id; ?>" target="_blank" class="campaign-btn">View Ads</a>
+                       <a href="graph_facebook.php?id=<?php echo $id;?>&name=<?php echo $name ?>" class="campaign-btn">View Ads</a>
                             <div class="one-half first campaign-title">
                                 <h2>Campaign ID</h2>
                                 <h3><?php echo $id;?> </h3>
@@ -183,9 +189,11 @@ if ($exist == 0)
                 }
                 ?>
                         
-
-
+                <?php }else{ ?>
+                    <h1 class="no-data"> No managed Ad for this account </h1>
+                <?php } ?>
                 </div>
+
             </div>
         <!-- </div> -->
         </div>

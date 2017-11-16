@@ -121,16 +121,6 @@ try{
                         <li><h1><i class="fa fa-line-chart"></i> Dashboard</h1></li>
                         <li><a href="https://tailormadetraffic.com/dashboard/beta-dashboard/order-plan.php" class="menu-button">New Development Service Payment  <i class="fa fa-plus"></i></a></li>
                     </ul>
-                    <div class="user-info">
-                        <img src="images/avatar.jpg" id="myavatar" class="avatar">
-                        <div class="user-options">
-                            <a href="#" id="logout">Logout</a>
-                        </div>
-                        <div class="gmail">
-                            <p><?php echo $gmail; ?></p>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
                 </div>  
             </div>
     

@@ -1,5 +1,10 @@
 <?php 
     session_start();
+    error_reporting(0);
+    include_once('../class/clsConnection.php');
+    include('../includes/variable.php');
+    include('../session.php');
+    include('../sessionuser.php');
     $id = $_GET['id'];
     $name = $_GET['name'];
     $_COOKIE['id'] = $id;
@@ -67,155 +72,157 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
-<?php include('menu.php'); ?>
-        <div class="facebook-graph">
+<?php include('./sidebar.php'); ?>
+        <div class="dashboard-wrapper">
+        <?php include('menu.php'); ?>
+            <div class="facebook-graph">
 
-        <h1 class="page-title"><?php echo $name; ?></h1>
+                <h1 class="page-title"><?php echo $name; ?></h1>
 
-                    <div class="one-third first days">
-                        <div class="days-content">
-                            <h1>This Month</h1>
+                            <div class="one-third first days">
+                                <div class="days-content">
+                                    <h1>This Month</h1>
 
-                            <div class="one-fifth first">
-                                <div class="stats">
-                                    <h2>Reach</h2>
-                                    <h3><?php echo $reach ?></h3>
+                                    <div class="one-fifth first">
+                                        <div class="stats">
+                                            <h2>Reach</h2>
+                                            <h3><?php echo $reach ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth ">
+                                        <div class="stats">
+                                            <h2>Impression</h2>
+                                            <h3><?php echo $impressions ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth ">
+                                        <div class="stats">
+                                            <h2>CPA</h2>
+                                            <h3><?php echo $cpa ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth ">
+                                        <div class="stats">
+                                            <h2>CPC</h2>
+                                            <h3><?php echo $cpc ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth last ">
+                                        <div class="stats">
+                                            <h2>Spend</h2>
+                                            <h3><?php echo $spend ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
                             </div>
-                            <div class="one-fifth ">
-                                <div class="stats">
-                                    <h2>Impression</h2>
-                                    <h3><?php echo $impressions ?></h3>
+
+                            <div class="one-third days">
+                                <div class="days-content">
+                                    <h1>Last Week</h1>
+
+                                    <div class="one-fifth first">
+                                        <div class="stats">
+                                            <h2>Reach</h2>
+                                            <h3><?php echo $reach_week ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth ">
+                                        <div class="stats">
+                                            <h2>Impression</h2>
+                                            <h3><?php echo $impressions_week ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth ">
+                                        <div class="stats">
+                                            <h2>CPA</h2>
+                                            <h3><?php echo $cpa_week ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth ">
+                                        <div class="stats">
+                                            <h2>CPC</h2>
+                                            <h3><?php echo $cpc_week ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth last ">
+                                        <div class="stats">
+                                            <h2>Spend</h2>
+                                            <h3><?php echo $spend_week ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
                             </div>
-                            <div class="one-fifth ">
-                                <div class="stats">
-                                    <h2>CPA</h2>
-                                    <h3><?php echo $cpa ?></h3>
+
+                            <div class="one-third last days">
+                                <div class="days-content">
+                                    <h1>Last Month</h1>
+
+                                    <div class="one-fifth first">
+                                        <div class="stats">
+                                            <h2>Reach</h2>
+                                            <h3><?php echo $reach_last_month ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth ">
+                                        <div class="stats">
+                                            <h2>Impression</h2>
+                                            <h3><?php echo $impressions_last_month ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth ">
+                                        <div class="stats">
+                                            <h2>CPA</h2>
+                                            <h3><?php echo $cpa_last_month ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth ">
+                                        <div class="stats">
+                                            <h2>CPC</h2>
+                                            <h3><?php echo $cpc_last_month ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="one-fifth last ">
+                                        <div class="stats">
+                                            <h2>Spend</h2>
+                                            <h3><?php echo $spend_last_month ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
                             </div>
-                            <div class="one-fifth ">
-                                <div class="stats">
-                                    <h2>CPC</h2>
-                                    <h3><?php echo $cpc ?></h3>
-                                </div>
-                            </div>
-                            <div class="one-fifth last ">
-                                <div class="stats">
-                                    <h2>Spend</h2>
-                                    <h3><?php echo $spend ?></h3>
-                                </div>
-                            </div>
+
                             <div class="clear"></div>
-                        </div>
-                    </div>
-
-                    <div class="one-third days">
-                        <div class="days-content">
-                            <h1>Last Week</h1>
-
-                            <div class="one-fifth first">
-                                <div class="stats">
-                                    <h2>Reach</h2>
-                                    <h3><?php echo $reach_week ?></h3>
-                                </div>
-                            </div>
-                            <div class="one-fifth ">
-                                <div class="stats">
-                                    <h2>Impression</h2>
-                                    <h3><?php echo $impressions_week ?></h3>
-                                </div>
-                            </div>
-                            <div class="one-fifth ">
-                                <div class="stats">
-                                    <h2>CPA</h2>
-                                    <h3><?php echo $cpa_week ?></h3>
-                                </div>
-                            </div>
-                            <div class="one-fifth ">
-                                <div class="stats">
-                                    <h2>CPC</h2>
-                                    <h3><?php echo $cpc_week ?></h3>
-                                </div>
-                            </div>
-                            <div class="one-fifth last ">
-                                <div class="stats">
-                                    <h2>Spend</h2>
-                                    <h3><?php echo $spend_week ?></h3>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-
-                    <div class="one-third last days">
-                        <div class="days-content">
-                            <h1>Last Month</h1>
-
-                            <div class="one-fifth first">
-                                <div class="stats">
-                                    <h2>Reach</h2>
-                                    <h3><?php echo $reach_last_month ?></h3>
-                                </div>
-                            </div>
-                            <div class="one-fifth ">
-                                <div class="stats">
-                                    <h2>Impression</h2>
-                                    <h3><?php echo $impressions_last_month ?></h3>
-                                </div>
-                            </div>
-                            <div class="one-fifth ">
-                                <div class="stats">
-                                    <h2>CPA</h2>
-                                    <h3><?php echo $cpa_last_month ?></h3>
-                                </div>
-                            </div>
-                            <div class="one-fifth ">
-                                <div class="stats">
-                                    <h2>CPC</h2>
-                                    <h3><?php echo $cpc_last_month ?></h3>
-                                </div>
-                            </div>
-                            <div class="one-fifth last ">
-                                <div class="stats">
-                                    <h2>Spend</h2>
-                                    <h3><?php echo $spend_last_month ?></h3>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-
-                    <div class="clear"></div>
 
 
-                   <form action="graph_facebook.php?id=<?php echo $id?>&name=<?php echo $name;?>" id="dateForm" method="POST" class="date-form"> 
-                  <!-- <form id="dateForm" class="date-form"> -->
-                        <div class="date-wrapper">
-                            <span>Date from:</span>                       
-                            <input type="date" id="start_date" name="start_date" class="date-selector">
-                        </div> 
-                        <div class="date-wrapper">
-                            <span>Date to:</span>
-                            <input type="date" id="end_date" name="end_date" class="date-selector">
-                        </div>
-                        <!-- <div class="breaker"></div> -->
-                        <!-- <input type="submit" value="Query" class="submit-btn" id="btn_submit" name="btn_submit"> -->
-                        <input type="submit" value="Query" class="submit-btn" id="btn_submit" name="btn_submit">
-                        
-                    </form>
+                        <form action="graph_facebook.php?id=<?php echo $id?>&name=<?php echo $name;?>" id="dateForm" method="POST" class="date-form"> 
+                        <!-- <form id="dateForm" class="date-form"> -->
+                                <div class="date-wrapper">
+                                    <span>Date from:</span>                       
+                                    <input type="date" id="start_date" name="start_date" class="date-selector">
+                                </div> 
+                                <div class="date-wrapper">
+                                    <span>Date to:</span>
+                                    <input type="date" id="end_date" name="end_date" class="date-selector">
+                                </div>
+                                <!-- <div class="breaker"></div> -->
+                                <!-- <input type="submit" value="Query" class="submit-btn" id="btn_submit" name="btn_submit"> -->
+                                <input type="submit" value="Query" class="submit-btn" id="btn_submit" name="btn_submit">
+                                
+                            </form>
 
 
-            <div id="charts-container">
-           
-                <div id="reach_chart"></div>
-                <div id="cpa_chart"></div>
-                <div id="cpc_chart"></div> 
-            </div>
+                    <div id="charts-container">
                 
+                        <div id="reach_chart"></div>
+                        <div id="cpa_chart"></div>
+                        <div id="cpc_chart"></div> 
+                    </div>
+                    
 
+            </div>
         </div>
-
     </body>
 
     
@@ -302,7 +309,7 @@
             title: 'Reach, Impressions, Spend Insights',
             curveType: 'function',
             pointSize: 10,
-            width: '1400',
+            width: '1100',
             height: 350,
             curveType: 'none',
             pointShape: 'circle',
@@ -313,7 +320,7 @@
             title: 'Cost Per Click Insights',
             curveType: 'function',
             pointSize: 10,
-            width: '1400',
+            width: '1100',
             colors: ['#c0392b', 'blue', '#3fc26b'],
             curveType: 'none',
             pointShape: 'circle',
@@ -325,7 +332,7 @@
             title: 'Cost Per Action Insights',
             curveType: 'function',
             pointSize: 10,
-            width: '1400',
+            width: '1100',
             colors: ['#16a085', 'blue', '#3fc26b'],
             curveType: 'none',
             pointShape: 'circle',

@@ -41,7 +41,9 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 </script>
-    <?php include('menu.php'); ?>
+ <?php include('./sidebar.php'); ?>
+        <div class="dashboard-wrapper">
+        <?php include('menu.php'); ?>
             <div class="page-engagements">
                 
             <h1>Campaign Ads</h1>
@@ -106,7 +108,7 @@
             <?php } ?>
 
             </div>
-
+        </div>
 
     </body>
    

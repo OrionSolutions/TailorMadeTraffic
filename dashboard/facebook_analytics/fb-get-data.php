@@ -20,7 +20,6 @@ Api::init($app_id, $app_secret, $access_token);
 $api = Api::instance();
 $api = Api::init($app_id, $app_secret, $access_token);
 
-
     function getCampaigns(){
         $id= 'act_15686630';
         require 'src/Facebook/autoload.php';
@@ -258,7 +257,7 @@ $api = Api::init($app_id, $app_secret, $access_token);
         $sdate = "2017-11-1";
         $eDate = "2017-11-6";
         $timeframe = "{'since':'".$sdate."','until':'".$eDate."'}";
-        $ad_reach = $fb->get($id.'/insights?fields=cost_per_total_action,cpc,spend,reach,impressions&date_preset=this_month&time_increment=1',$_SESSION['fb_access_token']);
+        $ad_reach = $fb->get($id.'/insights?fields=cost_per_total_action,cpc,spend,reach,impressions&date_preset=this_month',$_SESSION['fb_access_token']);
         $reach = $ad_reach->getGraphEdge();
         foreach ($reach as $i){        
             $IM_VAL  = $i['cost_per_total_action'];
@@ -295,7 +294,7 @@ $api = Api::init($app_id, $app_secret, $access_token);
         'app_secret' => '8c135ba81b086443c41ee685ff2756f6',
         'default_graph_version' => 'v2.10',
         ]);
-        $ad_reach = $fb->get($id.'/insights?fields=cost_per_total_action,cpc,spend,reach,impressions&date_preset=last_7d',$_SESSION['fb_access_token']);
+        $ad_reach = $fb->get($id.'/insights?fields=cost_per_total_action,cpc,spend,reach,impressions&date_preset=last_week_mon_sun',$_SESSION['fb_access_token']);
         $reach = $ad_reach->getGraphEdge();
         foreach ($reach as $i){        
             $IM_VAL  = $i['cost_per_total_action'];
@@ -321,6 +320,31 @@ $api = Api::init($app_id, $app_secret, $access_token);
             $IM_VAL  = $i['cpc'];
         }
     return $reach;
+    }
+
+    function checkData(){
+        $id= 'act_15686630';
+        try{
+            require 'src/Facebook/autoload.php';
+            $fb = new Facebook\Facebook([
+            'app_id' => '1702836673094421', // Replace {app-id} with your app id
+            'app_secret' => '8c135ba81b086443c41ee685ff2756f6',
+            'default_graph_version' => 'v2.10',
+            ]);
+            $ad_reach = $fb->get($id.'/insights',$_SESSION['fb_access_token']);
+            $reach = $ad_reach->getGraphEdge();
+            foreach ($reach as $i){        
+                $data  = $i['account_id'];
+            }
+            if(!empty($data)){
+                return true;
+            }else{
+                //return "Add account is absent";
+            }
+        }catch(Exception $e){
+            return false;
+        }
+       
     }
 
 
