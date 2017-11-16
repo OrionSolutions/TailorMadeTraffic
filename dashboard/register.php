@@ -127,7 +127,7 @@ $exist = $rs["Existing"];
                     if(mysqli_num_rows($getUserexist) || mysqli_num_rows($getEmailexist)){
                         if(mysqli_num_rows($getEmailexist)){
                             echo '<script> 
-                            $(document).ready(function(){ $("#email").css("border","1px solid #e74c3c"); $("#email").attr("value", "Google already taken!"); });
+                            $(document).ready(function(){ $("#email").css("border","1px solid #e74c3c"); $("#email").attr("value", "Email already taken!"); });
                             </script>'; 
                         }else{
                             echo '<script> $("#txtusername").css("border","1px solid #e74c3c"); $("#txtusername").attr("value", "Username already exist!"); </script>'; 
